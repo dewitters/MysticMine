@@ -2,7 +2,7 @@ Mystic Mine is now Open Source
 ==============================
 
 All source code and content of Mystic Mine (http://www.mysticmine.com) is now
-released under the MIT license (see LICENSE.txt or more info). This includes:
+released under the MIT license (see LICENSE.txt for more info). This includes:
 - All source code (mainly written in python)
 - All graphics (Blender 3D and Gimp files included)
 
@@ -22,8 +22,8 @@ Why did I make this game Open Source?
 
 Plenty of people have mailed me with the request to port Mystic Mine to some
 platform X (because that would be really cool!). Or to distribute Mystic Mine
-where it's currently not available. But the sad truth is that I currently can't
-put much energy in Mystic Mine, because I'm focussing on another project
+where it's currently not available. But the sad truth is that I can't
+put much energy in Mystic Mine because I'm focussing on another project
 (http://rpgplayground.com). I feel sad about this, because it would indeed be
 cool if Mystic Mine received more attention.
 
@@ -49,7 +49,7 @@ Enjoy, and have fun!
 
 About Mystic Mine
 -----------------
-Mystic Mine is an indie game created by Koen Witters (Koonsolo http://www.koonsolo.com). 
+Mystic Mine is an indie game created by Koen Witters (aka Koonsolo http://www.koonsolo.com). 
 You can find more info at http://www.mysticmine.com.
 
 
