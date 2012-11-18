@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2222"
+   sodipodi:version="0.32"
+   inkscape:version="0.45"
+   sodipodi:docbase="/home/kwitters/projects/koonsolo/koonrepos/monorail/trunk/assets/graphics"
+   sodipodi:docname="level_road.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   inkscape:export-filename="/home/kwitters/projects/koonsolo/koonrepos/monorail/trunk/assets/graphics/level_road.png"
+   inkscape:export-xdpi="150.02791"
+   inkscape:export-ydpi="150.02791"
+   sodipodi:modified="TRUE">
+  <defs
+     id="defs2224" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.79425397"
+     inkscape:cx="361.32225"
+     inkscape:cy="495.59508"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="1272"
+     inkscape:window-height="968"
+     inkscape:window-x="0"
+     inkscape:window-y="0" />
+  <metadata
+     id="metadata2227">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;fill:#a87600;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect2230"
+       width="614.28571"
+       height="614.28571"
+       x="61.428566"
+       y="196.6479"
+       inkscape:export-filename="/home/kwitters/projects/koonsolo/koonrepos/monorail/trunk/assets/graphics/level_road.png"
+       inkscape:export-xdpi="150.02791"
+       inkscape:export-ydpi="150.02791" />
+    <path
+       style="fill:none;fill-opacity:0.75;fill-rule:evenodd;stroke:#ffffff;stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:0.34090909;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 210.28938,786.47837 C 163.52502,782.38931 148.2526,725.86532 190.88404,687.12103 C 218.93517,661.62761 121.23008,656.32956 136.1527,602.53171 C 151.16175,548.42227 218.94895,588.49473 212.49325,513.25731 C 206.45559,442.89199 110.73387,502.04057 147.14503,387.0118 C 183.91861,270.83808 239.86285,280.98606 285.71428,305.21933 C 332.67856,330.04076 308.21428,362.36219 336.42857,411.6479 C 364.02916,459.86159 255.93936,475.95253 310.19436,552.21749 C 363.43131,627.0514 289.23081,604.176 323.83814,650.5538 C 357.83907,696.11894 421.96657,680.56285 443.75228,648.59857 C 455.76496,630.97341 388.35925,594.21311 388.41215,570.77553 C 388.46504,547.33796 489.9707,557.3678 480.97882,513.71384 C 472.23558,471.26695 371.06913,447.15992 376.24771,410.64207 C 381.42628,374.12421 411.97332,377.0458 464.11618,364.90294 C 516.25904,352.76008 605.50858,361.42194 606.22287,433.20766 C 606.93716,506.42194 548.34764,463.757 536.56192,509.11414 C 524.77621,554.47129 618.55793,550.23524 610.70079,586.30667 C 602.84365,622.3781 490.60123,600.54622 555.25321,658.4857 C 620.61036,717.05712 609.17961,744.86676 550.60578,769.50503"
+       id="path3202"
+       inkscape:export-filename="/home/kwitters/projects/koonsolo/koonrepos/monorail/trunk/assets/graphics/level_road.png"
+       inkscape:export-xdpi="169.76842"
+       inkscape:export-ydpi="169.76842"
+       sodipodi:nodetypes="cszzzzzzzzszzzzzzzz" />
+  </g>
+</svg>
