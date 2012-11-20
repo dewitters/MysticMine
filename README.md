@@ -53,6 +53,19 @@ Mystic Mine is an indie game created by Koen Witters (aka Koonsolo http://www.ko
 You can find more info at http://www.mysticmine.com.
 
 
+Requirements
+------------
+- Python
+- pygame
+- numpy
+- Blender (only to regenerate sprites)
+
+
+How to Run the Game
+-------------------
+- Copy the data/800x600/ folder as data folder in the source directory
+- Run the monorail.py file
+
 License
 -------
 
