@@ -87,7 +87,7 @@ def generate_sprite( configname, spritefilename, blenderfilename, scale, count,
     if should_update( tmpfilename % 1, [blenderfilename] ):
         for i in range(1, count+1):
             print "generating", tmpfilename % i
-            outname = "./" + tmpfilename[ 0: tmpfilename.rfind("_") ]
+            outname = tmpfilename[ 0: tmpfilename.rfind("_") ]
             if scene is None:
                 os.system( "blender -b "+blenderfilename+" -F PNG -o "+outname+"_ -f "+str(i) )
             else:
@@ -131,7 +131,7 @@ def generate_image( configname, imagefilename, blenderfilename, scale,
 
     if should_update( tmpfilename, [blenderfilename] ):
         print "generating", tmpfilename
-        outfilename = "./" + tmpfilename[0: tmpfilename.rfind("_") ]
+        outfilename = tmpfilename[0: tmpfilename.rfind("_") ]
         if scene is None:
             os.system("blender -b "+blenderfilename+" -F PNG -o "+outfilename+"_ -f 1")
         else:
