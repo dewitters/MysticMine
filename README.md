@@ -58,13 +58,17 @@ Requirements
 - Python
 - pygame
 - numpy
+- pyrex
 - Blender (only to regenerate sprites)
 
 
 How to Run the Game
 -------------------
-- Copy the data/800x600/ folder as data folder in the source directory
+- Copy the data/800x600/ folder as data folder in the "source" directory
 - Run the monorail.py file
+- For non i386 architectures you have to rebuild the ai.so:
+  To do this, go to the "source" directory and run: python setup.py build
+
 
 License
 -------
