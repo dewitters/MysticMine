@@ -1,7 +1,9 @@
+## Automatically adapted for numpy.oldnumeric Nov 20, 2012 by 
+
 #!/usr/bin/env python
 
 import copy
-from Numeric import array
+from numpy.oldnumeric import array
 
 import pygame
 
@@ -67,7 +69,7 @@ class Surface:
         
         a = pygame.surfarray.pixels_alpha(result.pysurf)
         b = a * array(alpha)
-        a[:] = b.astype('b')
+        a[:] = b.astype('B')
 
         return result
 
