@@ -286,7 +286,7 @@ msgstr[1] "%d Münzen"
 #: ../source_demo/scenarios.py:575 ../source_demo/scenarios.py:642
 #, python-format
 msgid "Collect %(point)s in %(second)s."
-msgstr "Sammele %(point) in %(second)."
+msgstr "Sammele %(point)s in %(second)s."
 
 #: ../source/scenarios.py:149 ../source/scenarios.py:507
 #: ../source/scenarios.py:718 ../source_demo/scenarios.py:149
@@ -363,7 +363,7 @@ msgstr[1] "%d Punkte"
 #: ../source/scenarios.py:208 ../source_demo/scenarios.py:208
 #, python-format
 msgid "Gain %(point)s in %(second)s"
-msgstr "Erreiche %(point)e in %(second)n"
+msgstr "Erreiche %(point)s in %(second)s"
 
 #: ../source/scenarios.py:210 ../source_demo/scenarios.py:210
 msgid "Hold the lamp as long as possible."
@@ -416,7 +416,7 @@ msgstr[1] "%d Gold Blöcke"
 #: ../source/scenarios.py:270 ../source_demo/scenarios.py:270
 #, python-format
 msgid "Cut %(goldblock)s in %(second)s"
-msgstr "Baue %(goldblock) in %(second) ab"
+msgstr "Baue %(goldblock)s in %(second)s ab"
 
 #: ../source/scenarios.py:274 ../source_demo/scenarios.py:274
 #, python-format
@@ -475,7 +475,7 @@ msgstr[1] "%d mal"
 #: ../source/scenarios.py:345 ../source_demo/scenarios.py:345
 #, python-format
 msgid "Avoid the dynamite %(times)s in %(second)s"
-msgstr "Weiche dem Dynamit %(times) mal in %(second) aus"
+msgstr "Weiche dem Dynamit %(times)s mal in %(second)s aus"
 
 #: ../source/scenarios.py:349 ../source_demo/scenarios.py:349
 #, python-format
