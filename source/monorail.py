@@ -27,17 +27,26 @@ script_dir = get_main_dir()
 #else:
 #    script_dir = os.path.dirname(os.path.realpath(__file__)) 
 
-
 # ----- Handling localization
-#current_lang = 'ru_RU'
-current_lang = 'en_US'
-
-locale_dir = os.path.join(script_dir, "data/locale")
-
+import locale
 import gettext
-gettext.install("monorail", locale_dir  )
-lang = gettext.translation('monorail', locale_dir, languages=[current_lang])
+APP_NAME = "monorail"
+LOCALE_DIR = os.path.join(script_dir, "data/locale")
+DEFAULT_LANGUAGES = os.environ.get('LANG', '').split(':')
+DEFAULT_LANGUAGES += ['en_US']
+ 
+lc, encoding = locale.getdefaultlocale()
+if lc:
+    languages = [lc]
 
+languages += DEFAULT_LANGUAGES
+mo_location = LOCALE_DIR
+
+gettext.install (True,localedir=None, unicode=1)
+gettext.find(APP_NAME, mo_location)
+gettext.textdomain (APP_NAME)
+gettext.bind_textdomain_codeset(APP_NAME, "UTF-8")
+lang = gettext.translation (APP_NAME, mo_location, languages = languages, fallback = True)
 lang.install()
 gettext.lang = lang
 # ----- End handle localisation
