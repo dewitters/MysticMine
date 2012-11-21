@@ -33,7 +33,10 @@ import locale
 import gettext
 APP_NAME = "monorail"
 LOCALE_DIR = os.path.join(script_dir, "data/locale")
-DEFAULT_LANGUAGES = os.environ.get('LANG', '').split(':')
+DEFAULT_LANGUAGES = os.environ.get('LANGUAGE', '').split(':')
+DEFAULT_LANGUAGES += os.environ.get('LC_ALL', '').split(':')
+DEFAULT_LANGUAGES += os.environ.get('LC_MESSAGES', '').split(':')
+DEFAULT_LANGUAGES += os.environ.get('LANG', '').split(':')
 DEFAULT_LANGUAGES += ['en_US']
  
 lc, encoding = locale.getdefaultlocale()
