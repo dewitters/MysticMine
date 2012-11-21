@@ -7,6 +7,7 @@ import copy
 import time
 import traceback
 import inspect
+import imp
 
 #http://stackoverflow.com/questions/606561/how-to-get-filename-of-the-main-module-in-python
 def main_is_frozen():
@@ -18,7 +19,7 @@ def get_main_dir():
    if main_is_frozen():
        # print 'Running from path', os.path.dirname(sys.executable)
        return os.path.dirname(sys.executable)
-   return os.path.dirname(sys.argv[0])
+   return os.path.dirname(os.path.realpath(__file__))
 
 script_dir = get_main_dir()
 
