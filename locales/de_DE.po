@@ -268,7 +268,7 @@ msgstr "Münzen sammeln"
 #, python-format
 msgid "%d second"
 msgid_plural "%d seconds"
-msgstr[0] "Eine Sekunde"
+msgstr[0] "%d Sekunde"
 msgstr[1] "%d Sekunden"
 
 #: ../source/scenarios.py:144 ../source/scenarios.py:502
@@ -276,7 +276,7 @@ msgstr[1] "%d Sekunden"
 #, python-format
 msgid "%d coin"
 msgid_plural "%d coins"
-msgstr[0] "Eine Münze"
+msgstr[0] "%d Münze"
 msgstr[1] "%d Münzen"
 
 #: ../source/scenarios.py:145 ../source/scenarios.py:430
@@ -294,7 +294,7 @@ msgstr "Sammele %(point)s in %(second)s."
 #, python-format
 msgid "Collect the most coins in %d second."
 msgid_plural "Collect the most coins in %d second."
-msgstr[0] "Sammele so viele Münzen wie möglich in einer Sekunde."
+msgstr[0] "Sammele so viele Münzen wie möglich in %d Sekunde."
 msgstr[1] "Sammele so viele Münzen wie möglich in %d Sekunden."
 
 #: ../source/scenarios.py:154 ../source/scenarios.py:512
@@ -302,7 +302,7 @@ msgstr[1] "Sammele so viele Münzen wie möglich in %d Sekunden."
 #, python-format
 msgid "Be the first to collect %d coin."
 msgid_plural "Be the first to collect %d coins."
-msgstr[0] "Sammele als erster eine Münze."
+msgstr[0] "Sammele als erster %d Münze."
 msgstr[1] "Sammele als erster %d Münzen."
 
 #: ../source/scenarios.py:159 ../source/scenarios.py:517
@@ -310,7 +310,7 @@ msgstr[1] "Sammele als erster %d Münzen."
 #, python-format
 msgid "Collect %d coin."
 msgid_plural "Collect %d coins."
-msgstr[0] "Sammele eine Münze."
+msgstr[0] "Sammele %d Münze."
 msgstr[1] "Sammele %d Münzen."
 
 #: ../source/scenarios.py:168 ../source_demo/scenarios.py:168
@@ -321,7 +321,7 @@ msgstr "Sammele die meisten Münzen"
 #, python-format
 msgid "Collect %d more coin"
 msgid_plural "Collect %d more coins"
-msgstr[0] "Sammele noch eine Münze"
+msgstr[0] "Sammele noch %d Münze"
 msgstr[1] "Sammele noch %d Münzen"
 
 #: ../source/scenarios.py:179 ../source_demo/scenarios.py:179
