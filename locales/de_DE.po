@@ -1,0 +1,747 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2012 Koonsolo
+# This file is distributed under the same license as the PACKAGE package.
+# Thomas Zimmermann <bugs@vdm-design.de>, 2012.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: monorail 1.0.0\n"
+"Report-Msgid-Bugs-To: koen@koonsolo.com\n"
+"POT-Creation-Date: 2009-06-22 06:50+0200\n"
+"PO-Revision-Date: 2012-11-21 13:31+0200\n"
+"Last-Translator: Thomas Zimmermann <bugs@vdm-design.de>\n"
+"Language-Team: Deutsch\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO8859-1\n"
+"Content-Transfer-Encoding: 4bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../source/hud.py:34 ../source_demo/hud.py:34
+msgid "Menu"
+msgstr "Menü"
+
+#: ../source/hud.py:211 ../source_demo/hud.py:214
+msgid "Press your button when ready"
+msgstr ""
+
+#: ../source/hud.py:235 ../source_demo/hud.py:238
+msgid "Ready!"
+msgstr "Bereit!"
+
+#: ../source/hud.py:238 ../source_demo/hud.py:241
+msgid "waiting..."
+msgstr "warten..."
+
+#: ../source/hud.py:254 ../source_demo/hud.py:257
+msgid "OK"
+msgstr "Ok"
+
+#: ../source/hud.py:281 ../source_demo/hud.py:284
+msgid "Info: "
+msgstr "Info:"
+
+#: ../source/hud.py:289 ../source_demo/hud.py:292
+msgid ""
+"Switch the track with spacebar. You can also click on the track with your "
+"mouse to switch it."
+msgstr "Stelle die Weiche mit der Leertaste. Du kannst auch mit der Maus auf"
+"die Weiche klicken um diese zu verstellen"
+
+#: ../source/hud.py:335 ../source_demo/hud.py:338
+msgid "A key switches all tracks on the playfield."
+msgstr "Eine Taste ändert alle Weichen auf dem Spielfeld."
+
+#: ../source/hud.py:424 ../source_demo/hud.py:427
+msgid "Pass the dynamite by bumping into other car."
+msgstr "Gib das Dynamit weiter indem du andere Loren rammst."
+
+#: ../source/hud.py:439 ../source_demo/hud.py:442
+msgid "Pass the lamp by bumping into other car."
+msgstr "Gib die Lampe weiter indem du andere Loren rammst."
+
+#: ../source/hud.py:448 ../source_demo/hud.py:451
+msgid "Bring the diamond to a tunnel."
+msgstr "Bring den Diamanten in einen Tunnel"
+
+#: ../source/hud.py:495 ../source_demo/hud.py:498
+msgid "Pass the diamond by bumping into other car."
+msgstr "Gib den Diamanten weiter indem du andere Loren rammst."
+
+#: ../source/hud.py:508 ../source_demo/hud.py:511
+msgid "With a balloon you can only go up."
+msgstr "Mit dem Ballon kannst du nur aufwärts fahren."
+
+#: ../source/hud.py:566 ../source_demo/hud.py:569
+msgid "Only the car with axe can cut gold."
+msgstr "Nur die Lore mit der Axt kann Gold schneiden."
+
+#: ../source/hud.py:604 ../source_demo/hud.py:607
+msgid "Only your own flag can be collected."
+msgstr "Du kannst nur deine eigene Flagge einsammeln."
+
+#: ../source/hud.py:659 ../source_demo/hud.py:662
+msgid "Go up slopes with oil."
+msgstr "Bezwinge Steigungen mit Öl."
+
+#: ../source/hud.py:717 ../source_demo/hud.py:720
+msgid ""
+"You can't pickup anything when you have a rock. Lose the rock in a tunnel."
+msgstr "Du kannst nichts einsammeln wenn du einen Felsen hast. Werde den Felsen im Tunnel los."
+
+#: ../source/hud.py:775 ../source_demo/hud.py:778
+msgid "A Torch moves every car to a different location"
+msgstr "Eine Fackel bringt alle Loren an eine andere Position."
+
+#: ../source/hud.py:803 ../source_demo/hud.py:806
+msgid "A ghost makes you go up slopes and move through other cars."
+msgstr "Ein Geist lässt dich Steigungen herauf und durch andere Loren fahren."
+
+#: ../source/hud.py:903 ../source_demo/hud.py:906
+msgid "Game Ended!"
+msgstr "Spiel beendet!"
+
+#: ../source/hud.py:907 ../source_demo/hud.py:910
+msgid "Ranking"
+msgstr "Ergebnisliste"
+
+#: ../source/hud.py:960 ../source_demo/hud.py:963
+msgid "Played level as:"
+msgstr "Level gespielt als:"
+
+#: ../source/hud.py:963 ../source_demo/hud.py:966
+msgid "Your current skill level:"
+msgstr "Dein momentaner Skill Level:"
+
+#: ../source/hud.py:1002 ../source_demo/hud.py:1005
+msgid "Nice job!"
+msgstr "Gut gemacht!"
+
+#: ../source/hud.py:1015 ../source_demo/hud.py:1018
+msgid "Game Over!"
+msgstr "Game Over!"
+
+#: ../source/hud.py:1031 ../source_demo/hud.py:1102
+msgid "Continue"
+msgstr "Weiter"
+
+#: ../source/hud.py:1034 ../source_demo/hud.py:1105
+msgid "Skip Level"
+msgstr "Level überspringen"
+
+#: ../source/hud.py:1036 ../source/menu.py:366 ../source_demo/hud.py:1107
+#: ../source_demo/menu.py:366
+msgid "Options"
+msgstr "Optionen"
+
+#: ../source/hud.py:1038 ../source_demo/hud.py:1109
+msgid "To Menu"
+msgstr "Zum Menü"
+
+#: ../source/hud.py:1040 ../source/menu.py:368 ../source_demo/hud.py:1111
+#: ../source_demo/menu.py:368
+msgid "Quit"
+msgstr "Ende"
+
+#: ../source/menu.py:360 ../source_demo/menu.py:360
+msgid "Adventure"
+msgstr "Kampangne"
+
+#: ../source/menu.py:362 ../source_demo/menu.py:362
+msgid "Quick play"
+msgstr "Kurzspiel"
+
+#: ../source/menu.py:364 ../source_demo/menu.py:364
+msgid "Multiplayer"
+msgstr "Mehrspieler"
+
+#: ../source/menu.py:461 ../source_demo/menu.py:465
+msgid "Sound"
+msgstr "Sound"
+
+#: ../source/menu.py:464 ../source_demo/menu.py:468
+msgid "Music"
+msgstr "Musik"
+
+#: ../source/menu.py:470 ../source_demo/menu.py:474
+msgid "Accessibility"
+msgstr "Erreichbarkeit"
+
+#: ../source/menu.py:472 ../source/menu.py:562 ../source_demo/menu.py:476
+#: ../source_demo/menu.py:566
+msgid "Close"
+msgstr "Schließen"
+
+#: ../source/menu.py:527 ../source_demo/menu.py:531
+msgid "Windowed"
+msgstr "Fenster Modus"
+
+#: ../source/menu.py:529 ../source_demo/menu.py:533
+msgid "Fullscreen"
+msgstr "Vollbild Modus"
+
+#: ../source/menu.py:548 ../source_demo/menu.py:552
+msgid "Game"
+msgstr "Spiel"
+
+#: ../source/menu.py:549 ../source/menu.py:557 ../source_demo/menu.py:553
+#: ../source_demo/menu.py:561
+msgid "Speed"
+msgstr "Geschwindigkeit"
+
+#: ../source/menu.py:556 ../source_demo/menu.py:560
+msgid "Scan"
+msgstr "Scan"
+
+#: ../source/menu.py:601 ../source_demo/menu.py:605
+msgid "One Switch"
+msgstr "Eine Taste"
+
+#: ../source/menu.py:603 ../source_demo/menu.py:607
+msgid "Normal Mode"
+msgstr "Normaler Modus"
+
+#: ../source/menu.py:655 ../source_demo/menu.py:659
+msgid "Number of players?"
+msgstr "Anzahl der Spieler?"
+
+#: ../source/menu.py:699 ../source_demo/menu.py:711
+msgid "Player 1, press button!"
+msgstr "Spieler 1, drück eine Taste!"
+
+#: ../source/menu.py:724 ../source_demo/menu.py:736
+#, python-format
+msgid "Player %d"
+msgstr "Spieler %d"
+
+#: ../source/menu.py:734 ../source_demo/menu.py:746
+#, python-format
+msgid "Player %d, press button!"
+msgstr "Spieler %d, drück eine Taste!"
+
+#: ../source/menu.py:761 ../source_demo/menu.py:773
+msgid "        Menu"
+msgstr "        Menü"
+
+#: ../source/menu.py:763 ../source_demo/menu.py:775
+msgid "Play         "
+msgstr "Spielen      "
+
+#: ../source/menu.py:932 ../source/menu.py:944 ../source_demo/menu.py:944
+#: ../source_demo/menu.py:956
+#, python-format
+msgid "skill: %(name)s (%(value).0f)"
+msgstr "Skill: %(name)s (%(value).0f)"
+
+#: ../source/menu.py:938 ../source_demo/menu.py:950
+msgid "Unlocking item"
+msgstr "Freigespielte Gegenstände"
+
+#: ../source/menu.py:1157 ../source_demo/menu.py:1169
+msgid "pickup:"
+msgstr "Aufgesammelte Gegenstände:"
+
+#: ../source/menu.py:1224 ../source_demo/menu.py:1236
+msgid "Secret Items:"
+msgstr "Versteckte Gegenstände:"
+
+#: ../source/monorail.py:53 ../source_demo/monorail.py:57
+msgid "Mystic Mine"
+msgstr "Mystic Mine"
+
+#: ../source/scenarios.py:121 ../source_demo/scenarios.py:121
+msgid "Your mission is..."
+msgstr "Deine Aufgabe ist..."
+
+#: ../source/scenarios.py:130 ../source_demo/scenarios.py:130
+msgid "Coin Collect"
+msgstr "Münzen sammeln"
+
+#: ../source/scenarios.py:143 ../source/scenarios.py:206
+#: ../source/scenarios.py:267 ../source/scenarios.py:343
+#: ../source/scenarios.py:428 ../source/scenarios.py:501
+#: ../source/scenarios.py:573 ../source/scenarios.py:640
+#: ../source_demo/scenarios.py:143 ../source_demo/scenarios.py:206
+#: ../source_demo/scenarios.py:267 ../source_demo/scenarios.py:343
+#: ../source_demo/scenarios.py:428 ../source_demo/scenarios.py:501
+#: ../source_demo/scenarios.py:573 ../source_demo/scenarios.py:640
+#, python-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "Eine Sekunde"
+msgstr[1] "%d Sekunden"
+
+#: ../source/scenarios.py:144 ../source/scenarios.py:502
+#: ../source_demo/scenarios.py:144 ../source_demo/scenarios.py:502
+#, python-format
+msgid "%d coin"
+msgid_plural "%d coins"
+msgstr[0] "Eine Münze"
+msgstr[1] "%d Münzen"
+
+#: ../source/scenarios.py:145 ../source/scenarios.py:430
+#: ../source/scenarios.py:503 ../source/scenarios.py:575
+#: ../source/scenarios.py:642 ../source_demo/scenarios.py:145
+#: ../source_demo/scenarios.py:430 ../source_demo/scenarios.py:503
+#: ../source_demo/scenarios.py:575 ../source_demo/scenarios.py:642
+#, python-format
+msgid "Collect %(point)s in %(second)s."
+msgstr "Sammele %(point)s in %(second)s."
+
+#: ../source/scenarios.py:149 ../source/scenarios.py:507
+#: ../source/scenarios.py:718 ../source_demo/scenarios.py:149
+#: ../source_demo/scenarios.py:507 ../source_demo/scenarios.py:718
+#, python-format
+msgid "Collect the most coins in %d second."
+msgid_plural "Collect the most coins in %d second."
+msgstr[0] "Sammele so viele Münzen wie möglich in einer Sekunde."
+msgstr[1] "Sammele so viele Münzen wie möglich in %d Sekunden."
+
+#: ../source/scenarios.py:154 ../source/scenarios.py:512
+#: ../source_demo/scenarios.py:154 ../source_demo/scenarios.py:512
+#, python-format
+msgid "Be the first to collect %d coin."
+msgid_plural "Be the first to collect %d coins."
+msgstr[0] "Sammele als erster eine Münze."
+msgstr[1] "Sammele als erster %d Münzen."
+
+#: ../source/scenarios.py:159 ../source/scenarios.py:517
+#: ../source_demo/scenarios.py:159 ../source_demo/scenarios.py:517
+#, python-format
+msgid "Collect %d coin."
+msgid_plural "Collect %d coins."
+msgstr[0] "Sammele eine Münze."
+msgstr[1] "Sammele %d Münzen."
+
+#: ../source/scenarios.py:168 ../source_demo/scenarios.py:168
+msgid "Collect the most coins"
+msgstr "Sammele die meisten Münzen"
+
+#: ../source/scenarios.py:174 ../source_demo/scenarios.py:174
+#, python-format
+msgid "Collect %d more coin"
+msgid_plural "Collect %d more coins"
+msgstr[0] "Sammele noch eine Münze"
+msgstr[1] "Sammele noch %d Münzen"
+
+#: ../source/scenarios.py:179 ../source_demo/scenarios.py:179
+#, python-format
+msgid "All %d coin collected, "
+msgid_plural "All %d coins collected, "
+msgstr[0] "Alle %d Münzen eingesammelt, "
+msgstr[1] "Alle %d Münzen eingesammelt, "
+
+#: ../source/scenarios.py:184 ../source/scenarios.py:319
+#: ../source/scenarios.py:406 ../source/scenarios.py:483
+#: ../source/scenarios.py:551 ../source/scenarios.py:622
+#: ../source/scenarios.py:689 ../source_demo/scenarios.py:184
+#: ../source_demo/scenarios.py:319 ../source_demo/scenarios.py:406
+#: ../source_demo/scenarios.py:483 ../source_demo/scenarios.py:551
+#: ../source_demo/scenarios.py:622 ../source_demo/scenarios.py:689
+#, python-format
+msgid "%d bonus point"
+msgid_plural "%d bonus points"
+msgstr[0] "%d bonus Punkt"
+msgstr[1] "%d bonus Punkte"
+
+#: ../source/scenarios.py:188 ../source_demo/scenarios.py:188
+msgid "Collect many coins"
+msgstr "Sammele viele Münzen"
+
+#: ../source/scenarios.py:196 ../source_demo/scenarios.py:196
+msgid "Hold the Lamp"
+msgstr "Behalte die Lampe"
+
+#: ../source/scenarios.py:207 ../source/scenarios.py:641
+#: ../source_demo/scenarios.py:207 ../source_demo/scenarios.py:641
+#, python-format
+msgid "%d point"
+msgid_plural "%d points"
+msgstr[0] "%d Punkt"
+msgstr[1] "%d Punkte"
+
+#: ../source/scenarios.py:208 ../source_demo/scenarios.py:208
+#, python-format
+msgid "Gain %(point)s in %(second)s"
+msgstr "Erreiche %(point)s in %(second)s"
+
+#: ../source/scenarios.py:210 ../source_demo/scenarios.py:210
+msgid "Hold the lamp as long as possible."
+msgstr "Behalte die Lampe so lange wie möglich."
+
+#: ../source/scenarios.py:213 ../source_demo/scenarios.py:213
+#, python-format
+msgid "Be the first to hold the lamp for %d second."
+msgid_plural "Be the first to hold the lamp for %d seconds."
+msgstr[0] "Sei der Erste der die Lampe für %d Sekunde behält."
+msgstr[1] "Sei der Erste der die Lampe für %d Sekunden behält."
+
+#: ../source/scenarios.py:218 ../source_demo/scenarios.py:218
+#, python-format
+msgid "Hold the lamp for %d second."
+msgid_plural "Hold the lamp for %d seconds."
+msgstr[0] "Behalte die Lampe für %d Sekunde."
+msgstr[1] "Behalte die Lampe für %d Sekunden."
+
+#: ../source/scenarios.py:234 ../source/scenarios.py:249
+#: ../source_demo/scenarios.py:234 ../source_demo/scenarios.py:249
+msgid "Hold the lamp as long as possible"
+msgstr "Behalte die Lampe so lange wie möglich"
+
+#: ../source/scenarios.py:240 ../source_demo/scenarios.py:240
+#, python-format
+msgid "Hold the lamp %d more second"
+msgid_plural "Hold the lamp %d more seconds"
+msgstr[0] "Behalte die Lampe für mehr als %d Sekunde"
+msgstr[1] "Behalte die Lampe für mehr als %d Sekunden"
+
+#: ../source/scenarios.py:245 ../source_demo/scenarios.py:245
+#, python-format
+msgid "Goal achieved, %d bonus point"
+msgid_plural "Goal achieved, %d bonus points"
+msgstr[0] "Ziel erreicht, %d bonus Punkt"
+msgstr[1] "Ziel erreicht, %d bonus Punkte"
+
+#: ../source/scenarios.py:257 ../source_demo/scenarios.py:257
+msgid "Gold Cutting"
+msgstr "Gold abbauen"
+
+#: ../source/scenarios.py:268 ../source_demo/scenarios.py:268
+#, python-format
+msgid "%d gold block"
+msgid_plural "%d gold blocks"
+msgstr[0] "%d Gold Block"
+msgstr[1] "%d Gold Blöcke"
+
+#: ../source/scenarios.py:270 ../source_demo/scenarios.py:270
+#, python-format
+msgid "Cut %(goldblock)s in %(second)s"
+msgstr "Baue %(goldblock)s in %(second)s ab"
+
+#: ../source/scenarios.py:274 ../source_demo/scenarios.py:274
+#, python-format
+msgid "Collect the most gold in %d second."
+msgid_plural "Collect the most gold in %d seconds."
+msgstr[0] "Sammele das meiste Gold in %d Sekunde."
+msgstr[1] "Sammele das meiste Gold in %d Sekunden."
+
+#: ../source/scenarios.py:279 ../source_demo/scenarios.py:279
+#, python-format
+msgid "Be the first to collect %d gold block."
+msgid_plural "Be the first to collect %d gold blocks."
+msgstr[0] "Sei der erste der %d Gold Block sammelt."
+msgstr[1] "Sei der erste der %d Gold Blöcke sammelt."
+
+#: ../source/scenarios.py:284 ../source_demo/scenarios.py:284
+#, python-format
+msgid "Collect %d gold block."
+msgid_plural "Collect %d gold blocks."
+msgstr[0] "Sammele %d Gold Block."
+msgstr[1] "Sammele %d Gold Blöcke."
+
+#: ../source/scenarios.py:303 ../source_demo/scenarios.py:303
+msgid "Cut the most goldblocks"
+msgstr "Baue die meisten Gold Blöcke ab"
+
+#: ../source/scenarios.py:309 ../source_demo/scenarios.py:309
+#, python-format
+msgid "Cut %d more gold block"
+msgid_plural "Cut %d more gold blocsk"
+msgstr[0] "Baue noch %d Gold Block ab"
+msgstr[1] "Baue noch %d Gold Blöcke ab"
+
+#: ../source/scenarios.py:314 ../source_demo/scenarios.py:314
+#, python-format
+msgid "All %d gold block collected,"
+msgid_plural "All %d gold blocks collected,"
+msgstr[0] "Alle %d Gold Block abgebaut,"
+msgstr[1] "Alle %d Gold Blöcke abgebaut,"
+
+#: ../source/scenarios.py:323 ../source_demo/scenarios.py:323
+msgid "Cut as many gold blocks as possible"
+msgstr "Baue so viele Gold Blöcke wie möglich ab"
+
+#: ../source/scenarios.py:332 ../source_demo/scenarios.py:332
+msgid "Pass the Dynamite"
+msgstr "Gib das Dynamit weiter"
+
+#: ../source/scenarios.py:344 ../source_demo/scenarios.py:344
+#, python-format
+msgid "%d time"
+msgid_plural "%d times"
+msgstr[0] "%d mal"
+msgstr[1] "%d mal"
+
+#: ../source/scenarios.py:345 ../source_demo/scenarios.py:345
+#, python-format
+msgid "Avoid the dynamite %(times)s in %(second)s"
+msgstr "Weiche dem Dynamit %(times)s mal in %(second)s aus"
+
+#: ../source/scenarios.py:349 ../source_demo/scenarios.py:349
+#, python-format
+msgid "Pass the Dynamite in %d second."
+msgid_plural "Pass the Dynamite in %d seconds."
+msgstr[0] "Gib das Dynamit in %d Sekunde weiter."
+msgstr[1] "Gib das Dynamit in %d Sekunden weiter."
+
+#: ../source/scenarios.py:353 ../source_demo/scenarios.py:353
+#, python-format
+msgid "Do some stuff %d."
+msgstr "Tue etwas %d."
+
+#: ../source/scenarios.py:390 ../source/scenarios.py:410
+#: ../source_demo/scenarios.py:390 ../source_demo/scenarios.py:410
+msgid "Avoid the dynamite"
+msgstr "Weiche dem Dynamit aus"
+
+#: ../source/scenarios.py:396 ../source_demo/scenarios.py:396
+#, python-format
+msgid "Avoid the dynamite %d time."
+msgid_plural "Avoid the dynamite %d times."
+msgstr[0] "Weiche dem Dynamit %d mal aus."
+msgstr[1] "Weiche dem Dynamit %d mal aus."
+
+#: ../source/scenarios.py:401 ../source_demo/scenarios.py:401
+#, python-format
+msgid "All %d dynamite avoided,"
+msgid_plural "All %d dynamites avoided,"
+msgstr[0] "Allen %d Dynamitstange ausgewichen,"
+msgstr[1] "Allen %d Dynamitstangen ausgewichen,"
+
+#: ../source/scenarios.py:417 ../source_demo/scenarios.py:417
+msgid "Race"
+msgstr "Rennen"
+
+#: ../source/scenarios.py:429 ../source_demo/scenarios.py:429
+#, python-format
+msgid "%d flag"
+msgid_plural "%d flags"
+msgstr[0] "%d Flagge"
+msgstr[1] "%d Flaggen"
+
+#: ../source/scenarios.py:434 ../source_demo/scenarios.py:434
+#, python-format
+msgid "Collect the most flags in %d second."
+msgid_plural "Collect the most flags in %d seconds."
+msgstr[0] "Sammele die meisten Flaggen in %d Sekunde."
+msgstr[1] "Sammele die meisten Flaggen in %d Sekunden."
+
+#: ../source/scenarios.py:439 ../source_demo/scenarios.py:439
+#, python-format
+msgid "Be the first to collect %d flag."
+msgid_plural "Be the first to collect %d flags."
+msgstr[0] "Sammele als erste %d Flagge."
+msgstr[1] "Sammele als erste %d Flaggen."
+
+#: ../source/scenarios.py:444 ../source_demo/scenarios.py:444
+#, python-format
+msgid "Collect %d flag."
+msgid_plural "Collect %d flags."
+msgstr[0] "Sammele %d Flagge."
+msgstr[1] "Sammele %d Flaggen."
+
+#: ../source/scenarios.py:467 ../source_demo/scenarios.py:467
+msgid "Race to your flag"
+msgstr "Rase zu deiner Flagge"
+
+#: ../source/scenarios.py:473 ../source_demo/scenarios.py:473
+#, python-format
+msgid "Collect %d more flag"
+msgid_plural "Collect %d more flags"
+msgstr[0] "Sammele noch %d Flagge"
+msgstr[1] "Sammele noch %d Flaggen."
+
+#: ../source/scenarios.py:478 ../source_demo/scenarios.py:478
+#, python-format
+msgid "All %d flag collected,"
+msgid_plural "All %d flags collected,"
+msgstr[0] "Alle %d Flagge gesammelt,"
+msgstr[1] "Alle %d Flaggen gesammelt,"
+
+#: ../source/scenarios.py:487 ../source_demo/scenarios.py:487
+msgid "Collect as many flags as possible"
+msgstr "Sammele so viele Flaggen wie möglich"
+
+#: ../source/scenarios.py:494 ../source_demo/scenarios.py:494
+msgid "Drop the rocks"
+msgstr "Werde die Felsen los"
+
+#: ../source/scenarios.py:535 ../source/scenarios.py:673
+#: ../source_demo/scenarios.py:535 ../source_demo/scenarios.py:673
+msgid "Collect the most points"
+msgstr "Sammele die meisten Punkte"
+
+#: ../source/scenarios.py:541 ../source/scenarios.py:679
+#: ../source_demo/scenarios.py:541 ../source_demo/scenarios.py:679
+#, python-format
+msgid "Collect %d more point"
+msgid_plural "Collect %d more points"
+msgstr[0] "Sammele noch %d Punkt"
+msgstr[1] "Sammele noch %d Punkte"
+
+#: ../source/scenarios.py:546 ../source/scenarios.py:684
+#: ../source_demo/scenarios.py:546 ../source_demo/scenarios.py:684
+#, python-format
+msgid "All %d point collected,"
+msgid_plural "All %d points collected,"
+msgstr[0] "Alle %d Punkt gesammelt,"
+msgstr[1] "Alle %d Punkte gesammelt,"
+
+#: ../source/scenarios.py:555 ../source/scenarios.py:693
+#: ../source_demo/scenarios.py:555 ../source_demo/scenarios.py:693
+msgid "Collect as many points as possible"
+msgstr "Sammele so viele Punkte wie möglich"
+
+#: ../source/scenarios.py:566 ../source_demo/scenarios.py:566
+msgid "Diamond Collect"
+msgstr "Diamanten sammeln"
+
+#: ../source/scenarios.py:574 ../source_demo/scenarios.py:574
+#, python-format
+msgid "%d diamond"
+msgid_plural "%d diamonds"
+msgstr[0] "%d Diamant"
+msgstr[1] "%d Diamanten"
+
+#: ../source/scenarios.py:579 ../source_demo/scenarios.py:579
+#, python-format
+msgid "Collect the most diamonds in %d second."
+msgid_plural "Collect the most diamonds in %d seconds."
+msgstr[0] "Sammele die meisten Diamanten in %d Sekunde."
+msgstr[1] "Sammele die meisten Diamanten in %d Sekunden."
+
+#: ../source/scenarios.py:584 ../source_demo/scenarios.py:584
+#, python-format
+msgid "Be the first to collect %d diamond."
+msgid_plural "Be the first to collect %d diamonds."
+msgstr[0] "Sei der erste der %d Diamant sammelt."
+msgstr[1] "Sei der erste der %d Diamanten sammelt."
+
+#: ../source/scenarios.py:589 ../source_demo/scenarios.py:589
+#, python-format
+msgid "Collect %d diamond."
+msgid_plural "Collect %d diamonds."
+msgstr[0] "Sammele %d Diamant."
+msgstr[1] "Sammele %d Diamanten."
+
+#: ../source/scenarios.py:606 ../source_demo/scenarios.py:606
+msgid "Collect the most diamonds"
+msgstr "Sammele die meisten Diamanten"
+
+#: ../source/scenarios.py:612 ../source_demo/scenarios.py:612
+#, python-format
+msgid "Collect %d more diamond"
+msgid_plural "Collect %d more diamonds"
+msgstr[0] "Sammele noch %d Diamant"
+msgstr[1] "Sammele noch %d Diamanten"
+
+#: ../source/scenarios.py:617 ../source_demo/scenarios.py:617
+#, python-format
+msgid "All %d diamond collected,"
+msgid_plural "All %d diamonds collected,"
+msgstr[0] "Alle %d Diamant gesammelt,"
+msgstr[1] "Alle %d Diamanten gesammelt,"
+
+#: ../source/scenarios.py:626 ../source_demo/scenarios.py:626
+msgid "Collect as many diamonds as possible"
+msgstr "Sammele so viele Diamanten wie möglich"
+
+#: ../source/scenarios.py:633 ../source_demo/scenarios.py:633
+msgid "Collect Frenzy"
+msgstr "Sammelwahnsinn"
+
+#: ../source/scenarios.py:646 ../source_demo/scenarios.py:646
+#, python-format
+msgid "Collect the most points in %d second."
+msgid_plural "Collect the most points in %d seconds."
+msgstr[0] "Sammele die meisten Punkte in %d Sekunde."
+msgstr[1] "Sammele die meisten Punkte in %d Sekunden."
+
+#: ../source/scenarios.py:651 ../source_demo/scenarios.py:651
+#, python-format
+msgid "Be the first to collect %d point."
+msgid_plural "Be the first to collect %d points."
+msgstr[0] "Sammele als erste %d Punkt."
+msgstr[1] "Sammele als erste %d Punkte."
+
+#: ../source/scenarios.py:656 ../source_demo/scenarios.py:656
+#, python-format
+msgid "Collect %d point."
+msgid_plural "Collect %d points."
+msgstr[0] "Sammele %d Punkt."
+msgstr[1] "Sammele %d Punkte."
+
+#: ../source/scenarios.py:700 ../source_demo/scenarios.py:700
+msgid "Goldrush"
+msgstr "Goldrausch"
+
+#: ../source/scenarios.py:713 ../source_demo/scenarios.py:713
+#, python-format
+msgid "Collect all coins in %d second."
+msgid_plural "Collect all coins in %d seconds."
+msgstr[0] "Sammele alle Münzen in %d Sekunde."
+msgstr[1] "Sammele alle Münzen in %d Sekunden."
+
+#: ../source/scenarios.py:722 ../source_demo/scenarios.py:722
+msgid "Collect the most coins."
+msgstr "Sammele die meisten Münzen."
+
+#: ../source/scenarios.py:724 ../source_demo/scenarios.py:724
+msgid "Collect all coins."
+msgstr "Sammele alle Münzen"
+
+#: ../source/scenarios.py:754 ../source_demo/scenarios.py:754
+msgid "Collect all the coins"
+msgstr "Sammele alle Münzen"
+
+#: ../source/settings.py:23 ../source_demo/settings.py:23
+msgid "The Best"
+msgstr "Der Beste!"
+
+#: ../source/settings.py:24 ../source_demo/settings.py:24
+msgid "Expert"
+msgstr "Experte"
+
+#: ../source/settings.py:25 ../source_demo/settings.py:25
+msgid "Master"
+msgstr "Meister"
+
+#: ../source/settings.py:26 ../source_demo/settings.py:26
+msgid "Experienced"
+msgstr "Erfahrener"
+
+#: ../source/settings.py:27 ../source_demo/settings.py:27
+msgid "Professional"
+msgstr "Profi"
+
+#: ../source/settings.py:28 ../source_demo/settings.py:28
+msgid "Amateur"
+msgstr "Amateur"
+
+#: ../source/settings.py:29 ../source_demo/settings.py:29
+msgid "Apprentice"
+msgstr "Lehrling"
+
+#: ../source/settings.py:30 ../source_demo/settings.py:30
+msgid "Beginner"
+msgstr "Anfänger"
+
+#: ../source_demo/hud.py:1040
+msgid "Buy now!"
+msgstr "Jetzt kaufen!"
+
+#: ../source_demo/hud.py:1053
+msgid ""
+"Buy this game now so you can\n"
+"       * Continue this fun adventure\n"
+"       * Play over 200 different levels together\n"
+"          with 6 friends\n"
+"       * Unlock all secret items\n"
+"       * Discover new pickups and game styles\n"
+"       * . . .\n"
+"        "
+msgstr ""
+
+#: ../source_demo/hud.py:1083
+msgid "Demo has ended!"
+msgstr "Demo beendet!"
