@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
-from source.koon.gfx import Surface
+from monorail.koon.gfx import Surface
 
-from source.frame import *
+from monorail.frame import *
 
 def setup_module( module ):
     resman.read("data/resources.cfg")

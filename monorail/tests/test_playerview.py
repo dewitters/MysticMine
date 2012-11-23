@@ -4,13 +4,13 @@ import os
 
 import pygame
 
-from source.koon.res import resman
-import source.koon.gfx as gfx
-import source.koon.geo as geo
+from monorail.koon.res import resman
+import monorail.koon.gfx as gfx
+import monorail.koon.geo as geo
 
-import source.player as m_player
-import source.playerview as m_playerview
-import source.frame as m_frame
+import monorail.player as m_player
+import monorail.playerview as m_playerview
+import monorail.frame as m_frame
 
 def setup_module( module ):
     resman.read("data/resources.cfg")

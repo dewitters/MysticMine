@@ -2,8 +2,8 @@
 
 import os
 
-from source.tiles import *
-from source.koon.geo import Vec3D
+from monorail.tiles import *
+from monorail.koon.geo import Vec3D
 
 class TestDirection:
 

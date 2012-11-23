@@ -2,11 +2,11 @@
 
 import os
 
-from source.koon.geo import Vec3D
-from source.tiles import Tile, Direction, Trail
-from source.world import Level, Playfield
-from source.player import *
-from source.pickups import *
+from monorail.koon.geo import Vec3D
+from monorail.tiles import Tile, Direction, Trail
+from monorail.world import Level, Playfield
+from monorail.player import *
+from monorail.pickups import *
 
 
 class TestLevel:

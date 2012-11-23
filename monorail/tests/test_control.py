@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
-from source.koon.geo import Vec3D
-from source.world import *
-from source.tiles import *
-import source.control as ctrl
-import source.ai as ai
+from monorail.koon.geo import Vec3D
+from monorail.world import *
+from monorail.tiles import *
+import monorail.control as ctrl
+import monorail.ai as ai
 
 class TestGroundControl:
 

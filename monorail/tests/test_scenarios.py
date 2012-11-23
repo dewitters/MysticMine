@@ -2,9 +2,9 @@
 
 import os
 
-from source.scenarios import *
-from source.world import Level
-from source.world import Playfield
+from monorail.scenarios import *
+from monorail.world import Level
+from monorail.world import Playfield
 
 class TestQuestManager:
 

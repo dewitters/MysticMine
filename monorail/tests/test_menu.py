@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from source.menu import *
+from monorail.menu import *
 
 def setup_module( module ):
     resman.read("data/resources.cfg")

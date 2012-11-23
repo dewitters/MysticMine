@@ -2,8 +2,8 @@
 
 import os
 
-from source.settings import *
-from source.scenarios import *
+from monorail.settings import *
+from monorail.scenarios import *
 
 
 class TestSettings:

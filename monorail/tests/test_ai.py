@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import source.ai as ai
+import monorail.ai as ai
 
 class SimpleNode (ai.Node):
     """AiNode for use in the unit tests

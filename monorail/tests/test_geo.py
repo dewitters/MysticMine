@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from source.koon.geo import Vec3D
+from monorail.koon.geo import Vec3D
 
 class TestVec3D:
     def test_constructor( self ):

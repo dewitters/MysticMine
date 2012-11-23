@@ -2,11 +2,11 @@
 
 import os
 
-from source.koon.res import resman
+from monorail.koon.res import resman
 
-from source.pickups import *
-from source.player import *
-from source.tiles import *
+from monorail.pickups import *
+from monorail.player import *
+from monorail.tiles import *
 
 class TestFlag:
 

@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-from source.koon.geo import Vec3D
-from source.tiles import *
-from source.player import *
-from source.world import Level, Playfield
+from monorail.koon.geo import Vec3D
+from monorail.tiles import *
+from monorail.player import *
+from monorail.world import Level, Playfield
 
 def setup_module( module ):
     pygame.init()
