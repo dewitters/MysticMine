@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 import pygame
-from source.koon.res import resman
-import source.koon.geo as geo
+from monorail.koon.res import resman
+import monorail.koon.geo as geo
 
 class TestResourceManager:
     def test_get( self ):

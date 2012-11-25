@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from source.koon.geo import *
+from monorail.koon.geo import *
 import pygame
 
 class TestRectangle:

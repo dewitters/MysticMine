@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import source.koon.cfg as cfg
+import monorail.koon.cfg as cfg
 
 class TestConfigNode:
 

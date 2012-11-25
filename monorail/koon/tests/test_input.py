@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-from source.koon.input import *
-from source.koon.geo import Vec2D
+from monorail.koon.input import *
+from monorail.koon.geo import Vec2D
 from pygame.locals import *
 
 class TestKeyboard:

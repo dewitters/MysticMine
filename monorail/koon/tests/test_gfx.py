@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from source.koon.gfx import *;
+from monorail.koon.gfx import *;
 import pygame
 
 class TestFont:

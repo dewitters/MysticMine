@@ -3,7 +3,7 @@
 import time
 
 import pygame
-import source.koon.snd as snd
+import monorail.koon.snd as snd
 
 def setup_module( module ):
     pygame.init()

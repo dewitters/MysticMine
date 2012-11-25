@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
 import pygame
-import source.koon.gui as gui
-import source.koon.gfx as gfx
-from source.koon.input import *
-from source.koon.geo import Vec2D, Rectangle
+import monorail.koon.gui as gui
+import monorail.koon.gfx as gfx
+from monorail.koon.input import *
+from monorail.koon.geo import Vec2D, Rectangle
 
 
 def setup_module( cls ):
