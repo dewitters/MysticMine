@@ -5,8 +5,8 @@ from os import path
 
 from PIL import Image, ImageSequence
 
-import source.koon.build as build
-import source.koon.cfg as cfg
+import monorail.koon.build as build
+import monorail.koon.cfg as cfg
 
 print "Updating data from assets..."
 

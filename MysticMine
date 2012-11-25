@@ -1,0 +1,4 @@
+#!/usr/bin/env python
+import monorail.monorail
+
+monorail.monorail.main() 
