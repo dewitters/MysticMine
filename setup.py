@@ -15,7 +15,7 @@ def find_data_files(srcdir, *wildcard):
     for files in os.listdir(srcdir):
         if files.endswith(wildcard):
             file_list.append(srcdir+files)
-    return file_list 
+    return file_list
 
 gfx = find_data_files('data/800x600/gfx/', '.png')
 levels = find_data_files('data/800x600/levels/', '.lvl')
@@ -45,11 +45,11 @@ setup( name='MysticMine',
                 ('monorail/data/music',music),
                 ('monorail/data/snd',snd),
     ],
-    ext_modules=[ 
+    ext_modules=[
         Extension("monorail.ai", ["monorail/ai.pyx"])
     ],
-    cmdclass = {'build_ext': build_ext},
-    install_requires=[
+    cmdclass={'build_ext': build_ext},
+    requires=[
         "pygame",
         "numpy",
         "pyrex",

@@ -8,739 +8,699 @@ msgid ""
 msgstr ""
 "Project-Id-Version: monorail 1.0.0\n"
 "Report-Msgid-Bugs-To: koen@koonsolo.com\n"
-"POT-Creation-Date: 2009-06-22 06:50+0200\n"
+"POT-Creation-Date: 2012-12-04 10:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: ../source/hud.py:34 ../source_demo/hud.py:34
+#: ../monorail/hud.py:34
 msgid "Menu"
 msgstr ""
 
-#: ../source/hud.py:211 ../source_demo/hud.py:214
-msgid "Press your button when ready"
+#: ../monorail/hud.py:226
+msgid "Press your button or click on the car"
 msgstr ""
 
-#: ../source/hud.py:235 ../source_demo/hud.py:238
+#: ../monorail/hud.py:244
 msgid "Ready!"
 msgstr ""
 
-#: ../source/hud.py:238 ../source_demo/hud.py:241
+#: ../monorail/hud.py:247
 msgid "waiting..."
 msgstr ""
 
-#: ../source/hud.py:254 ../source_demo/hud.py:257
+#: ../monorail/hud.py:263
 msgid "OK"
 msgstr ""
 
-#: ../source/hud.py:281 ../source_demo/hud.py:284
+#: ../monorail/hud.py:290
 msgid "Info: "
 msgstr ""
 
-#: ../source/hud.py:289 ../source_demo/hud.py:292
+#: ../monorail/hud.py:298
 msgid ""
 "Switch the track with spacebar. You can also click on the track with your "
 "mouse to switch it."
 msgstr ""
 
-#: ../source/hud.py:335 ../source_demo/hud.py:338
+#: ../monorail/hud.py:344
 msgid "A key switches all tracks on the playfield."
 msgstr ""
 
-#: ../source/hud.py:424 ../source_demo/hud.py:427
+#: ../monorail/hud.py:433
 msgid "Pass the dynamite by bumping into other car."
 msgstr ""
 
-#: ../source/hud.py:439 ../source_demo/hud.py:442
+#: ../monorail/hud.py:448
 msgid "Pass the lamp by bumping into other car."
 msgstr ""
 
-#: ../source/hud.py:448 ../source_demo/hud.py:451
+#: ../monorail/hud.py:457
 msgid "Bring the diamond to a tunnel."
 msgstr ""
 
-#: ../source/hud.py:495 ../source_demo/hud.py:498
+#: ../monorail/hud.py:504
 msgid "Pass the diamond by bumping into other car."
 msgstr ""
 
-#: ../source/hud.py:508 ../source_demo/hud.py:511
+#: ../monorail/hud.py:517
 msgid "With a balloon you can only go up."
 msgstr ""
 
-#: ../source/hud.py:566 ../source_demo/hud.py:569
+#: ../monorail/hud.py:575
 msgid "Only the car with axe can cut gold."
 msgstr ""
 
-#: ../source/hud.py:604 ../source_demo/hud.py:607
+#: ../monorail/hud.py:613
 msgid "Only your own flag can be collected."
 msgstr ""
 
-#: ../source/hud.py:659 ../source_demo/hud.py:662
+#: ../monorail/hud.py:668
 msgid "Go up slopes with oil."
 msgstr ""
 
-#: ../source/hud.py:717 ../source_demo/hud.py:720
+#: ../monorail/hud.py:726
 msgid ""
 "You can't pickup anything when you have a rock. Lose the rock in a tunnel."
 msgstr ""
 
-#: ../source/hud.py:775 ../source_demo/hud.py:778
+#: ../monorail/hud.py:784
 msgid "A Torch moves every car to a different location"
 msgstr ""
 
-#: ../source/hud.py:803 ../source_demo/hud.py:806
+#: ../monorail/hud.py:812
 msgid "A ghost makes you go up slopes and move through other cars."
 msgstr ""
 
-#: ../source/hud.py:903 ../source_demo/hud.py:906
+#: ../monorail/hud.py:912
 msgid "Game Ended!"
 msgstr ""
 
-#: ../source/hud.py:907 ../source_demo/hud.py:910
+#: ../monorail/hud.py:916 ../monorail/hud.py:956
 msgid "Ranking"
 msgstr ""
 
-#: ../source/hud.py:960 ../source_demo/hud.py:963
+#: ../monorail/hud.py:952
+msgid "All Games Total"
+msgstr ""
+
+#: ../monorail/hud.py:1011
 msgid "Played level as:"
 msgstr ""
 
-#: ../source/hud.py:963 ../source_demo/hud.py:966
+#: ../monorail/hud.py:1014
 msgid "Your current skill level:"
 msgstr ""
 
-#: ../source/hud.py:1002 ../source_demo/hud.py:1005
+#: ../monorail/hud.py:1053
 msgid "Nice job!"
 msgstr ""
 
-#: ../source/hud.py:1015 ../source_demo/hud.py:1018
+#: ../monorail/hud.py:1066
 msgid "Game Over!"
 msgstr ""
 
-#: ../source/hud.py:1031 ../source_demo/hud.py:1102
+#: ../monorail/hud.py:1082
 msgid "Continue"
 msgstr ""
 
-#: ../source/hud.py:1034 ../source_demo/hud.py:1105
+#: ../monorail/hud.py:1085
 msgid "Skip Level"
 msgstr ""
 
-#: ../source/hud.py:1036 ../source/menu.py:366 ../source_demo/hud.py:1107
-#: ../source_demo/menu.py:366
+#: ../monorail/hud.py:1087 ../monorail/menu.py:366
 msgid "Options"
 msgstr ""
 
-#: ../source/hud.py:1038 ../source_demo/hud.py:1109
+#: ../monorail/hud.py:1089
 msgid "To Menu"
 msgstr ""
 
-#: ../source/hud.py:1040 ../source/menu.py:368 ../source_demo/hud.py:1111
-#: ../source_demo/menu.py:368
+#: ../monorail/hud.py:1091 ../monorail/menu.py:368
 msgid "Quit"
 msgstr ""
 
-#: ../source/menu.py:360 ../source_demo/menu.py:360
+#: ../monorail/menu.py:360
 msgid "Adventure"
 msgstr ""
 
-#: ../source/menu.py:362 ../source_demo/menu.py:362
+#: ../monorail/menu.py:362
 msgid "Quick play"
 msgstr ""
 
-#: ../source/menu.py:364 ../source_demo/menu.py:364
+#: ../monorail/menu.py:364
 msgid "Multiplayer"
 msgstr ""
 
-#: ../source/menu.py:461 ../source_demo/menu.py:465
+#: ../monorail/menu.py:461
 msgid "Sound"
 msgstr ""
 
-#: ../source/menu.py:464 ../source_demo/menu.py:468
+#: ../monorail/menu.py:464
 msgid "Music"
 msgstr ""
 
-#: ../source/menu.py:470 ../source_demo/menu.py:474
+#: ../monorail/menu.py:470
 msgid "Accessibility"
 msgstr ""
 
-#: ../source/menu.py:472 ../source/menu.py:562 ../source_demo/menu.py:476
-#: ../source_demo/menu.py:566
+#: ../monorail/menu.py:472 ../monorail/menu.py:562
 msgid "Close"
 msgstr ""
 
-#: ../source/menu.py:527 ../source_demo/menu.py:531
+#: ../monorail/menu.py:527
 msgid "Windowed"
 msgstr ""
 
-#: ../source/menu.py:529 ../source_demo/menu.py:533
+#: ../monorail/menu.py:529
 msgid "Fullscreen"
 msgstr ""
 
-#: ../source/menu.py:548 ../source_demo/menu.py:552
+#: ../monorail/menu.py:548
 msgid "Game"
 msgstr ""
 
-#: ../source/menu.py:549 ../source/menu.py:557 ../source_demo/menu.py:553
-#: ../source_demo/menu.py:561
+#: ../monorail/menu.py:549 ../monorail/menu.py:557
 msgid "Speed"
 msgstr ""
 
-#: ../source/menu.py:556 ../source_demo/menu.py:560
+#: ../monorail/menu.py:556
 msgid "Scan"
 msgstr ""
 
-#: ../source/menu.py:601 ../source_demo/menu.py:605
+#: ../monorail/menu.py:601
 msgid "One Switch"
 msgstr ""
 
-#: ../source/menu.py:603 ../source_demo/menu.py:607
+#: ../monorail/menu.py:603
 msgid "Normal Mode"
 msgstr ""
 
-#: ../source/menu.py:655 ../source_demo/menu.py:659
+#: ../monorail/menu.py:655
 msgid "Number of players?"
 msgstr ""
 
-#: ../source/menu.py:699 ../source_demo/menu.py:711
+#: ../monorail/menu.py:699
 msgid "Player 1, press button!"
 msgstr ""
 
-#: ../source/menu.py:724 ../source_demo/menu.py:736
+#: ../monorail/menu.py:724
 #, python-format
 msgid "Player %d"
 msgstr ""
 
-#: ../source/menu.py:734 ../source_demo/menu.py:746
+#: ../monorail/menu.py:734
 #, python-format
 msgid "Player %d, press button!"
 msgstr ""
 
-#: ../source/menu.py:761 ../source_demo/menu.py:773
+#: ../monorail/menu.py:761
 msgid "        Menu"
 msgstr ""
 
-#: ../source/menu.py:763 ../source_demo/menu.py:775
+#: ../monorail/menu.py:763
 msgid "Play         "
 msgstr ""
 
-#: ../source/menu.py:932 ../source/menu.py:944 ../source_demo/menu.py:944
-#: ../source_demo/menu.py:956
+#: ../monorail/menu.py:932 ../monorail/menu.py:944
 #, python-format
 msgid "skill: %(name)s (%(value).0f)"
 msgstr ""
 
-#: ../source/menu.py:938 ../source_demo/menu.py:950
+#: ../monorail/menu.py:938
 msgid "Unlocking item"
 msgstr ""
 
-#: ../source/menu.py:1157 ../source_demo/menu.py:1169
+#: ../monorail/menu.py:1157
 msgid "pickup:"
 msgstr ""
 
-#: ../source/menu.py:1224 ../source_demo/menu.py:1236
+#: ../monorail/menu.py:1251
 msgid "Secret Items:"
 msgstr ""
 
-#: ../source/monorail.py:53 ../source_demo/monorail.py:57
+#: ../monorail/monorail.py:92
 msgid "Mystic Mine"
 msgstr ""
 
-#: ../source/scenarios.py:121 ../source_demo/scenarios.py:121
+#: ../monorail/scenarios.py:136
 msgid "Your mission is..."
 msgstr ""
 
-#: ../source/scenarios.py:130 ../source_demo/scenarios.py:130
+#: ../monorail/scenarios.py:145
 msgid "Coin Collect"
 msgstr ""
 
-#: ../source/scenarios.py:143 ../source/scenarios.py:206
-#: ../source/scenarios.py:267 ../source/scenarios.py:343
-#: ../source/scenarios.py:428 ../source/scenarios.py:501
-#: ../source/scenarios.py:573 ../source/scenarios.py:640
-#: ../source_demo/scenarios.py:143 ../source_demo/scenarios.py:206
-#: ../source_demo/scenarios.py:267 ../source_demo/scenarios.py:343
-#: ../source_demo/scenarios.py:428 ../source_demo/scenarios.py:501
-#: ../source_demo/scenarios.py:573 ../source_demo/scenarios.py:640
+#: ../monorail/scenarios.py:160 ../monorail/scenarios.py:223
+#: ../monorail/scenarios.py:284 ../monorail/scenarios.py:360
+#: ../monorail/scenarios.py:445 ../monorail/scenarios.py:518
+#: ../monorail/scenarios.py:590 ../monorail/scenarios.py:657
 #, python-format
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:144 ../source/scenarios.py:502
-#: ../source_demo/scenarios.py:144 ../source_demo/scenarios.py:502
+#: ../monorail/scenarios.py:161 ../monorail/scenarios.py:519
 #, python-format
 msgid "%d coin"
 msgid_plural "%d coins"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:145 ../source/scenarios.py:430
-#: ../source/scenarios.py:503 ../source/scenarios.py:575
-#: ../source/scenarios.py:642 ../source_demo/scenarios.py:145
-#: ../source_demo/scenarios.py:430 ../source_demo/scenarios.py:503
-#: ../source_demo/scenarios.py:575 ../source_demo/scenarios.py:642
+#: ../monorail/scenarios.py:162 ../monorail/scenarios.py:447
+#: ../monorail/scenarios.py:520 ../monorail/scenarios.py:592
+#: ../monorail/scenarios.py:659
 #, python-format
 msgid "Collect %(point)s in %(second)s."
 msgstr ""
 
-#: ../source/scenarios.py:149 ../source/scenarios.py:507
-#: ../source/scenarios.py:718 ../source_demo/scenarios.py:149
-#: ../source_demo/scenarios.py:507 ../source_demo/scenarios.py:718
+#: ../monorail/scenarios.py:166 ../monorail/scenarios.py:524
+#: ../monorail/scenarios.py:736
 #, python-format
 msgid "Collect the most coins in %d second."
 msgid_plural "Collect the most coins in %d second."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:154 ../source/scenarios.py:512
-#: ../source_demo/scenarios.py:154 ../source_demo/scenarios.py:512
+#: ../monorail/scenarios.py:171 ../monorail/scenarios.py:529
 #, python-format
 msgid "Be the first to collect %d coin."
 msgid_plural "Be the first to collect %d coins."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:159 ../source/scenarios.py:517
-#: ../source_demo/scenarios.py:159 ../source_demo/scenarios.py:517
+#: ../monorail/scenarios.py:176 ../monorail/scenarios.py:534
 #, python-format
 msgid "Collect %d coin."
 msgid_plural "Collect %d coins."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:168 ../source_demo/scenarios.py:168
+#: ../monorail/scenarios.py:185
 msgid "Collect the most coins"
 msgstr ""
 
-#: ../source/scenarios.py:174 ../source_demo/scenarios.py:174
+#: ../monorail/scenarios.py:191
 #, python-format
 msgid "Collect %d more coin"
 msgid_plural "Collect %d more coins"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:179 ../source_demo/scenarios.py:179
+#: ../monorail/scenarios.py:196
 #, python-format
 msgid "All %d coin collected, "
 msgid_plural "All %d coins collected, "
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:184 ../source/scenarios.py:319
-#: ../source/scenarios.py:406 ../source/scenarios.py:483
-#: ../source/scenarios.py:551 ../source/scenarios.py:622
-#: ../source/scenarios.py:689 ../source_demo/scenarios.py:184
-#: ../source_demo/scenarios.py:319 ../source_demo/scenarios.py:406
-#: ../source_demo/scenarios.py:483 ../source_demo/scenarios.py:551
-#: ../source_demo/scenarios.py:622 ../source_demo/scenarios.py:689
+#: ../monorail/scenarios.py:201 ../monorail/scenarios.py:336
+#: ../monorail/scenarios.py:423 ../monorail/scenarios.py:500
+#: ../monorail/scenarios.py:568 ../monorail/scenarios.py:639
+#: ../monorail/scenarios.py:706
 #, python-format
 msgid "%d bonus point"
 msgid_plural "%d bonus points"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:188 ../source_demo/scenarios.py:188
+#: ../monorail/scenarios.py:205
 msgid "Collect many coins"
 msgstr ""
 
-#: ../source/scenarios.py:196 ../source_demo/scenarios.py:196
+#: ../monorail/scenarios.py:213
 msgid "Hold the Lamp"
 msgstr ""
 
-#: ../source/scenarios.py:207 ../source/scenarios.py:641
-#: ../source_demo/scenarios.py:207 ../source_demo/scenarios.py:641
+#: ../monorail/scenarios.py:224 ../monorail/scenarios.py:658
 #, python-format
 msgid "%d point"
 msgid_plural "%d points"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:208 ../source_demo/scenarios.py:208
+#: ../monorail/scenarios.py:225
 #, python-format
 msgid "Gain %(point)s in %(second)s"
 msgstr ""
 
-#: ../source/scenarios.py:210 ../source_demo/scenarios.py:210
+#: ../monorail/scenarios.py:227
 msgid "Hold the lamp as long as possible."
 msgstr ""
 
-#: ../source/scenarios.py:213 ../source_demo/scenarios.py:213
+#: ../monorail/scenarios.py:230
 #, python-format
 msgid "Be the first to hold the lamp for %d second."
 msgid_plural "Be the first to hold the lamp for %d seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:218 ../source_demo/scenarios.py:218
+#: ../monorail/scenarios.py:235
 #, python-format
 msgid "Hold the lamp for %d second."
 msgid_plural "Hold the lamp for %d seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:234 ../source/scenarios.py:249
-#: ../source_demo/scenarios.py:234 ../source_demo/scenarios.py:249
+#: ../monorail/scenarios.py:251 ../monorail/scenarios.py:266
 msgid "Hold the lamp as long as possible"
 msgstr ""
 
-#: ../source/scenarios.py:240 ../source_demo/scenarios.py:240
+#: ../monorail/scenarios.py:257
 #, python-format
 msgid "Hold the lamp %d more second"
 msgid_plural "Hold the lamp %d more seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:245 ../source_demo/scenarios.py:245
+#: ../monorail/scenarios.py:262
 #, python-format
 msgid "Goal achieved, %d bonus point"
 msgid_plural "Goal achieved, %d bonus points"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:257 ../source_demo/scenarios.py:257
+#: ../monorail/scenarios.py:274
 msgid "Gold Cutting"
 msgstr ""
 
-#: ../source/scenarios.py:268 ../source_demo/scenarios.py:268
+#: ../monorail/scenarios.py:285
 #, python-format
 msgid "%d gold block"
 msgid_plural "%d gold blocks"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:270 ../source_demo/scenarios.py:270
+#: ../monorail/scenarios.py:287
 #, python-format
 msgid "Cut %(goldblock)s in %(second)s"
 msgstr ""
 
-#: ../source/scenarios.py:274 ../source_demo/scenarios.py:274
+#: ../monorail/scenarios.py:291
 #, python-format
 msgid "Collect the most gold in %d second."
 msgid_plural "Collect the most gold in %d seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:279 ../source_demo/scenarios.py:279
+#: ../monorail/scenarios.py:296
 #, python-format
 msgid "Be the first to collect %d gold block."
 msgid_plural "Be the first to collect %d gold blocks."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:284 ../source_demo/scenarios.py:284
+#: ../monorail/scenarios.py:301
 #, python-format
 msgid "Collect %d gold block."
 msgid_plural "Collect %d gold blocks."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:303 ../source_demo/scenarios.py:303
+#: ../monorail/scenarios.py:320
 msgid "Cut the most goldblocks"
 msgstr ""
 
-#: ../source/scenarios.py:309 ../source_demo/scenarios.py:309
+#: ../monorail/scenarios.py:326
 #, python-format
 msgid "Cut %d more gold block"
 msgid_plural "Cut %d more gold blocsk"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:314 ../source_demo/scenarios.py:314
+#: ../monorail/scenarios.py:331
 #, python-format
 msgid "All %d gold block collected,"
 msgid_plural "All %d gold blocks collected,"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:323 ../source_demo/scenarios.py:323
+#: ../monorail/scenarios.py:340
 msgid "Cut as many gold blocks as possible"
 msgstr ""
 
-#: ../source/scenarios.py:332 ../source_demo/scenarios.py:332
+#: ../monorail/scenarios.py:349
 msgid "Pass the Dynamite"
 msgstr ""
 
-#: ../source/scenarios.py:344 ../source_demo/scenarios.py:344
+#: ../monorail/scenarios.py:361
 #, python-format
 msgid "%d time"
 msgid_plural "%d times"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:345 ../source_demo/scenarios.py:345
+#: ../monorail/scenarios.py:362
 #, python-format
 msgid "Avoid the dynamite %(times)s in %(second)s"
 msgstr ""
 
-#: ../source/scenarios.py:349 ../source_demo/scenarios.py:349
+#: ../monorail/scenarios.py:366
 #, python-format
 msgid "Pass the Dynamite in %d second."
 msgid_plural "Pass the Dynamite in %d seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:353 ../source_demo/scenarios.py:353
+#: ../monorail/scenarios.py:370
 #, python-format
 msgid "Do some stuff %d."
 msgstr ""
 
-#: ../source/scenarios.py:390 ../source/scenarios.py:410
-#: ../source_demo/scenarios.py:390 ../source_demo/scenarios.py:410
+#: ../monorail/scenarios.py:407 ../monorail/scenarios.py:427
 msgid "Avoid the dynamite"
 msgstr ""
 
-#: ../source/scenarios.py:396 ../source_demo/scenarios.py:396
+#: ../monorail/scenarios.py:413
 #, python-format
 msgid "Avoid the dynamite %d time."
 msgid_plural "Avoid the dynamite %d times."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:401 ../source_demo/scenarios.py:401
+#: ../monorail/scenarios.py:418
 #, python-format
 msgid "All %d dynamite avoided,"
 msgid_plural "All %d dynamites avoided,"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:417 ../source_demo/scenarios.py:417
+#: ../monorail/scenarios.py:434
 msgid "Race"
 msgstr ""
 
-#: ../source/scenarios.py:429 ../source_demo/scenarios.py:429
+#: ../monorail/scenarios.py:446
 #, python-format
 msgid "%d flag"
 msgid_plural "%d flags"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:434 ../source_demo/scenarios.py:434
+#: ../monorail/scenarios.py:451
 #, python-format
 msgid "Collect the most flags in %d second."
 msgid_plural "Collect the most flags in %d seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:439 ../source_demo/scenarios.py:439
+#: ../monorail/scenarios.py:456
 #, python-format
 msgid "Be the first to collect %d flag."
 msgid_plural "Be the first to collect %d flags."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:444 ../source_demo/scenarios.py:444
+#: ../monorail/scenarios.py:461
 #, python-format
 msgid "Collect %d flag."
 msgid_plural "Collect %d flags."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:467 ../source_demo/scenarios.py:467
+#: ../monorail/scenarios.py:484
 msgid "Race to your flag"
 msgstr ""
 
-#: ../source/scenarios.py:473 ../source_demo/scenarios.py:473
+#: ../monorail/scenarios.py:490
 #, python-format
 msgid "Collect %d more flag"
 msgid_plural "Collect %d more flags"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:478 ../source_demo/scenarios.py:478
+#: ../monorail/scenarios.py:495
 #, python-format
 msgid "All %d flag collected,"
 msgid_plural "All %d flags collected,"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:487 ../source_demo/scenarios.py:487
+#: ../monorail/scenarios.py:504
 msgid "Collect as many flags as possible"
 msgstr ""
 
-#: ../source/scenarios.py:494 ../source_demo/scenarios.py:494
+#: ../monorail/scenarios.py:511
 msgid "Drop the rocks"
 msgstr ""
 
-#: ../source/scenarios.py:535 ../source/scenarios.py:673
-#: ../source_demo/scenarios.py:535 ../source_demo/scenarios.py:673
+#: ../monorail/scenarios.py:552 ../monorail/scenarios.py:690
 msgid "Collect the most points"
 msgstr ""
 
-#: ../source/scenarios.py:541 ../source/scenarios.py:679
-#: ../source_demo/scenarios.py:541 ../source_demo/scenarios.py:679
+#: ../monorail/scenarios.py:558 ../monorail/scenarios.py:696
 #, python-format
 msgid "Collect %d more point"
 msgid_plural "Collect %d more points"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:546 ../source/scenarios.py:684
-#: ../source_demo/scenarios.py:546 ../source_demo/scenarios.py:684
+#: ../monorail/scenarios.py:563 ../monorail/scenarios.py:701
 #, python-format
 msgid "All %d point collected,"
 msgid_plural "All %d points collected,"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:555 ../source/scenarios.py:693
-#: ../source_demo/scenarios.py:555 ../source_demo/scenarios.py:693
+#: ../monorail/scenarios.py:572 ../monorail/scenarios.py:710
 msgid "Collect as many points as possible"
 msgstr ""
 
-#: ../source/scenarios.py:566 ../source_demo/scenarios.py:566
+#: ../monorail/scenarios.py:583
 msgid "Diamond Collect"
 msgstr ""
 
-#: ../source/scenarios.py:574 ../source_demo/scenarios.py:574
+#: ../monorail/scenarios.py:591
 #, python-format
 msgid "%d diamond"
 msgid_plural "%d diamonds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:579 ../source_demo/scenarios.py:579
+#: ../monorail/scenarios.py:596
 #, python-format
 msgid "Collect the most diamonds in %d second."
 msgid_plural "Collect the most diamonds in %d seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:584 ../source_demo/scenarios.py:584
+#: ../monorail/scenarios.py:601
 #, python-format
 msgid "Be the first to collect %d diamond."
 msgid_plural "Be the first to collect %d diamonds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:589 ../source_demo/scenarios.py:589
+#: ../monorail/scenarios.py:606
 #, python-format
 msgid "Collect %d diamond."
 msgid_plural "Collect %d diamonds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:606 ../source_demo/scenarios.py:606
+#: ../monorail/scenarios.py:623
 msgid "Collect the most diamonds"
 msgstr ""
 
-#: ../source/scenarios.py:612 ../source_demo/scenarios.py:612
+#: ../monorail/scenarios.py:629
 #, python-format
 msgid "Collect %d more diamond"
 msgid_plural "Collect %d more diamonds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:617 ../source_demo/scenarios.py:617
+#: ../monorail/scenarios.py:634
 #, python-format
 msgid "All %d diamond collected,"
 msgid_plural "All %d diamonds collected,"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:626 ../source_demo/scenarios.py:626
+#: ../monorail/scenarios.py:643
 msgid "Collect as many diamonds as possible"
 msgstr ""
 
-#: ../source/scenarios.py:633 ../source_demo/scenarios.py:633
+#: ../monorail/scenarios.py:650
 msgid "Collect Frenzy"
 msgstr ""
 
-#: ../source/scenarios.py:646 ../source_demo/scenarios.py:646
+#: ../monorail/scenarios.py:663
 #, python-format
 msgid "Collect the most points in %d second."
 msgid_plural "Collect the most points in %d seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:651 ../source_demo/scenarios.py:651
+#: ../monorail/scenarios.py:668
 #, python-format
 msgid "Be the first to collect %d point."
 msgid_plural "Be the first to collect %d points."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:656 ../source_demo/scenarios.py:656
+#: ../monorail/scenarios.py:673
 #, python-format
 msgid "Collect %d point."
 msgid_plural "Collect %d points."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:700 ../source_demo/scenarios.py:700
+#: ../monorail/scenarios.py:717
 msgid "Goldrush"
 msgstr ""
 
-#: ../source/scenarios.py:713 ../source_demo/scenarios.py:713
+#: ../monorail/scenarios.py:731
 #, python-format
 msgid "Collect all coins in %d second."
 msgid_plural "Collect all coins in %d seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../source/scenarios.py:722 ../source_demo/scenarios.py:722
+#: ../monorail/scenarios.py:740
 msgid "Collect the most coins."
 msgstr ""
 
-#: ../source/scenarios.py:724 ../source_demo/scenarios.py:724
+#: ../monorail/scenarios.py:742
 msgid "Collect all coins."
 msgstr ""
 
-#: ../source/scenarios.py:754 ../source_demo/scenarios.py:754
+#: ../monorail/scenarios.py:772
 msgid "Collect all the coins"
 msgstr ""
 
-#: ../source/settings.py:23 ../source_demo/settings.py:23
+#: ../monorail/settings.py:23
 msgid "The Best"
 msgstr ""
 
-#: ../source/settings.py:24 ../source_demo/settings.py:24
+#: ../monorail/settings.py:24
 msgid "Expert"
 msgstr ""
 
-#: ../source/settings.py:25 ../source_demo/settings.py:25
+#: ../monorail/settings.py:25
 msgid "Master"
 msgstr ""
 
-#: ../source/settings.py:26 ../source_demo/settings.py:26
+#: ../monorail/settings.py:26
 msgid "Experienced"
 msgstr ""
 
-#: ../source/settings.py:27 ../source_demo/settings.py:27
+#: ../monorail/settings.py:27
 msgid "Professional"
 msgstr ""
 
-#: ../source/settings.py:28 ../source_demo/settings.py:28
+#: ../monorail/settings.py:28
 msgid "Amateur"
 msgstr ""
 
-#: ../source/settings.py:29 ../source_demo/settings.py:29
+#: ../monorail/settings.py:29
 msgid "Apprentice"
 msgstr ""
 
-#: ../source/settings.py:30 ../source_demo/settings.py:30
+#: ../monorail/settings.py:30
 msgid "Beginner"
-msgstr ""
-
-#: ../source_demo/hud.py:1040
-msgid "Buy now!"
-msgstr ""
-
-#: ../source_demo/hud.py:1053
-msgid ""
-"Buy this game now so you can\n"
-"       * Continue this fun adventure\n"
-"       * Play over 200 different levels together\n"
-"          with 6 friends\n"
-"       * Unlock all secret items\n"
-"       * Discover new pickups and game styles\n"
-"       * . . .\n"
-"        "
-msgstr ""
-
-#: ../source_demo/hud.py:1083
-msgid "Demo has ended!"
 msgstr ""

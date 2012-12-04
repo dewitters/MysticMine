@@ -64,23 +64,26 @@ Requirements
 
 How to Run the Game
 -------------------
-- Copy the data/800x600/ folder as data folder in the "monorail" directory
-- Run the monorail.py file
-- For non i386 architectures you have to rebuild the ai.so:
-  To do this, go to the "monorail" directory and run: python setup.py build_ext --inplace
+In root directory of MysticMine sources:
+- Run 'make'
+- Run './MysticMine'
+
+
+Install Instructions
+--------------------
+In root directory of MysticMine sources:
+- Run 'make install'
+
+This will install all files to the python site-packages directory and a start
+script to you bin directory, so that you can start it by just calling
+'MysticMine'
 
 
 Build Instructions
 ------------------
-Just run:
-  python setup.py install
-in the root directory of the MysticMine sources.
-This will install all files to the python site-packages directory, and a start script
-to your bin directory, so that you can start is by just calling "MysticMine"
-
-To rebuild the graphics, you have to run:
-  python build.py
-in the root directory of the MysticMine sources.
+You can rebuild everything including all assets of the game. In root directory
+of MysticMine sources:
+- Run 'make rebuild-all'
 
 
 License
