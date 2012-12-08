@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import monorail.ai as ai
 
@@ -30,11 +29,11 @@ class SimpleNode (ai.Node):
 ##        """
 ##        # Given
 ##        node = SimpleNode()
-##        
+##
 ##        # When
 ##        child = node.generate_childeren()[0]
 ##        grandchild = child.generate_childeren()[0]
-##                
+##
 ##        # Then
 ##        assert node.get_generation( node ) == 0
 ##        assert child.get_generation( node ) == 1
@@ -45,14 +44,14 @@ class SimpleNode (ai.Node):
 ##        """Given a structure of child Nodes
 ##        When the score is set to high on a child
 ##        Then the best_score of the parents are updated
-##        """            
+##        """
 ##        # Given
 ##        node = SimpleNode()
 ##
 ##        node.generate_childeren()
 ##        node.set_score(1)
 ##        for child in node.get_childeren():
-##            child.generate_childeren()        
+##            child.generate_childeren()
 ##            child.set_score(1)
 ##
 ##        # When/Then
@@ -82,7 +81,7 @@ class SimpleNode (ai.Node):
 ##        node.set_score(1)
 ##        for child in node.get_childeren():
 ##            child.set_score(1)
-##            
+##
 ##        # When/Then
 ##        assert len(node.get_best_childs()) == 2
 ##
@@ -103,7 +102,7 @@ class SimpleNode (ai.Node):
 ##        node.generate_childeren()
 ##        for child in node.get_childeren():
 ##            child.generate_childeren()
-##            
+##
 ##        # When/Then
 ##        assert not node.is_leaf()
 ##        assert not node.get_childeren()[0].is_leaf()
@@ -148,7 +147,7 @@ class TestPredictionTree:
 ##        child = tree.root_node.get_childeren()[0]
 ##        assert child is not None
 ##        assert len(child.get_childeren()) == 2
-        
+
 
 ##    def test_replace_root_with_child_is_optimized( self ):
 ##        """Given a PredictionTree with root node and childeren
@@ -159,10 +158,10 @@ class TestPredictionTree:
 ##        tree = ai.PredictionTree()
 ##        tree.set_root( SimpleNode() )
 ##        tree.update() # generate the tree
-##        
+##
 ##        # When
 ##        tree.set_root( tree.root_node.get_childeren()[0] )
-##        
+##
 ##        # Then
 ##        assert len(tree.root_node.get_childeren()) == 2
 
@@ -175,10 +174,10 @@ class TestPredictionTree:
 ##        tree = ai.PredictionTree()
 ##        tree.set_root( SimpleNode() )
 ##        tree.update() # generate the tree
-##        
+##
 ##        # When
 ##        tree.set_root( SimpleNode() )
-##        
+##
 ##        # Then
 ##        assert tree.root_node.get_childeren() is None
 
@@ -190,17 +189,17 @@ class TestPredictionTree:
 ##        # Given
 ##        tree = ai.PredictionTree( MAX_GENERATIONS = 5 )
 ##        tree.set_root( SimpleNode() )
-##        
+##
 ##        # When
 ##        tree.update()
-##        
+##
 ##        # Then
 ##        child = tree.root_node.get_childeren()[0]
 ##        grandchild = child.get_childeren()[0]
-##        
+##
 ##        assert tree.root_node.get_total_score() == 1
 ##        assert 1 < child.get_total_score() < grandchild.get_total_score() < 3
-        
+
 ##    def test_scores_are_recalculated_on_root_change( self ):
 ##        """Given a PredictionTree with root node and scores
 ##        When the root node changes to a child node
@@ -209,19 +208,19 @@ class TestPredictionTree:
 ##        # Given
 ##        tree = ai.PredictionTree( MAX_GENERATIONS = 5 )
 ##        tree.set_root( SimpleNode() )
-##        
+##
 ##        # When
 ##        tree.update()
 ##        tree.set_root( tree.root_node.get_childeren()[0] )
 ##        tree.update()
-##        
+##
 ##        # Then
 ##        child = tree.root_node.get_childeren()[0]
 ##        grandchild = child.get_childeren()[0]
-##        
+##
 ##        assert tree.root_node.get_total_score() == 1
 ##        assert 1 < child.get_total_score() < grandchild.get_total_score() < 3
-        
+
 ##    def test_get_nodes_of_generation( self ):
 ##        """Given a PredictionTree with root node and childeren
 ##        When the childeren are calculated
@@ -230,10 +229,10 @@ class TestPredictionTree:
 ##        # Given
 ##        tree = ai.PredictionTree( MAX_GENERATIONS = 5 )
 ##        tree.set_root( SimpleNode() )
-##        
+##
 ##        # When
 ##        tree.update()
-##        
+##
 ##        # Then
 ##        generation = tree.get_nodes_of_generation(0)
 ##        assert len(generation) == 1
@@ -246,7 +245,7 @@ class TestPredictionTree:
 ##        assert generation[1] in tree.root_node.get_childeren()
 ##        assert generation[0].generation == 1
 ##        assert generation[0].generation == 1
-##                
+##
 ##        generation = tree.get_nodes_of_generation(2)
 ##        assert len(generation) == 4
 ##        assert generation[0] in tree.root_node.get_childeren()[0].get_childeren()\
@@ -261,7 +260,7 @@ class TestPredictionTree:
 ##        assert generation[1].generation == 2
 ##        assert generation[2].generation == 2
 ##        assert generation[3].generation == 2
-                
+
 ##    def test_get_nodes_of_generation_on_new_root( self ):
 ##        """Given a PredictionTree with root node and childeren
 ##        When root node is recalculated
@@ -270,12 +269,12 @@ class TestPredictionTree:
 ##        # Given
 ##        tree = ai.PredictionTree( MAX_GENERATIONS = 5 )
 ##        tree.set_root( SimpleNode() )
-##        
+##
 ##        # When
 ##        tree.update()
 ##        tree.set_root( tree.root_node.get_childeren()[0] )
 ##        tree.update()
-##        
+##
 ##        # Then
 ##        generation = tree.get_nodes_of_generation(0)
 ##        assert len(generation) == 1
@@ -288,7 +287,7 @@ class TestPredictionTree:
 ##        assert generation[1] in tree.root_node.get_childeren()
 ##        assert generation[0].generation == 1
 ##        assert generation[0].generation == 1
-##                
+##
 ##        generation = tree.get_nodes_of_generation(2)
 ##        assert len(generation) == 4
 ##        assert generation[0] in tree.root_node.get_childeren()[0].get_childeren()\
@@ -303,4 +302,4 @@ class TestPredictionTree:
 ##        assert generation[1].generation == 2
 ##        assert generation[2].generation == 2
 ##        assert generation[3].generation == 2
-##                
+##

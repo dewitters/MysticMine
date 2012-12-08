@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import pygame
 import random
@@ -29,10 +28,10 @@ class Point (object):
     def draw( self, frame ):
         pos = (self.pos[0] + frame.X_OFFSET,
                self.pos[1] + frame.Y_OFFSET + self.life - 50)
-        
+
         self.font.draw( self.text, frame.surface, pos,
                         align=gfx.Font.CENTER, valign=gfx.Font.MIDDLE )
-        
+
     def is_alive( self ):
         return self.life >= 0
 
@@ -58,27 +57,27 @@ class Event (object):
              resman.get("game.fuse_sound").is_playing():
             resman.get("game.fuse_sound").stop()
         Event.instance.play_fuse = False
-        
+
     @staticmethod
     def dynamite_fuse():
         Event.instance.play_fuse = True
 
     @staticmethod
     def dynamite_tick():
-        resman.get("game.dynamite_tick_sound").play()        
+        resman.get("game.dynamite_tick_sound").play()
 
     @staticmethod
     def coin_pickup( score, carpos ):
-        resman.get("game.coin_sound").play()        
+        resman.get("game.coin_sound").play()
 
         Event.instance.points.append( Point( score, carpos.get_screen_position() ) )
-    
+
     @staticmethod
     def flag_pickup( score, carpos ):
         resman.get("game.collect_sound").play()
 
         Event.instance.points.append( Point( score, carpos.get_screen_position() ) )
-    
+
     @staticmethod
     def carhit():
         resman.get("game.carhit_sound").play()
@@ -181,14 +180,14 @@ class Explosion:
 
         def is_dead( self ):
             return self.progress > 1.0
-        
+
         def render( self, surface, x_offset, y_offset ):
             if self.progress <= 1.0:
                 pos = self.pos
                 gold_sprite = resman.get("game.copper_sprite")
                 gold_sprite.draw( surface, pos + Vec2D(x_offset, y_offset) )
-                
-    
+
+
     def __init__( self, pos, end_tiles ):
         self.particles = []
         for tile in end_tiles:
@@ -201,7 +200,7 @@ class Explosion:
 
         Event.explosion()
 
-        
+
     def game_tick( self ):
         for particle in self.particles:
             particle.game_tick()
@@ -216,7 +215,7 @@ class Explosion:
         if self.animTimer is None:
             self.animTimer = gfx.LoopAnimationTimer( 20, 0, 16 ) # real maxframe is in draw
             self.animTimer.set_frame( frame.time_sec, 0 )
-                
+
 
         if self.sprite is not None:
             self.sprite.nr = self.animTimer.get_frame( frame.time_sec )
@@ -224,6 +223,6 @@ class Explosion:
 
             if self.sprite.nr >= 15:
                 self.sprite = None
-        
+
     def is_alive( self ):
         return self.sprite is not None or len(self.particles > 0)

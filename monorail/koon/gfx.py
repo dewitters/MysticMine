@@ -1,6 +1,4 @@
-## Automatically adapted for numpy.oldnumeric Nov 20, 2012 by 
-
-#!/usr/bin/env python
+## Automatically adapted for numpy.oldnumeric Nov 20, 2012 by
 
 import copy
 from numpy.oldnumeric import array
@@ -15,7 +13,7 @@ class Surface:
 
         Parameter param can be a filename, a pygame.Surface or a
         (width, height) tuple.
-        
+
         """
         assert param is not None
 
@@ -38,7 +36,7 @@ class Surface:
         """
         if isinstance( pos, tuple ):
             pos = Vec2D( pos[0], pos[1] )
-        
+
         if isinstance( surface, pygame.Surface ):
             if rect is not None:
                 surface.blit( self.pysurf, pos.get_tuple(), rect )
@@ -66,7 +64,7 @@ class Surface:
         assert alpha >= 0.0 and alpha <= 1.0
         result = Surface((self.get_width(), self.get_height()))
         result.pysurf = self.pysurf.copy()
-        
+
         a = pygame.surfarray.pixels_alpha(result.pysurf)
         b = a * array(alpha)
         a[:] = b.astype('B')
@@ -119,7 +117,7 @@ class SpriteFilm (Sprite):
     """Contains surface frames of equal size
 
     Members:
-    
+
     surface: the sprite image
     nr: sprite nr to draw
     center: center of the sprite (Vec2D)
@@ -168,7 +166,7 @@ class SpriteFilm (Sprite):
 class Font:
     LEFT, RIGHT, CENTER = range(3)
     TOP, BOTTOM, MIDDLE = range(3)
-    
+
     def __init__( self, filename = None, size = 16, color = (0,0,0), \
                   use_antialias = False ):
         if filename is None:
@@ -224,7 +222,7 @@ class Timer:
         # initialize when not done already
         if not hasattr(self, 'next_tick'):
             self.start( time_sec - self.timeskip )
-        
+
         if self.next_tick < time_sec:
             self.next_tick += self.timeskip
             return True
@@ -248,10 +246,10 @@ class LoopAnimationTimer:
         frame = int( (time - self.starttime) * self.fps )
 
         frame = (frame + self.startframe) % self.maxframes
-        
+
         return frame + self.firstframe
-        
-        
+
+
 class PingPongTimer:
 
     def __init__( self, fps, firstframe, maxframes ):
@@ -272,7 +270,7 @@ class PingPongTimer:
 
         if frame >= self.maxframes:
             frame = self.maxframes*2 - frame
-        
+
         return frame + self.firstframe
-        
-        
+
+

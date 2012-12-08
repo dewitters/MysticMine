@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import os
 
@@ -15,9 +14,9 @@ class TestFlag:
         tile = Tile( Vec3D(), Tile.Type.FLAT )
         goldcar = GoldCar( TrailPosition( tile, 0 ), 0 )
         flag = Flag(goldcar)
-        
+
         # When
-        
+
 
         # Then
 

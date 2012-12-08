@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """ Contains keyboard, mouse, joysticks, etc...
 
 """
@@ -49,7 +48,7 @@ class ButtonLogger:
             return False
         else:
             return len( self.went_up_buttons ) > 0
-    
+
     def is_down( self, key ):
         return key in self.down_buttons
 
@@ -88,7 +87,7 @@ class Mouse (ButtonLogger):
     - pos: the current Vec2D position of the mouse
     """
     UNKNOWN, LEFT, RIGHT, MIDDLE, SCROLLUP, SCROLLDOWN = range( 6 )
-    
+
     def __init__( self ):
         ButtonLogger.__init__( self )
         self.pos = None
@@ -101,7 +100,7 @@ class Mouse (ButtonLogger):
     def has_moved( self ):
         return self._prev_pos is not None and \
                self._prev_pos <> self.pos
-            
+
 class Joystick (ButtonLogger):
     def get_name( self, key ):
         return "joy " + str(key)

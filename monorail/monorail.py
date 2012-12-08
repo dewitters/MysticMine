@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import sys
 import os
@@ -26,7 +25,7 @@ script_dir = get_main_dir()
 #if sys.platform == 'win32' and hasattr(sys, "frozen"):
 #    script_dir = os.path.dirname(sys.executable)
 #else:
-#    script_dir = os.path.dirname(os.path.realpath(__file__)) 
+#    script_dir = os.path.dirname(os.path.realpath(__file__))
 
 # ----- Handling localization
 import locale
@@ -38,7 +37,7 @@ DEFAULT_LANGUAGES += os.environ.get('LC_ALL', '').split(':')
 DEFAULT_LANGUAGES += os.environ.get('LC_MESSAGES', '').split(':')
 DEFAULT_LANGUAGES += os.environ.get('LANG', '').split(':')
 DEFAULT_LANGUAGES += ['en_US']
- 
+
 lc, encoding = locale.getdefaultlocale()
 if lc:
     languages = [lc]
@@ -104,7 +103,7 @@ class Monorail (Game):
         self.menu = MonorailMenu( self.game_data )
         self.game = MonorailGame( self.game_data )
         self.editor = None
-        
+
         self.state = self.game
         self.state = self.menu
 
@@ -153,7 +152,7 @@ class Monorail (Game):
                 else:
                     self.state = self.game
                     self.game.restart( self.game_data )
-        
+
         self.state.do_tick( indev )
 
         # Handle maximize button
@@ -171,17 +170,17 @@ class Monorail (Game):
         self.state.draw_mouse( surface, interpol, time_sec )
         #self.draw_fps( surface )
 
-            
+
 class MonorailGame:
     STATE_INTRO, STATE_BEGIN, STATE_GAME, STATE_MENU, STATE_QUIT, STATE_STATS, STATE_TOTAL,\
                  STATE_DONE = range( 8 )
 
     MOUSE_TIMEOUT = 25 * 3
-    
+
     def __init__( self, game_data ):
         self.restart( game_data )
         self.music_man = MusicManager()
-        
+
         # preload clock sounds and big explosion graphic
         resman.get("game.clock_sound")
         resman.get("game.clockring_sound")
@@ -191,22 +190,22 @@ class MonorailGame:
     def restart( self, game_data ):
         """Start a new game with the current game_data"""
         self.game_data = game_data
-        
+
         self.state = MonorailGame.STATE_INTRO
-        
+
         self.scenario = self.game_data.get_quest().create_scenario(self.game_data.skill_level.value)
         self.playfield = self.scenario.playfield
         self.controller = ctrl.GroundControl( self.playfield )
         self.init_goldcars()
-       
+
         self.hud = Hud( self.scenario, self.controller, self.game_data )
         self.hud.start_intro_screen()
-        
+
         self.begin_timeout = 25 * 3
 
         self.ingame_menu = None
         self.gui_state = GuiState()
-        
+
         self.mouse_timeout = MonorailGame.MOUSE_TIMEOUT
         self.is_paused = False
 
@@ -220,10 +219,10 @@ class MonorailGame:
         for iq in self.game_data.get_quest().get_opponent_iqs():
             goldcar_names.append( "" )
             controllers.append( ctrl.AiController( None, iq ) )
-            
+
         self.playfield.add_goldcars( goldcar_names )
-        self.controller.add_controllers( controllers )        
-            
+        self.controller.add_controllers( controllers )
+
     def do_tick( self, indev ):
         if self.ingame_menu is None and not self.is_paused:
             if self.game_data.is_single_player() or \
@@ -237,7 +236,7 @@ class MonorailGame:
                     if joy.any_went_up():
                         indev.key.feed_up( K_SPACE )
 
-            
+
             if self.state == MonorailGame.STATE_INTRO:
                 if self.hud.is_ready(): # or self.game_data.is_single_player():
                     self.hud.end_info()
@@ -257,16 +256,16 @@ class MonorailGame:
                 # Start right away in single player
                 if self.game_data.is_single_player():
                     self.scenario.game_tick()
-                
+
                 self.begin_timeout -= 1
-                if self.begin_timeout <= 0:            
+                if self.begin_timeout <= 0:
                     self.state = MonorailGame.STATE_GAME
 
                 if indev.mouse.has_moved():
                     self.mouse_timeout = MonorailGame.MOUSE_TIMEOUT
                 else:
-                    self.mouse_timeout -= 1                
-            
+                    self.mouse_timeout -= 1
+
             elif self.state == MonorailGame.STATE_GAME:
                 self.controller.game_tick( indev )
                 self.playfield.game_tick()
@@ -278,14 +277,14 @@ class MonorailGame:
                         self.game_data.get_quest().save_score( self.scenario )
                         skill = self.game_data.get_quest().get_skill( self.scenario )
                         self.game_data.skill_level.update( skill )
-                        
+
                         self.game_data.save_single_player_progress()
 
                         if self.scenario.has_won():
                             self.hud.start_win_screen()
                         else:
                             self.hud.start_lose_screen()
-                            
+
                     self.state = MonorailGame.STATE_STATS
                     self.mouse_timeout = MonorailGame.MOUSE_TIMEOUT
                     self.music_man.stop()
@@ -307,14 +306,14 @@ class MonorailGame:
                         else:
                             self.restart( self.game_data )
                             return
-                                        
+
             elif self.state == MonorailGame.STATE_TOTAL:
                 if self.hud.is_ready():
                     self.state = MonorailGame.STATE_DONE
 
             elif self.state == MonorailGame.STATE_MENU:
                 pass
-                                    
+
             self.hud.game_tick( indev )
             self.music_man.game_tick()
 
@@ -322,9 +321,9 @@ class MonorailGame:
             if indev.key.went_down( K_ESCAPE ) or \
                         self.hud.menu_btn.went_down() or \
                         SingleSwitch.esc_went_down:
-                resman.get("gui.paper_sound").play()                
-                self.ingame_menu = IngameMenu(self.game_data.is_single_player(), self.game_data)                
-            
+                resman.get("gui.paper_sound").play()
+                self.ingame_menu = IngameMenu(self.game_data.is_single_player(), self.game_data)
+
         elif self.ingame_menu is not None: # Ingame Menu
             SingleSwitch.feed_keys( indev )
 
@@ -341,7 +340,7 @@ class MonorailGame:
                 elif self.ingame_menu.to_next_level:
                     self.music_man.stop()
                     self.state = MonorailGame.STATE_DONE
-                    
+
                 self.ingame_menu = None
 
             self.mouse_timeout = MonorailGame.MOUSE_TIMEOUT
@@ -358,7 +357,7 @@ class MonorailGame:
 
     def draw( self, surface, interpol, time_sec ):
         #surface.fill( (0,0,0) )
-        
+
         frame = Frame( surface, time_sec, interpol )
         if self.ingame_menu is not None or self.is_paused or\
             self.state not in [MonorailGame.STATE_BEGIN, MonorailGame.STATE_GAME]:
@@ -376,7 +375,7 @@ class MonorailGame:
     def draw_mouse( self, surface, interpol, time_sec ):
         if self.mouse_timeout > 0:
             x, y = pygame.mouse.get_pos()
-            resman.get("gui_surf").draw( surface, Vec2D(x, y), (0,0,32,32) )            
+            resman.get("gui_surf").draw( surface, Vec2D(x, y), (0,0,32,32) )
 
     def mouse_down( self, button ):
         pass
@@ -392,7 +391,7 @@ class MonorailEditor:
     ERASE, MAX = range( 8 )
 
     X_OFFSET, Y_OFFSET = 20, 300
-    
+
     def __init__( self, level_nr ):
         self.level_nr = level_nr
         self.load_level()
@@ -402,7 +401,7 @@ class MonorailEditor:
     def load_level( self ):
         self.level = Level()
         if os.path.exists( Level.get_filename( self.level_nr ) ):
-            self.level.load( Level.get_filename( self.level_nr ) )        
+            self.level.load( Level.get_filename( self.level_nr ) )
 
     def save_all( self ):
         self.level.save( Level.get_filename( self.level_nr ) )
@@ -425,7 +424,7 @@ class MonorailEditor:
             if self.level_nr > 0:
                 self.save_all()
                 self.level_nr -= 1
-                self.load_level()            
+                self.load_level()
         elif indev.key.went_down( K_PAGEDOWN ):
             self.save_all()
             self.level_nr += 1
@@ -443,14 +442,14 @@ class MonorailEditor:
         if indev.key.went_down( K_RIGHT ):
             for tile in self.level.tiles:
                 tile.pos.x += 1
-                
+
 
     def draw( self, surface, interpol, time_sec ):
         surface.fill( (50,50,50) )
 
         #resman.get("game.hud_left_surf").draw( surface, Vec2D(0,0) )
 
-        
+
         frame = Frame( surface, time_sec, interpol )
         frame.X_OFFSET = MonorailEditor.X_OFFSET
         frame.Y_OFFSET = MonorailEditor.Y_OFFSET
@@ -458,11 +457,11 @@ class MonorailEditor:
 
         if self.current_tile in [MonorailEditor.FLAT, MonorailEditor.ENTERANCE]:
             frame.draw( self.edit_tile1 )
-            
+
         elif self.current_tile in [MonorailEditor.NORTH_SLOPE ,MonorailEditor.EAST_SLOPE, MonorailEditor.SOUTH_SLOPE, MonorailEditor.WEST_SLOPE]:
             frame.draw( self.edit_tile1 )
             frame.draw( self.edit_tile2 )
-            
+
         elif self.current_tile == MonorailEditor.ERASE:
             pass
 
@@ -486,7 +485,7 @@ class MonorailEditor:
 
     def update_edit_tiles( self ):
         mouse_x, mouse_y = pygame.mouse.get_pos()
-        
+
         pos = Vec3D((-mouse_y + (mouse_x+32)/2 - MonorailEditor.X_OFFSET/2 + MonorailEditor.Y_OFFSET) / 32,
     	            (mouse_y + (mouse_x-32)/2 - MonorailEditor.X_OFFSET/2 - MonorailEditor.Y_OFFSET) / 32,
                      0)
@@ -534,7 +533,7 @@ def main():
     #configuration.is_fullscreen = "fullscreen" in args
     SingleSwitch.is_enabled = ("ss" in args) or configuration.one_switch
     SingleSwitch.scan_timeout = configuration.scan_speed
-    
+
     koon.app.set_game_speed(configuration.game_speed)
 
     app = Monorail( configuration )

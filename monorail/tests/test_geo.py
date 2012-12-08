@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 from monorail.koon.geo import Vec3D
 
@@ -17,7 +16,7 @@ class TestVec3D:
         c = Vec3D( 1, 2, 3 )
         assert a == c
         assert a <> b
-        
+
     def test_add_sub_mul( self ):
         a = Vec3D( 1, 1, 0 )
         b = Vec3D( 0, 2, 3 )
@@ -26,7 +25,7 @@ class TestVec3D:
         assert b * 5 == Vec3D( 0, 10, 15 )
         assert -b == Vec3D( 0, -2, -3 )
         assert Vec3D( 2, 8, 34 ) / 2 == Vec3D( 1, 4, 17 )
-        
+
     def test_dot_product( self ):
         a = Vec3D( 1, 1, 0 )
         b = Vec3D( 1, -1, 0 )

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import os
 
@@ -24,13 +23,13 @@ class TestLevel:
         assert level.get_tile( 0, 0 ).type == Tile.Type.FLAT
 
         level.set_tile( tile2 )
-        assert level.get_tile( 0, 0 ) is not None 
+        assert level.get_tile( 0, 0 ) is not None
         assert level.get_tile( 0, 0 ).type == Tile.Type.EAST_SLOPE_TOP
 
         level.remove_tile( 0, 0 )
         assert level.get_tile( 0, 0 ) is None
 
-                               
+
     def test_save_load_level( self ):
         level = Level()
         level_loaded = Level()
@@ -84,14 +83,14 @@ class TestLevel:
 
         neighbor = level.get_tile( 0,0 ).get_neighbor( Direction.EAST )
         assert neighbor is None
-        
+
         neighbor = level.get_tile( 0,1 ).get_neighbor( Direction.EAST )
         assert neighbor == level.get_tile(1,1)
-        
+
         level.remove_tile( 0, 1 )
         neighbor = level.get_tile( 0,0 ).get_neighbor( Direction.SOUTH )
         assert neighbor is None
-        
+
     def test_slope_neighbors( self ):
         level = Level()
 
@@ -130,7 +129,7 @@ class TestLevel:
         assert first_tile and second_tile
 
 class TestPlayfield:
-    
+
     def test_goldcar_ranking( self ):
         """Given a playfield with 5 goldcars
         When all goldcars have different scores
@@ -138,21 +137,21 @@ class TestPlayfield:
         # Given
         playfield = Playfield()
         playfield.goldcars = [GoldCar(None, i) for i in range(0,5)]
-        
+
         # When
         playfield.goldcars[0].score = 55
         playfield.goldcars[1].score = 12
         playfield.goldcars[2].score = 100
         playfield.goldcars[3].score = 0
         playfield.goldcars[4].score = 25
-        
+
         # Then
         ranking = playfield.get_goldcar_ranking()
 
         assert len(ranking) == 5
         for goldcars in ranking:
             assert len(goldcars) == 1
-            
+
         assert ranking[0][0] is playfield.goldcars[2]
         assert ranking[1][0] is playfield.goldcars[0]
         assert ranking[2][0] is playfield.goldcars[4]
@@ -166,7 +165,7 @@ class TestPlayfield:
         # Given
         playfield = Playfield()
         playfield.goldcars = [GoldCar(None, i) for i in range(0,6)]
-        
+
         # When
         playfield.goldcars[0].score = 0
         playfield.goldcars[1].score = 12
@@ -174,7 +173,7 @@ class TestPlayfield:
         playfield.goldcars[3].score = 0
         playfield.goldcars[4].score = 100
         playfield.goldcars[5].score = 0
-        
+
         # Then
         ranking = playfield.get_goldcar_ranking()
 
@@ -199,7 +198,7 @@ class TestPlayfield:
         """
         # Given
         playfield = Playfield()
-        
+
         playfield.level = Level()
 
         playfield.level.set_tile( Tile( Vec3D(0,0,0), Tile.Type.FLAT ) )
@@ -211,9 +210,9 @@ class TestPlayfield:
         # When
         playfield.goldcars = [
             GoldCar( TrailPosition(playfield.level.get_tile(2,0), 900), 1 )]
-        
+
         pos = TrailPosition(playfield.level.get_tile(1,0), 100)
-        
+
         # Then
         assert not playfield.is_free_position( pos )
 
@@ -225,7 +224,7 @@ class TestPlayfield:
         """
         # Given
         playfield = Playfield()
-        
+
         playfield.level = Level()
 
         playfield.level.set_tile( Tile( Vec3D(0,0,0), Tile.Type.FLAT ) )
@@ -237,9 +236,9 @@ class TestPlayfield:
         # When
         playfield.goldcars = [
             GoldCar( TrailPosition(playfield.level.get_tile(2,0), 900), 1 )]
-        
+
         pos = TrailPosition(playfield.level.get_tile(2,0), 100)
-        
+
         # Then
         assert playfield.is_free_position( pos )
 
@@ -251,7 +250,7 @@ class TestPlayfield:
         """
         # Given
         playfield = Playfield()
-        
+
         playfield.level = Level()
 
         playfield.level.set_tile( Tile( Vec3D(0,0,0), Tile.Type.FLAT ) )
@@ -266,7 +265,7 @@ class TestPlayfield:
         for i in range(0, 256):
             # When
             pos = playfield.get_free_position()
-            
+
             # Then
             if pos is not None:
                 assert playfield.is_free_position( pos )
@@ -278,14 +277,14 @@ class TestPlayfield:
            Then it comes out of the other"""
         # Given
         level = Level()
-        portalA = Enterance( Vec3D(2,0,0) )        
+        portalA = Enterance( Vec3D(2,0,0) )
         tileAA = Tile(       Vec3D(1,0,0), Tile.Type.FLAT )
         tileA = Tile(        Vec3D(0,0,0), Tile.Type.FLAT )
-        tileB = Tile(        Vec3D(0,1,0), Tile.Type.FLAT )        
-        tileC = Tile(        Vec3D(0,2,0), Tile.Type.FLAT )        
-        tileCC = Tile(       Vec3D(1,2,0), Tile.Type.FLAT )        
+        tileB = Tile(        Vec3D(0,1,0), Tile.Type.FLAT )
+        tileC = Tile(        Vec3D(0,2,0), Tile.Type.FLAT )
+        tileCC = Tile(       Vec3D(1,2,0), Tile.Type.FLAT )
         portalC = Enterance( Vec3D(2,2,0) )
-        
+
         level.set_tile( portalA )
         level.set_tile( tileAA )
         level.set_tile( tileA )
@@ -314,25 +313,25 @@ class TestPlayfield:
                 pass
             elif goldcar.pos.tile == order[ order_at+1 ]:
                 order_at += 1
-            else: 
+            else:
                 assert False, "unknown tile after " + str(order_at)
-            
+
             count += 1
 
         assert  count < 1000
-        
+
     def test_edge_portal_handling( self ):
         """Given a goldcar on a small track with 2 portals
            When goldcar rides through one portal
            Then it comes out of the other"""
         # Given
         level = Level()
-        portalA = Enterance( Vec3D(1,0,0) )        
+        portalA = Enterance( Vec3D(1,0,0) )
         tileA = Tile(        Vec3D(0,0,0), Tile.Type.FLAT )
-        tileB = Tile(        Vec3D(0,1,0), Tile.Type.FLAT )        
-        tileC = Tile(        Vec3D(0,2,0), Tile.Type.FLAT )        
+        tileB = Tile(        Vec3D(0,1,0), Tile.Type.FLAT )
+        tileC = Tile(        Vec3D(0,2,0), Tile.Type.FLAT )
         portalC = Enterance( Vec3D(1,2,0) )
-        
+
         level.set_tile( portalA )
         level.set_tile( tileA )
         level.set_tile( tileB )
@@ -344,7 +343,7 @@ class TestPlayfield:
 
         playfield = Playfield()
         playfield.level = level
-        playfield.goldcars = [goldcar]        
+        playfield.goldcars = [goldcar]
 
         order = [tileB, tileC, portalC, portalA, tileA, tileB]
         order_at = 0
@@ -359,15 +358,15 @@ class TestPlayfield:
                 pass
             elif goldcar.pos.tile == order[ order_at+1 ]:
                 order_at += 1
-            else: 
+            else:
                 assert False, "unknown tile after " + str(order_at)
-            
+
             count += 1
 
         assert  count < 1000
-        
-        
-            
+
+
+
 ##
 ##    def test_pickup_count_remains_same_on_collision( self ):
 ##        """Given a playfield with 2 goldcars and one diamond
@@ -378,7 +377,7 @@ class TestPlayfield:
 ##
 ##        tileA = Tile( Vec3D(0,1,0), Tile.Type.FLAT )
 ##        tileB = Tile( Vec3D(0,3,0), Tile.Type.FLAT )
-##        
+##
 ##        level.set_tile( Tile( Vec3D(0,0,0), Tile.Type.FLAT ) )
 ##        level.set_tile( tileA )
 ##        level.set_tile( Tile( Vec3D(0,2,0), Tile.Type.FLAT ) )
@@ -392,12 +391,12 @@ class TestPlayfield:
 ##        goldcarA = GoldCar( TrailPosition( tileA, tileA.get_length()/2 ), 0 )
 ##        goldcarB = GoldCar( TrailPosition( tileB, tileB.get_length()/2 ), 1 )
 ##        goldcarB.pos.reverse_progress()
-##        
+##
 ##        playfield.goldcars = [goldcarA, goldcarB]
-##                
+##
 ##        # When
-##        goldcarA.collectible = Diamond()        
-##        
+##        goldcarA.collectible = Diamond()
+##
 ##        while goldcarB.collectible == None:
 ##            playfield.game_tick(None)
 ##
@@ -410,12 +409,12 @@ class TestPlayfield:
 ##        goldcarA = GoldCar( TrailPosition( tileA, tileA.get_length()/2 ), 0 )
 ##        goldcarB = GoldCar( TrailPosition( tileB, tileB.get_length()/2 ), 1 )
 ##        goldcarB.pos.reverse_progress()
-##        
+##
 ##        playfield.goldcars = [goldcarA, goldcarB]
-##                
+##
 ##        # When
-##        goldcarB.collectible = Diamond()        
-##        
+##        goldcarB.collectible = Diamond()
+##
 ##        while goldcarA.collectible == None:
 ##            playfield.game_tick(None)
 ##

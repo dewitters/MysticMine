@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 from monorail.koon.geo import Vec3D
 from monorail.tiles import *
@@ -17,7 +16,7 @@ class TestGoldCar:
     def test_constructor( self ):
         tile = Tile( Vec3D(), Tile.Type.FLAT )
         g = GoldCar( TrailPosition( tile, 0 ), 0 )
-        
+
 
     def test_collision( self ):
         tile = Tile( Vec3D(), Tile.Type.FLAT, Trail.Type.NS )
@@ -37,10 +36,10 @@ class TestGoldCar:
         goldcar2.game_tick()
 
         goldcar1.handle_collision( goldcar2 )
-        assert goldcar1.pos.get_distance( goldcar2.pos ) < GoldCar.COLLIDE_DISTANCE + 20 
+        assert goldcar1.pos.get_distance( goldcar2.pos ) < GoldCar.COLLIDE_DISTANCE + 20
         assert goldcar1.pos.get_distance( goldcar2.pos ) >= GoldCar.COLLIDE_DISTANCE
 
-        
+
         goldcar1 = GoldCar( TrailPosition( tile, 100 ), 0 )
         goldcar2 = GoldCar( TrailPosition( tile, 100 + GoldCar.COLLIDE_DISTANCE + 10 ), 0 )
 
@@ -59,9 +58,9 @@ class TestGoldCar:
 
         print goldcar1.speed
         print goldcar2.speed
-        
+
         goldcar1.handle_collision( goldcar2 )
-        assert goldcar1.pos.get_distance( goldcar2.pos ) < GoldCar.COLLIDE_DISTANCE + 20 
+        assert goldcar1.pos.get_distance( goldcar2.pos ) < GoldCar.COLLIDE_DISTANCE + 20
         assert goldcar1.pos.get_distance( goldcar2.pos ) >= GoldCar.COLLIDE_DISTANCE
 
 
@@ -72,7 +71,7 @@ class TestGoldCar:
         # Given
         level = Level()
         tileA = Tile( Vec3D(0,0,0), Tile.Type.FLAT )
-        tileB = Tile( Vec3D(0,1,0), Tile.Type.FLAT )        
+        tileB = Tile( Vec3D(0,1,0), Tile.Type.FLAT )
         level.set_tile( Tile( Vec3D(0,-1,0), Tile.Type.FLAT ) )
         level.set_tile( tileA )
         level.set_tile( tileB )
@@ -80,7 +79,7 @@ class TestGoldCar:
 
 
         goldcar = GoldCar( TrailPosition( tileA, 0 ), 0 )
-        
+
 
         count = 0
         while goldcar.pos.tile != tileB and count < 100:

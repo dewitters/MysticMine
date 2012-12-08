@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import random
 
@@ -23,7 +22,7 @@ class PickupView:
         else:
             return self.pos.y + 64
     z = property( get_z )
-    
+
     def get_pos( self, frame ):
         self.pos = None
         if self.model.container is None or not hasattr( self.model.container, "views" ): return None
@@ -49,9 +48,9 @@ class TorchView (PickupView):
     def __init__( self, model ):
         PickupView.__init__( self )
         self.model = model
-        
+
         self.sprite = resman.get("game.torch_sprite").clone()
-        
+
     def draw( self, frame ):
         if self.get_pos( frame ) is not None:
             self.sprite.draw( frame.surface, self.get_pos(frame) + Vec2D(frame.X_OFFSET, frame.Y_OFFSET - 20) )
@@ -60,10 +59,10 @@ class KeyView (PickupView):
     def __init__( self, model ):
         PickupView.__init__( self )
         self.model = model
-        
+
         self.sprite = resman.get("game.key_sprite")
-        self.animTimer = LoopAnimationTimer( 25, 0, 19 )                
-        
+        self.animTimer = LoopAnimationTimer( 25, 0, 19 )
+
     def draw( self, frame ):
         if self.get_pos( frame ) is not None:
             self.sprite.draw( frame.surface, self.get_pos(frame) + Vec2D(frame.X_OFFSET, frame.Y_OFFSET - 20) )
@@ -74,7 +73,7 @@ class MirrorView (PickupView):
         self.model = model
 
         self.sprite = resman.get("game.mirror_sprite").clone()
-        self.animTimer = LoopAnimationTimer( 25, 0, 9 )        
+        self.animTimer = LoopAnimationTimer( 25, 0, 9 )
 
     def draw( self, frame ):
         if self.get_pos( frame ) is not None:
@@ -104,20 +103,20 @@ class MultiplierView (PickupView):
         pos = self.get_pos(frame) + Vec2D(frame.X_OFFSET, frame.Y_OFFSET)
         if self.model.goldcar is not None:
             pos += Vec2D(0, 20)
-            
+
         font.draw("x2", frame.surface, pos.get_tuple(), Font.CENTER, Font.MIDDLE)
 
 class BalloonView (PickupView):
     def __init__( self, model ):
         PickupView.__init__( self )
         self.model = model
-        
+
         self.sprite = resman.get("game.balloon_sprite")
-        
+
     def draw( self, frame ):
         if self.get_pos( frame ) is not None:
             self.sprite.draw( frame.surface, self.get_pos(frame) + Vec2D(frame.X_OFFSET, frame.Y_OFFSET - 20) )
-    
+
 class GhostView (PickupView):
     def __init__( self, model ):
         PickupView.__init__( self )
@@ -149,7 +148,7 @@ class GoldBlockView (PickupView):
         self.model = model
 
         self.sprite = resman.get("game.gold_sprite").clone()
-        self.animTimer = LoopAnimationTimer( 25, 0, 15 )        
+        self.animTimer = LoopAnimationTimer( 25, 0, 15 )
 
     def draw( self, frame ):
         if self.get_pos( frame ) is not None:
@@ -175,7 +174,7 @@ class DiamondView (PickupView):
         self.model = model
 
         self.sprite = resman.get("game.diamond_sprite").clone()
-        self.animTimer = LoopAnimationTimer( 25, 0, 4 )        
+        self.animTimer = LoopAnimationTimer( 25, 0, 4 )
 
     def draw( self, frame ):
         if self.get_pos( frame ) is not None:
@@ -203,7 +202,7 @@ class DynamiteView (PickupView):
         def draw( self, frame ):
             pos = self.pos + self.center + Vec2D( frame.X_OFFSET, frame.Y_OFFSET )
             self.surf.draw( frame.surface, pos )
-        
+
     def __init__( self, model ):
         PickupView.__init__( self )
         self.model = model
@@ -225,7 +224,7 @@ class DynamiteView (PickupView):
         if self.model.life < pickups.Dynamite.DEC * 18 and\
            self.model.life != self.prev_life:
             self.prev_life = self.model.life
-            
+
             self.sprite.nr += self.sprite_delta
 
             if self.sprite.nr < 0:
@@ -235,10 +234,10 @@ class DynamiteView (PickupView):
                 self.sprite.nr = 3
                 self.sprite_delta = -1
                 event.Event.dynamite_tick()
-        
+
         while self.sparkle_timer.do_tick( frame.time_sec ):
             self.sparkle_tick( frame )
-                    
+
         self.sprite.draw( frame.surface, self.get_pos(frame) + Vec2D( frame.X_OFFSET, frame.Y_OFFSET ) )
         for sparkle in self.sparkles:
             sparkle.draw( frame )
@@ -254,7 +253,7 @@ class DynamiteView (PickupView):
             sparkle.game_tick()
             if not sparkle.is_dead():
                 new_sparkles.append( sparkle )
-        self.sparkles = new_sparkles        
+        self.sparkles = new_sparkles
 
 class LampView (PickupView):
     def __init__( self, model ):
@@ -262,7 +261,7 @@ class LampView (PickupView):
         self.model = model
 
         self.sprite = resman.get("game.lamp_sprite").clone()
-        #self.animTimer = LoopAnimationTimer( 25, 0, 4 )        
+        #self.animTimer = LoopAnimationTimer( 25, 0, 4 )
 
     def draw( self, frame ):
         if self.get_pos( frame ) is not None:
@@ -289,7 +288,7 @@ class FlagView (PickupView):
         self.model = model
 
         self.sprite = resman.get("game.flag%d_sprite" % (model.goldcar.nr+1))
-        self.animTimer = LoopAnimationTimer( 20, 0, 8 )        
+        self.animTimer = LoopAnimationTimer( 20, 0, 8 )
 
     def draw( self, frame ):
         if self.get_pos( frame ) is not None:
@@ -302,7 +301,7 @@ class LeprechaunView (PickupView):
         self.model = model
 
         self.sprite = resman.get("game.leprechaun_sprite").clone()
-        #self.animTimer = LoopAnimationTimer( 25, 0, 4 )        
+        #self.animTimer = LoopAnimationTimer( 25, 0, 4 )
 
     def draw( self, frame ):
         if self.get_pos( frame ) is not None:

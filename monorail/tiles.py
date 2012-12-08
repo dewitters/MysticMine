@@ -26,7 +26,7 @@ class Direction:
          /\        /\
         W  S         y
     """
-    
+
     def __init__( self, dir_id ):
         """Don't use contructor!"""
         self.id = dir_id
@@ -42,19 +42,19 @@ class Direction:
 
     def __hash__( self ):
         return hash( self.id )
-        
+
 Direction.NORTH = Direction( 0 )
 Direction.EAST  = Direction( 1 )
 Direction.SOUTH = Direction( 2 )
 Direction.WEST  = Direction( 3 )
 Direction.ALL = [Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST]
 
-    
+
 class Trail:
     """Trail class is part of Tile
 
     Don't use this class straight away, but use it in combination with Tile
-    
+
     Public members:
     - type: the trail type (see Trail.Type)
     - may_switch: True if able to switch, False if not
@@ -83,16 +83,16 @@ class Trail:
 
         elif self.tile.type in [Tile.Type.NORTH_SLOPE_BOT, Tile.Type.NORTH_SLOPE_TOP]:
             return Direction.NORTH
-        
+
         elif self.tile.type in [Tile.Type.EAST_SLOPE_BOT, Tile.Type.EAST_SLOPE_TOP]:
             return Direction.EAST
-        
+
         elif self.tile.type in [Tile.Type.SOUTH_SLOPE_BOT, Tile.Type.SOUTH_SLOPE_TOP]:
             return Direction.SOUTH
-            
+
         elif self.tile.type in [Tile.Type.WEST_SLOPE_BOT, Tile.Type.WEST_SLOPE_TOP]:
             return Direction.WEST
-            
+
         else:
             assert False # Tile type not defined!
             return Direction.NORTH
@@ -118,15 +118,15 @@ class Trail:
 
     def switch_it( self, from_dir = None ):
         if not self.may_switch: return
-        
+
         available = self.tile.get_possible_switches( from_dir )
         if len( available ) == 0: return
-        
+
         i = 5
         try:
             i = available.index( self.type )
         except: pass
-        
+
         if i+1 >= len( available ):
             self.type = available[0]
         else:
@@ -134,7 +134,7 @@ class Trail:
 
     def align( self, direction = None ):
         if self.tile.type <> Tile.Type.FLAT : return
-        
+
         if isinstance(self.tile, Enterance):
             if self.tile.is_north_exit():
                 self.type = Trail.Type.NS
@@ -166,7 +166,7 @@ class Tile:
         SOUTH_SLOPE_TOP, SOUTH_SLOPE_BOT, WEST_SLOPE_TOP, WEST_SLOPE_BOT, MAX, \
         ENTERANCE, RAILGATE = range( 12 )
         # NORTH_SLOPE_TOP is going down north to south
-    
+
     def __init__( self, position, tile_type, trail_type = None ):
         # init trail type
         if trail_type is None:
@@ -174,9 +174,9 @@ class Tile:
                 trail_type = Trail.Type.NS
             else:
                 trail_type = Trail.Type.HILL
-                
+
         #assert (tile_type == Tile.Type.FLAT) or (trail_type == Trail.Type.HILL)
-        
+
         self.pos = position
         self.type = tile_type
         self.trail = Trail( self, trail_type )
@@ -227,49 +227,49 @@ class Tile:
                 offset = Vec3D(-1,0,0)
             elif direction in [Direction.EAST, Direction.WEST]:
                 offset = Vec3D(0,0,0)
-                
+
         elif self.type == Tile.Type.NORTH_SLOPE_BOT:
             if direction == Direction.SOUTH:
                 offset = Vec3D(1,0,0)
             elif direction in [Direction.EAST, Direction.WEST]:
                 offset = Vec3D(0,0,0)
-     
+
         elif self.type == Tile.Type.EAST_SLOPE_TOP:
             if direction == Direction.EAST:
                 offset = Vec3D(0,1,0)
             elif direction in [Direction.SOUTH, Direction.NORTH]:
                 offset = Vec3D(0,0,0)
-                
+
         elif self.type == Tile.Type.EAST_SLOPE_BOT:
             if direction == Direction.WEST:
                 offset = Vec3D(0,-1,0)
             elif direction in [Direction.SOUTH, Direction.NORTH]:
                 offset = Vec3D(0,0,0)
-                
+
         elif self.type == Tile.Type.SOUTH_SLOPE_TOP:
             if direction == Direction.SOUTH:
                 offset = Vec3D(-1,2,0)
             elif direction in [Direction.EAST, Direction.WEST]:
                 offset = Vec3D(0,0,0)
-                
+
         elif self.type == Tile.Type.SOUTH_SLOPE_BOT:
             if direction == Direction.NORTH:
                 offset = Vec3D(1,-2,0)
             elif direction in [Direction.EAST, Direction.WEST]:
                 offset = Vec3D(0,0,0)
-                
+
         elif self.type == Tile.Type.WEST_SLOPE_TOP:
             if direction == Direction.WEST:
                 offset = Vec3D(-2,1,0)
             elif direction in [Direction.SOUTH, Direction.NORTH]:
                 offset = Vec3D(0,0,0)
-                
+
         elif self.type == Tile.Type.WEST_SLOPE_BOT:
             if direction == Direction.EAST:
                 offset = Vec3D(2,-1,0)
             elif direction in [Direction.SOUTH, Direction.NORTH]:
                 offset = Vec3D(0,0,0)
-                
+
         return offset
 
     def get_center( self ):
@@ -307,19 +307,19 @@ class Tile:
             if self.type == Tile.Type.EAST_SLOPE_BOT: out_pos = Vec2D(-16, -8)
             else: out_pos = Vec2D(-16, 8)
 
-	 
+
         if in_dir == out_dir.get_opposite():
             pos = (in_pos * (self.get_length() - length) + out_pos * length) / self.get_length()
         else:
             interpol = float(length) / float( self.get_length() )
             pos = in_pos - in_pos * math.sin( math.pi * interpol / 2.0 )
             pos += out_pos * (1.0 - math.cos( math.pi * interpol / 2.0))
-            
+
         pos += Vec2D( self.pos.x * 32  + self.pos.y * 32 + 32,
                 -self.pos.x * 16  + self.pos.y * 16 + 16 )
 
         return pos.get_tuple()
-    
+
     def get_possible_switches( self, from_dir = None ):
         """Returns the possible trail types"""
         available = []
@@ -352,7 +352,7 @@ class Tile:
 
 
     DATA_FORMAT = "<BBxxiii" # type, trail_type, pos_x, pos_y, pos_z
-        
+
     def save( self, out_file ):
         data = struct.pack( Tile.DATA_FORMAT, self.type, self.trail.type, self.pos.x, self.pos.y, self.pos.z )
         out_file.write( data )
@@ -401,7 +401,7 @@ class Enterance( Tile ):
 
     def is_north_exit( self ):
         return self.neighbors[Direction.SOUTH.id] is not None
-        
+
 class RailGate( Tile ):
     def __init__( self, position, trail_type = None ):
         Tile.__init__( self, position, Tile.Type.FLAT, trail_type )
@@ -419,7 +419,7 @@ class RailGate( Tile ):
 
     def switch_it( self, from_dir = None ):
         self.is_down = not self.is_down
-                
+
 
 class TrailPosition:
     """Specifies a position on a trail
@@ -519,10 +519,10 @@ class TrailPosition:
             self.tile = self.tile.get_in_tile()
             if self.tile is None:
                 self.tile = old_tile
-                self.reverse_progress()                
+                self.reverse_progress()
             elif self.tile.get_in_tile() == old_tile:
                 self.reverse_progress()
-        
+
         self.progress = 0;
 
     def get_out_direction( self ):
@@ -548,20 +548,20 @@ class TrailPosition:
     def get_distance( self, trailpos ):
         if self.tile == trailpos.tile:
             return abs( self.progress - trailpos.progress )
-            
+
         elif self.tile.get_in_tile() == trailpos.tile:
             dist = self.progress
 
             if trailpos.tile.get_in_tile() == self.tile:
-                return dist + trailpos.progress                    
+                return dist + trailpos.progress
             elif trailpos.tile.get_out_tile() == self.tile:
                 return dist + trailpos.tile.get_length() - trailpos.progress
 
         elif self.tile.get_out_tile() == trailpos.tile:
             dist = self.tile.get_length() - self.progress
-            
+
             if trailpos.tile.get_in_tile() == self.tile:
-                return dist + trailpos.progress                    
+                return dist + trailpos.progress
             elif trailpos.tile.get_out_tile() == self.tile:
                 return dist + trailpos.tile.get_length() - trailpos.progress
         return 999999999
@@ -570,7 +570,7 @@ class TrailPosition:
         """Returns true if self and trailpos have same direction"""
         if self.tile == trailpos.tile:
             return self.reversed == trailpos.reversed
-            
+
         elif self.tile.get_in_tile() == trailpos.tile:
             if trailpos.tile.get_in_tile() == self.tile:
                 return self.reversed <> trailpos.reversed
@@ -595,7 +595,7 @@ class TrailNode:
     def __init__( self, tile, in_dir ):
         """Create a Trailnode from a tile and in direction."""
         assert tile is not None
-        
+
         self.tile = tile
         self.in_dir = in_dir
         self.distance = 0
@@ -608,7 +608,7 @@ class TrailNode:
 ##        else:
 ##            node = TrailNode( self.tile.get_in_tile(), None )
 ##            out_dir = self.tile.trail.get_in_direction()
-##            
+##
 ##        node.in_dir = out_dir.get_opposite()
 ##        node.distance = self.distance + 1
 ##        return node
@@ -616,19 +616,19 @@ class TrailNode:
     def get_out_nodes( self ):
         """Return a list of possible out nodes coming from this node."""
         nodes = []
-        
+
         if isinstance(self.tile, Enterance):
             if self.in_dir in [Direction.NORTH, Direction.EAST]:
                 pass # Just continue as a flat tile
             else:
                 assert self.in_dir is not None, "We need a direction"
-                
+
                 for portal in self.tile.get_portals():
                     node = TrailNode( portal, self.in_dir.get_opposite() )
                     node.distance = self.distance + 1
                     nodes.append( node )
-                return nodes                
-                               
+                return nodes
+
         if self.tile.type == Tile.Type.FLAT:
             for direction in Direction.ALL:
                 if self.in_dir is None or direction <> self.in_dir:
@@ -637,18 +637,18 @@ class TrailNode:
                         node = TrailNode( neighbor, direction.get_opposite() )
                         node.distance = self.distance + 1
                         nodes.append( node )
-                        
+
         else: # tile is hill
             node = TrailNode( self.tile.get_in_tile(), \
                              self.tile.trail.get_in_direction().get_opposite() )
             node.distance = self.distance + 1
             nodes.append( node )
-        return nodes                    
+        return nodes
 
-        
+
 class PathTree:
     """A tree that contains all path possibilities up to a certain generation.
-    """    
+    """
     def __init__( self ):
         """ """
         pass
@@ -665,7 +665,4 @@ class PathTree:
         generation are calculated.
         """
         return False
-        
-        
-        
-        
+

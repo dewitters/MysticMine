@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import os
 
@@ -21,7 +20,7 @@ class TestDirection:
         assert a.get_opposite().get_opposite() == a
 
 class TestTileAndTrail:
-    
+
     def test_constructors( self ):
         t = Tile( Vec3D( -1, 3, 0 ), Tile.Type.SOUTH_SLOPE_TOP, Trail.Type.HILL )
         assert t.pos == Vec3D( -1, 3, 0 )
@@ -37,7 +36,7 @@ class TestTileAndTrail:
         hill = Tile( Vec3D(), Tile.Type.NORTH_SLOPE_TOP )
 
         assert hill.get_length() > flat.get_length()
-        
+
 
     def test_neighbors( self ):
         top   = Tile( Vec3D(0,0,0), Tile.Type.FLAT, Trail.Type.SW )
@@ -53,14 +52,14 @@ class TestTileAndTrail:
         assert top.get_out_tile() in [left, right]
         assert top.get_in_tile() <> top.get_out_tile()
 
-        
+
     def test_trail_in_out_direction( self ):
         t = Tile( Vec3D(0,0,0), Tile.Type.FLAT, Trail.Type.SE )
         assert t.trail.get_in_direction() in [Direction.EAST, Direction.SOUTH]
         assert t.trail.get_out_direction() in [Direction.EAST, Direction.SOUTH]
         assert t.trail.get_in_direction() <> t.trail.get_out_direction()
-        
-        t = Tile( Vec3D(0,0,0), Tile.Type.NORTH_SLOPE_TOP ) 
+
+        t = Tile( Vec3D(0,0,0), Tile.Type.NORTH_SLOPE_TOP )
         assert t.trail.get_in_direction() in [Direction.NORTH, Direction.SOUTH]
         assert t.trail.get_out_direction() in [Direction.NORTH, Direction.SOUTH]
         assert t.trail.get_in_direction() <> t.trail.get_out_direction()
@@ -78,14 +77,14 @@ class TestTileAndTrail:
         north  = Tile( Vec3D(0,0,0), Tile.Type.FLAT )
         east   = Tile( Vec3D(0,0,0), Tile.Type.FLAT )
         west   = Tile( Vec3D(0,0,0), Tile.Type.FLAT )
-        
+
         center.set_neighbor( north, Direction.NORTH )
         center.set_neighbor( east, Direction.EAST )
         center.set_neighbor( west, Direction.WEST )
         north.set_neighbor( center, Direction.SOUTH )
         east.set_neighbor( center, Direction.WEST )
         west.set_neighbor( center, Direction.EAST )
-        
+
         assert not north.trail.is_switch()
         assert center.trail.is_switch()
 
@@ -122,20 +121,20 @@ class TestTileAndTrail:
         east.trail.type = Trail.Type.EW
         west = Tile( Vec3D(0,0,0), Tile.Type.FLAT )
         west.trail.type = Trail.Type.EW
-        
+
         center.set_neighbor( north, Direction.NORTH )
         center.set_neighbor( east, Direction.EAST )
         center.set_neighbor( west, Direction.WEST )
         north.set_neighbor( center, Direction.SOUTH )
         east.set_neighbor( center, Direction.WEST )
         west.set_neighbor( center, Direction.EAST )
-        
+
         center.trail.align()
         tt = center.trail.type
         assert tt == Trail.Type.NE or tt == Trail.Type.NW or tt == Trail.Type.EW
         center.trail.align()
         assert center.trail.type == tt
-        
+
         center.trail.type = Trail.Type.EW
         center.trail.align( Direction.NORTH )
         tt = center.trail.type
@@ -148,25 +147,25 @@ class TestTileAndTrail:
 
         # save tiles
         f = open( "tilesave", "wb" );
-        
+
         tile1.save( f )
         tile2.save( f )
-        
+
         f.close()
 
         # load tiles
         f = open( "tilesave", "rb" );
-        
+
         copy1 = Tile.load( f )
         copy2 = Tile.load( f )
-        
+
         assert copy1.type == Tile.Type.NORTH_SLOPE_TOP
         assert copy1.trail.type == Trail.Type.HILL
         assert copy1.pos == Vec3D(6,5,4)
         assert copy2.type == Tile.Type.FLAT
         assert copy2.trail.type == Trail.Type.SW
         assert copy2.pos == Vec3D(3,4,1)
-        
+
         f.close()
 
         os.remove( "tilesave" )
@@ -210,7 +209,7 @@ class TestEnteranceTile:
             test[ index ] = True
 
         assert test.count( False ) == 0
-            
+
 
 
 class TestTrailPosition:
@@ -273,7 +272,7 @@ class TestTrailPosition:
         pos.set_position( top, top.get_length() / 2 )
         if pos.is_reversed():
             pos.reverse_progress()
-            
+
         pos += top.get_length()
         assert pos.tile == top
 
@@ -331,7 +330,7 @@ class TestTrailPosition:
         center.set_neighbor( west, Direction.WEST )
         east.set_neighbor( center, Direction.WEST )
         west.set_neighbor( center, Direction.EAST )
-        
+
         pos = TrailPosition( center, 50 )
         assert pos.tile == center
         pos.to_next_tile()
@@ -374,7 +373,7 @@ class TestTrailNode:
 ##        west.set_neighbor( center, Direction.EAST )
 ##
 ##        node = TrailNode( center, None )
-##        
+##
 ##        next = node.get_next_node()
 ##        assert node.tile == center
 ##        assert next.tile == south
@@ -390,7 +389,7 @@ class TestTrailNode:
         west.set_neighbor( center, Direction.EAST )
 
         node = TrailNode( center, None )
-        
+
         outs = node.get_out_nodes()
         assert len(outs) == 2
         assert outs[0].tile in [south, west]
@@ -413,13 +412,13 @@ class TestTrailNode:
         enter_c.set_neighbor( tile_c, Direction.WEST )
         tile_b.set_neighbor( enter_b, Direction.EAST )
         tile_c.set_neighbor( enter_c, Direction.EAST )
-        
+
         enter_a.set_portals( [enter_b, enter_c] )
 
         # When
         node = TrailNode( enter_a, Direction.WEST )
 
-        # Then        
+        # Then
         outs = node.get_out_nodes()
         assert len(outs) == 2
         assert outs[0].tile in [enter_b, enter_c]

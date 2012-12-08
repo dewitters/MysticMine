@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 from koon.geo import Vec2D
 from koon.res import resman
@@ -9,12 +8,12 @@ from pickups import Oiler, Ghost
 
 
 class GoldCarView (object):
-    
+
     def __init__( self, model ):
         self.model = model
-        
+
         self.sprite = copy.copy(resman.get("game.car%d_sprite" % (model.nr+1)))
-        
+
         self.motionblur = []
         self.motionblur_cnt = 0
         self.motionblur_timer = Timer( 25 )
@@ -38,15 +37,15 @@ class GoldCarView (object):
                 out_sprite = 0;
             else:
                 out_sprite = 6;
-            
+
             # Turn reversed
             if( in_dir  == Direction.EAST and out_dir == Direction.SOUTH ): in_sprite = 12
             if( out_dir == Direction.EAST and in_dir  == Direction.SOUTH ): out_sprite = 12
             if( in_dir  == Direction.WEST and out_dir == Direction.NORTH ): in_sprite = 12
             if( out_dir == Direction.WEST and in_dir  == Direction.NORTH ): out_sprite = 12
-            
+
             interpol = float(abs(pos.progress)) / float(pos.tile.get_length())
-                            
+
             self.sprite.nr = int(in_sprite * (1.0 - interpol) + out_sprite * interpol) % 12
 
         elif pos.tile.type in [Tile.Type.NORTH_SLOPE_TOP, Tile.Type.NORTH_SLOPE_BOT]:
@@ -63,7 +62,7 @@ class GoldCarView (object):
 
     def get_pos( self, frame ):
         return self.model.pos + (self.model.speed * frame.interpol)
-        
+
     def get_pickup_pos( self, frame ):
         if self.model.pos is None: return None
         x, y = self.get_pos( frame ).get_screen_position()
@@ -88,7 +87,7 @@ class GoldCarView (object):
             for ghost in self.motionblur:
                 if not self.alpha_surfs.has_key( alpha ):
                     self.alpha_surfs[alpha] = self.sprite.surface.get_blended( alpha )
-                    
+
                 ghost[1].surface = self.alpha_surfs[alpha]
                 ghost[1].draw( frame.surface, Vec2D(ghost[0][0] + frame.X_OFFSET, ghost[0][1] + frame.Y_OFFSET) )
                 alpha += diff
@@ -129,10 +128,10 @@ class GoldCarView (object):
             result.append( self.model.collectible )
         if self.model.modifier is not None:
             result.append( self.model.modifier )
-        return result    
+        return result
     submodels = property( get_submodels )
-        
 
-                
 
-        
+
+
+

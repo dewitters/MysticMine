@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import pygame
 import monorail.koon.gui as gui
@@ -29,7 +28,7 @@ class TestGuiState:
         child21 = gui.InteractiveComponent( Rectangle(0,0,0,0) )
         child22 = gui.Component()
         child222 = gui.InteractiveComponent( Rectangle(0,0,0,0) )
-        
+
         root.add_subcomponent( child1 )
         root.add_subcomponent( child2 )
         child1.add_subcomponent( child11 )
@@ -55,7 +54,7 @@ class TestGuiState:
     def test_mouse_move_over_should_activate_component( self ):
         # Given
         gui_state = gui.GuiState()
-        userinput = UserInput()        
+        userinput = UserInput()
         userinput.mouse.feed_pos( Vec2D( 50, 150 ) )
 
         component = gui.InteractiveComponent( Rectangle( 100, 100, 100, 100 ) )
@@ -69,12 +68,12 @@ class TestGuiState:
 
         # Then
         assert gui_state.get_active() == component
-        
+
 
     def test_mouse_still_over_shouldnt_activate_component( self ):
         # Given
         gui_state = gui.GuiState()
-        userinput = UserInput()        
+        userinput = UserInput()
         userinput.mouse.feed_pos( Vec2D( 150, 150 ) )
 
         component1 = gui.InteractiveComponent( Rectangle( 100, 100, 100, 100 ) )
@@ -97,7 +96,7 @@ class TestGuiState:
     def test_mouse_move_over_shouldnt_activate_nonhard_component( self ):
         # Given
         gui_state = gui.GuiState()
-        userinput = UserInput()        
+        userinput = UserInput()
         userinput.mouse.feed_pos( Vec2D( 50, 150 ) )
 
         component = gui.InteractiveComponent( Rectangle( 100, 100, 100, 100 ) )
@@ -108,7 +107,7 @@ class TestGuiState:
         base = gui.Component()
         base.add_subcomponent( component )
         base.add_subcomponent( hardcomp )
-        
+
         gui_state.set_active( hardcomp )
 
         assert gui_state.get_active() <> component
@@ -162,7 +161,7 @@ class TestComponent:
         assert sub1.tick_cnt == 1
         assert sub2.tick_cnt == 1
         assert sub1sub.tick_cnt == 1
-                    
+
     def test_should_call_subs_draw( self ):
         """Given a derived Component and subcomponent
             when draw is called on parent
@@ -196,7 +195,7 @@ class TestComponent:
         assert sub1.draw_cnt == 1
         assert sub2.draw_cnt == 1
         assert sub1sub.draw_cnt == 1
-        
+
 
 class TestButton:
 
@@ -217,7 +216,7 @@ class TestButton:
         userinput.mouse.feed_pos( Vec2D(110,110) )
         userinput.mouse.feed_down( Mouse.LEFT )
         button.tick( userinput, guistate )
-        
+
         # Then
         assert button.went_down()
 
@@ -235,7 +234,7 @@ class TestButton:
         userinput.mouse.feed_pos( Vec2D(110,90) )
         userinput.mouse.feed_down( Mouse.LEFT )
         button.tick( userinput, guistate )
-        
+
         # Then
         assert not button.went_down()
 
@@ -255,7 +254,7 @@ class TestButton:
         userinput.update()
         userinput.mouse.feed_up( Mouse.LEFT )
         button.tick( userinput, guistate )
-        
+
         # Then
         assert not button.went_down()
 
@@ -275,20 +274,20 @@ class TestImageButton:
 
     def test_init( self ):
         surface = gfx.Surface( (10, 10 * 4) )
-        
+
         sprite = gfx.SpriteFilm( surface )
         sprite.set_div( 1, 4 )
         assert sprite.width == 10 and sprite.height == 10
-        
-        button = gui.ImageButton(sprite)    
+
+        button = gui.ImageButton(sprite)
 
     def test_draw( self ):
         surface = gfx.Surface( (10, 10 * 3) )
-        
+
         sprite = gfx.SpriteFilm( surface )
         sprite.set_div( 1, 3 )
         assert sprite.width == 10 and sprite.height == 10
-        
+
         button = gui.ImageButton(sprite)
 
         background = gfx.Surface((100,100))
@@ -317,7 +316,7 @@ class TestCheckbox:
         userinput.mouse.feed_pos( Vec2D(110,110) )
         userinput.mouse.feed_down( Mouse.LEFT )
         checkbox.tick( userinput, guistate )
-        
+
         # Then
         assert checkbox.went_down()
         assert checkbox.is_selected()
@@ -364,7 +363,7 @@ class TestRadiobuttons:
         userinput.mouse.feed_pos( Vec2D(110,110) )
         userinput.mouse.feed_down( Mouse.LEFT )
         rb.tick( userinput, guistate )
-        
+
         # Then
         assert rb[0].is_selected()
         assert not rb[1].is_selected()
@@ -376,7 +375,7 @@ class TestRadiobuttons:
         userinput.mouse.feed_pos( Vec2D(110,310) )
         userinput.mouse.feed_down( Mouse.LEFT )
         rb.tick( userinput, guistate )
-        
+
         # Then
         assert not rb[0].is_selected()
         assert not rb[1].is_selected()
@@ -388,7 +387,7 @@ class TestRadiobuttons:
         userinput.mouse.feed_pos( Vec2D(110,210) )
         userinput.mouse.feed_down( Mouse.LEFT )
         rb.tick( userinput, guistate )
-        
+
         # Then
         assert not rb[0].is_selected()
         assert rb[1].is_selected()
@@ -396,7 +395,7 @@ class TestRadiobuttons:
         assert rb.get_selected() is rb[1]
         assert rb.get_selected_index() == 1
 
-        
+
 class TestTextField:
 
     def test_get_text_returns_set_text( self ):
@@ -412,17 +411,17 @@ class TestTextField:
 
         # Then
         assert textfield.text == TEST_TEXT
-        
+
     def test_active_receives_input_chars( self ):
         """Given an active TextField
             when keys are pressed
             then the text is entered"""
         # Given
-        textfield = gui.TextField( Rectangle( 100, 100, 50, 50 ), gfx.Font() )        
+        textfield = gui.TextField( Rectangle( 100, 100, 50, 50 ), gfx.Font() )
         userinput = UserInput()
         guistate = gui.GuiState()
         guistate.set_active( textfield )
-        
+
         # When
         # loop 1
         userinput.key.feed_char( "A" )
@@ -430,21 +429,21 @@ class TestTextField:
         userinput.update()
         userinput.key.feed_char( "b" )
         textfield.tick( userinput, guistate )
-        userinput.update()        
-        
+        userinput.update()
+
         # Then
         assert textfield.text == "Ab"
-        
+
     def test_non_active_receives_no_input( self ):
         """Given an non-active TextField
             when keys are pressed
             then the text isn't entered"""
         # Given
-        textfield = gui.TextField( Rectangle( 100, 100, 50, 50 ), gfx.Font() )        
+        textfield = gui.TextField( Rectangle( 100, 100, 50, 50 ), gfx.Font() )
         userinput = UserInput()
         guistate = gui.GuiState()
         guistate.set_active( None )
-        
+
         # When
         # loop 1
         userinput.key.feed_char( "A" )
@@ -452,15 +451,15 @@ class TestTextField:
         userinput.update()
         userinput.key.feed_char( "b" )
         textfield.tick( userinput, guistate )
-        userinput.update()        
-        
+        userinput.update()
+
         # Then
         assert textfield.text == ""
-        
+
 
 class TestSlider:
 
     def test_init( self ):
         slider = gui.Slider()
 
-        
+

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 from monorail.menu import *
 

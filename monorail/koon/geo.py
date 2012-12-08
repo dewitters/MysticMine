@@ -17,10 +17,10 @@ class Vec3D:
 
     def __add__(self, other):
         return Vec3D( self.x + other.x, self.y + other.y, self.z + other.z )
-    
+
     def __sub__(self, other):
         return Vec3D( self.x - other.x, self.y - other.y, self.z - other.z )
-    
+
     def __mul__(self, factor):
         return Vec3D( self.x * factor, self.y * factor, self.z * factor )
 
@@ -29,7 +29,7 @@ class Vec3D:
 
     def __neg__(self):
         return Vec3D( -self.x, -self.y, -self.z )
-    
+
     def dot( self, other ):
         """returns dot product of 2 vectors"""
         return (self.x * other.x) + (self.y * other.y) + (self.z * other.z)
@@ -68,10 +68,10 @@ class Vec2D:
 
     def __add__(self, other):
         return Vec2D( self.x + other.x, self.y + other.y )
-    
+
     def __sub__(self, other):
         return Vec2D( self.x - other.x, self.y - other.y )
-    
+
     def __mul__(self, factor):
         return Vec2D( self.x * factor, self.y * factor )
 
@@ -80,7 +80,7 @@ class Vec2D:
 
     def __neg__(self):
         return Vec2D( -self.x, -self.y )
-    
+
     def dot( self, other ):
         """returns dot product of 2 vectors"""
         return (self.x * other.x) + (self.y * other.y)
@@ -105,7 +105,7 @@ class Vec2D:
 class Rectangle:
     def __init__( self, x, y, width, height ):
         self.pos = Vec2D( x, y )
-        self.size = Vec2D( width, height )        
+        self.size = Vec2D( width, height )
 
     @staticmethod
     def from_pos_size( pos, size ):
@@ -113,7 +113,7 @@ class Rectangle:
 
     @staticmethod
     def from_tuple( tup ):
-        return Rectangle(tup[0], tup[1], tup[2], tup[3])    
+        return Rectangle(tup[0], tup[1], tup[2], tup[3])
 
     def contains( self, pos ):
         return pos.x >= self.pos.x and \
@@ -146,7 +146,7 @@ class Rectangle:
         bottom = min( self.bottom, other.bottom )
 
         return Rectangle(x, y, right-x, bottom-y)
-            
+
 
     def __eq__( self, other ):
         return self.pos == other.pos and self.size == other.size

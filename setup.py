@@ -1,4 +1,3 @@
-#!/usr/bin/python
 from distutils.core import Extension, setup
 from distutils.command.install import INSTALL_SCHEMES
 from Pyrex.Distutils import build_ext
@@ -23,15 +22,16 @@ music = find_data_files('data/800x600/music/', '.ogg')
 snd = find_data_files('data/800x600/snd/', '.wav')
 
 setup( name='MysticMine',
-    version='1.0.0',
+    version='1.2.0',
     author='koonsolo',
     author_email='info@koonsolo.com',
     description='A one switch game',
     url='http://www.koonsolo.com/mysticmine/',
     download_url='http://github.com/koonsolo/MysticMine',
-    license='LICENSE.txt',
+    license='MIT license',
+    long_description=open('README.md').read(),
     scripts=['MysticMine'],
-    packages=['monorail','monorail.koon','monorail.tests'],
+    packages=['monorail','monorail.koon'],
     data_files=[('monorail/fonts',['monorail/fonts/freesansbold.ttf']),
                 ('monorail/data',['data/800x600/edmunds.ttf','data/800x600/font_default.fnt',
                                 'data/800x600/font_default.png','data/800x600/resources.cfg',

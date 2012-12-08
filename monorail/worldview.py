@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import random
 
@@ -44,7 +43,7 @@ class LevelView:
                     tile.view_surf_nr = random.randint(0,4)
                 tile_surf.nr = tile.view_surf_nr
                 tile_surf.draw( frame.surface, pos )
-                
+
     def draw( self, frame ):
         if frame.optimize_speed:
             if self.background is None:
@@ -65,12 +64,12 @@ class PlayfieldView:
 
     def __init__( self, model ):
         self.model = model
-        
+
         self.dark_surf = None
 
     def draw( self, frame ):
         frame.X_OFFSET, frame.Y_OFFSET = 20, 300
-        
+
         draw_models = []
         draw_models.append( self.model.level )
         draw_models.extend( self.model.goldcars )

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 from monorail.koon.input import *
 from monorail.koon.geo import Vec2D
@@ -10,7 +9,7 @@ class TestKeyboard:
         key = Keyboard()
 
         key.feed_down( K_a )
-        
+
         assert key.went_down( K_a )
         assert not key.went_down( K_b )
         assert not key.went_up( K_a )
@@ -44,14 +43,14 @@ class TestKeyboard:
         key.feed_char("t")
 
         assert key.get_chars() == "st"
-        
+
 class TestMouse:
 
     def test_buttons( self ):
         mouse = Mouse()
 
         mouse.feed_down( Mouse.LEFT )
-        
+
         assert mouse.went_down( Mouse.LEFT )
         assert not mouse.went_down( Mouse.RIGHT )
         assert not mouse.went_up( Mouse.LEFT )
@@ -80,7 +79,7 @@ class TestMouse:
     def test_has_moved_returns_false_when_not_moved( self ):
         # Given
         mouse = Mouse()
-        mouse.feed_pos( Vec2D( 33, 44 ) )        
+        mouse.feed_pos( Vec2D( 33, 44 ) )
 
         # When
         mouse.update()
@@ -92,7 +91,7 @@ class TestMouse:
     def test_has_moved_returns_true_when_moved( self ):
         # Given
         mouse = Mouse()
-        mouse.feed_pos( Vec2D( 33, 44 ) )        
+        mouse.feed_pos( Vec2D( 33, 44 ) )
 
         # When
         mouse.update()
@@ -101,4 +100,4 @@ class TestMouse:
         # Then
         assert mouse.has_moved()
 
-        
+

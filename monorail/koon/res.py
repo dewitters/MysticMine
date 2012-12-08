@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """use 'resman' as the main ResourceManager in this module
 """
 import pygame
@@ -45,7 +44,7 @@ class ResourceManager:
                     int( node.get("y").value ),
                     int( node.get("width").value ),
                     int( node.get("height").value ) )
-                
+
             elif node.value == "Vec2D":
                 return geo.Vec2D(
                     typ( node.get("x").value ),
@@ -68,7 +67,7 @@ class ResourceManager:
                     subsurf.rect = self.get_from_node( node.get("rect") )
                 else:
                     subsurf = gfx.SubSurf( gfx.Surface( node.get("file").value ) )
-                    
+
                 if "offset_x" in node.attribs.keys():
                     subsurf.offset = geo.Vec2D(
                             int( node.get("offset_x").value),
@@ -77,20 +76,20 @@ class ResourceManager:
 
             elif node.value == "Music":
                 return snd.Music( node.get("file").value )
-                
+
             elif node.value == "Sound":
                 return snd.Sound( node.get("file").value )
-                
+
             else:
                 raise Exception("unknown type in resource file")
-        
-    
+
+
     def load( self, filename ):
         """Load a file, or get it from memory."""
         if filename not in self.loaded_files:
             if filename.lower().endswith(".png") or filename.lower().endswith(".jpg"):
                 self.loaded_files[ filename ] = pygame.image.load( filename ).convert_alpha()
-                
+
         return self.loaded_files[ filename ]
 
 

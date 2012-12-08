@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-
 import copy
-
 import tiles
 import pickups
 

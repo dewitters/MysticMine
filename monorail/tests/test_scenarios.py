@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import os
 
@@ -20,7 +19,7 @@ class TestQuestManager:
 
         #scenario = quest.create_scenario()
 
-        
+
 class TestQuest:
 
     def test_add_level( self ):
@@ -84,8 +83,8 @@ class TestQuest:
         assert quest.get_current_level_nr() == 3
 
 
-STATNAME = "teststat"        
-           
+STATNAME = "teststat"
+
 class TestStatistics:
 
     def setup_method(self, method):
@@ -124,7 +123,7 @@ class TestScenarioPacman:
 
         playfield = Playfield()
         playfield.load("tests/levelTest.lvl")
-        
+
         scenario.playfield = playfield
 
         scenario.game_tick()

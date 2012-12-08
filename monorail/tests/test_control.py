@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 from monorail.koon.geo import Vec3D
 from monorail.world import *
@@ -39,19 +38,19 @@ class TestGroundControl:
 ##
 ##        tree = ai.PredictionTree()
 ##        tree.set_root( ctrl.AiNode.create(None, tile, pos.get_in_direction()) )
-##        
+##
 ##        # When
 ##        tree.update()
 ##        child = tree.root_node.get_childeren()[0]
 ##        grandchild = child.get_childeren()[0]
 ##
-##        child_copy = ctrl.AiNode.create( None, child.trailnode.tile, child.trailnode.in_dir )        
+##        child_copy = ctrl.AiNode.create( None, child.trailnode.tile, child.trailnode.in_dir )
 ##        tree.set_root( child_copy )
-##        
-##        # Then        
+##
+##        # Then
 ##        assert tree.root_node.get_childeren()[0] is grandchild
-            
-        
+
+
 class TestPlayfieldState:
 
     def test_init( self ):
@@ -71,10 +70,10 @@ class TestPlayfieldState:
 
         pickup = CopperCoin()
         playfield.level.get_tile(0, 0).pickup = pickup
-        
+
         # When
         playfieldstate = ai.PlayfieldState( playfield )
-        
+
         # Then
         assert playfieldstate.get_pickup( playfield.level.get_tile(0,0) ) is pickup
         assert playfieldstate.get_pickup(playfield.level.get_tile(0,1) ) is None
@@ -95,14 +94,14 @@ class TestPlayfieldState:
         pickup = CopperCoin()
         playfield.level.get_tile(0, 0).pickup = pickup
         playfieldstate = ai.PlayfieldState( playfield )
-        
+
         # When
         clone = playfieldstate.clone()
 
         # Then
         assert clone.playfield is playfieldstate.playfield
         assert clone.pickups is not playfieldstate.pickups
-        
+
 
 class TestGoldcarNodeState:
     def test_init( self ):
@@ -149,12 +148,12 @@ class TestGoldcarNodeState:
 ##        west.set_neighbor( center, Direction.EAST )
 ##        west.set_neighbor( west2, Direction.WEST )
 ##        south2.set_neighbor( south, Direction.NORTH )
-##        west2.set_neighbor( west, Direction.EAST )        
-##        
+##        west2.set_neighbor( west, Direction.EAST )
+##
 ##        # When
 ##        carstate = ctrl.GoldcarNodeState( GoldCar( TrailPosition( center, 0 ), 0 ) )
 ##        ai_node = ctrl.AiNode.create( carstate, center, Direction.NORTH )
-##        
+##
 ##        # Then
 ##        assert ai_node.get_generation( ai_node ) == 0
 ##
@@ -189,7 +188,7 @@ class TestGoldcarNodeState:
 ##        west.set_neighbor( center, Direction.EAST )
 ##        west.set_neighbor( west2, Direction.WEST )
 ##        south2.set_neighbor( south, Direction.NORTH )
-##        west2.set_neighbor( west, Direction.EAST )        
+##        west2.set_neighbor( west, Direction.EAST )
 ##
 ##        # When
 ##        carstate = ctrl.GoldcarNodeState( GoldCar( TrailPosition( center, 0 ), 0 ) )
@@ -198,7 +197,7 @@ class TestGoldcarNodeState:
 ##        ai_node.generate_childeren()
 ##        for child in ai_node.get_childeren():
 ##            child.generate_childeren()
-##            
+##
 ##        # Then
 ##        ai_node.get_childeren()[1].get_childeren()[0].set_total_score(3)
 ##        assert ai_node.get_best_score() == 3
@@ -208,10 +207,10 @@ class TestGoldcarNodeState:
 ##
 ##        ai_node.get_childeren()[1].get_childeren()[0].set_total_score(3)
 ##        assert ai_node.get_best_score() == 5
-##        
+##
 ##        ai_node.get_childeren()[1].get_childeren()[0].set_total_score(7)
 ##        assert ai_node.get_best_score() == 7
-        
+
 class TestAiController:
 
     def test_( self ):
@@ -236,5 +235,5 @@ class TestAiController:
 ##        prediction_tree.update()
 ##        print "gen", prediction_tree.total_generations
 ##
-##        print "score", prediction_tree.root_node.get_childeren()[0].score        
+##        print "score", prediction_tree.root_node.get_childeren()[0].score
 ##

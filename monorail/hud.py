@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import pygame.font
 import copy
@@ -29,7 +28,7 @@ class Hud:
 
         self.guistate = gui.GuiState()
 
-        btnFont = gfx.Font( "data/edmunds.ttf", color=(0,0,0), size=19, use_antialias = True )        
+        btnFont = gfx.Font( "data/edmunds.ttf", color=(0,0,0), size=19, use_antialias = True )
         self.menu_btn = gui.ImageButton( copy.copy(resman.get("game.hud_menu_button_sprite")), Vec2D(5, 257) )
         self.menu_btn.set_label( _("Menu"), btnFont )
 
@@ -54,11 +53,11 @@ class Hud:
                     event.Event.clock_ring()
                 self.last_clock_ring = timeout
 
-            
+
     def draw( self, frame ):
         resman.get("game.hud_score_surf").draw( frame.surface, Vec2D(0,0) )
         resman.get("game.hud_watch_surf").draw( frame.surface, Vec2D(5,290) )
-        
+
         y = 7
 
         for goldcars in self.scenario.playfield.get_goldcar_ranking():
@@ -70,9 +69,9 @@ class Hud:
 
                 self.font_score.draw( "%d" % (goldcar.score), frame.surface,
                                       (110, y + 4), align = gfx.Font.RIGHT )
-                
+
                 y += 35
-                
+
         timeout = self.scenario.get_timeout()
         if timeout is not None:
             time_string = "%01d:%02d" % (timeout/60, timeout%60)
@@ -116,7 +115,7 @@ class Hud:
             return self.dialog.all_is_ready()
         else:
             return True
-                    
+
     def _get_tip_dialog( self ):
         if self.game_data.is_single_player():
             if self.game_data.quest.progress == 0:
@@ -149,9 +148,9 @@ class Hud:
 
 class BaseDlg (gui.Dialog):
     def __init__( self, scenario, ground_control ):
-        gui.Dialog.__init__( self, Rectangle(140, 80, 800-200, 600-200 ) ) 
+        gui.Dialog.__init__( self, Rectangle(140, 80, 800-200, 600-200 ) )
         self.background_image = resman.get("gui.paperdialog_surf")
-        
+
         self.scenario = scenario
         self.ground_control = ground_control
 
@@ -160,7 +159,7 @@ class BaseDlg (gui.Dialog):
         self.small_font = gfx.Font( "data/edmunds.ttf", 16, use_antialias = True )
 
         self.guistate = gui.GuiState()
-        
+
     def do_tick( self, indev ):
         self.guistate.update( indev, self )
 
@@ -168,12 +167,12 @@ class BaseDlg (gui.Dialog):
 
     def draw( self, frame ):
         gui.Dialog.draw( self, frame.surface, frame.interpol, frame.time_sec )
-        
-    
+
+
 class MultiDlg (BaseDlg):
     def __init__( self, scenario, ground_control ):
         BaseDlg.__init__( self, scenario, ground_control )
-        
+
         self.no_input_timeout = 25*1
 
         self.all_ready = False
@@ -184,14 +183,14 @@ class MultiDlg (BaseDlg):
 
     def do_tick( self, indev ):
         BaseDlg.do_tick( self, indev )
-        
+
         if self.no_input_timeout <= 0:
             if self.readys is None:
                 self.readys = [ isinstance( gc, ctrl.AiController ) for gc in self.ground_control.controllers ]
 
             i = 0
             for controller in self.ground_control.controllers:
-                goldcar_rect = Rectangle( self.get_goldcar_x( i ) - 30, 
+                goldcar_rect = Rectangle( self.get_goldcar_x( i ) - 30,
                     400, 60, 80)
 
                 if (isinstance(controller, ctrl.HumanController) and \
@@ -202,7 +201,7 @@ class MultiDlg (BaseDlg):
                     self.readys[i] = True
                 i += 1
 
-            if not False in self.readys:        
+            if not False in self.readys:
                 self.all_ready = True
         else:
             self.no_input_timeout -= 1
@@ -217,16 +216,16 @@ class MultiDlg (BaseDlg):
 
     def draw( self, frame ):
         BaseDlg.draw( self, frame )
-        
+
         center = Vec2D( frame.surface.get_width()/2, frame.surface.get_height()/2 )
 
         y = 365
-        
+
         if self.no_input_timeout <= 0:
             self.font.draw( _("Press your button or click on the car"), frame.surface, (center.x, y+15), gfx.Font.CENTER )
 
             y = 415
-            
+
             place = 0
             for controller in self.ground_control.controllers:
                 goldcar = controller.goldcar
@@ -248,12 +247,12 @@ class MultiDlg (BaseDlg):
                         sprite.nr = self.anim_timer.get_frame( frame.time_sec )
 
                 sprite.draw( frame.surface, Vec2D(x, y + 26) )
-                    
+
                 place += 1
 
     def all_is_ready( self ):
         return self.all_ready
-    
+
 
 class TipDlg (BaseDlg):
     def __init__( self, scenario, ground_control ):
@@ -301,7 +300,7 @@ class TrackTipDlg (TipDlg):
 
         x = 2
         y = 7
-        self.playfield.level = Level()        
+        self.playfield.level = Level()
         self.playfield.level.set_tile( Tile( Vec3D(x+0,y,0), Tile.Type.FLAT, Trail.Type.EW ) )
         self.playfield.level.set_tile( Tile( Vec3D(x+1,y,0), Tile.Type.FLAT ) )
         self.playfield.level.set_tile( Tile( Vec3D(x+2,y,0), Tile.Type.FLAT ) )
@@ -336,7 +335,7 @@ class TrackTipDlg (TipDlg):
         frame.optimize_speed = False
         frame.draw( self.playfield )
         frame.optimize_speed = True
-        
+
 class KeyTipDlg (TipDlg):
     def __init__( self, scenario, ground_control ):
         TipDlg.__init__( self, scenario, ground_control )
@@ -347,7 +346,7 @@ class KeyTipDlg (TipDlg):
 
         x = 2
         y = 7
-        self.playfield.level = Level()        
+        self.playfield.level = Level()
         self.playfield.level.set_tile( Tile( Vec3D(x+0,y,0), Tile.Type.FLAT, Trail.Type.EW ) )
         self.playfield.level.set_tile( Tile( Vec3D(x+1,y,0), Tile.Type.FLAT ) )
         self.playfield.level.set_tile( Tile( Vec3D(x+2,y,0), Tile.Type.FLAT ) )
@@ -395,7 +394,7 @@ class PassPickupTipDlg (TipDlg):
 
         self.playfield = Playfield()
 
-        self.playfield.level = Level()        
+        self.playfield.level = Level()
         self._fill_level()
 
     def _fill_level( self ):
@@ -438,7 +437,7 @@ class DynamiteTipDlg (PassPickupTipDlg):
     def do_tick( self, indev ):
         PassPickupTipDlg.do_tick( self, indev )
 
-        self.dynamite.life = 0.9   
+        self.dynamite.life = 0.9
 
 class LampTipDlg (PassPickupTipDlg):
 
@@ -446,9 +445,9 @@ class LampTipDlg (PassPickupTipDlg):
         PassPickupTipDlg.__init__( self, scenario, ground_control )
 
         self.description_field.text = _("Pass the lamp by bumping into other car.")
-        
+
         self.playfield.goldcars[0].add_pickup(pickups.Lamp())
-        
+
 
 class DiamondTipDlg (TipDlg):
     def __init__( self, scenario, ground_control ):
@@ -460,7 +459,7 @@ class DiamondTipDlg (TipDlg):
 
         x = 3
         y = 5
-        self.playfield.level = Level()        
+        self.playfield.level = Level()
         self.playfield.level.set_tile( Enterance( Vec3D(x+3,y+0,0) ))
         self.playfield.level.set_tile( Tile( Vec3D(x+2,y+0,0), Tile.Type.FLAT ) )
         self.playfield.level.set_tile( Tile( Vec3D(x+1,y+0,0), Tile.Type.FLAT ) )
@@ -482,7 +481,7 @@ class DiamondTipDlg (TipDlg):
         self.playfield.game_tick()
 
         diamond_cnt = self.playfield.get_pickup_count( pickups.Diamond )
-        
+
         if diamond_cnt < 1:
             self.playfield.spawn_pickup( pickups.Diamond() )
 
@@ -552,14 +551,14 @@ class BalloonTipDlg (TipDlg):
         self.timer += 1
 
         if self.timer == 25*3:
-            balloon_cnt = self.playfield.get_pickup_count( pickups.Balloon )        
-            
+            balloon_cnt = self.playfield.get_pickup_count( pickups.Balloon )
+
             if balloon_cnt < 1:
                 self.playfield.spawn_pickup( pickups.Balloon() )
         elif self.timer == 25*9:
             self.playfield.goldcars[0].collectible = None
             self.timer = 0
-            
+
     def draw( self, frame ):
         TipDlg.draw( self, frame )
 
@@ -573,7 +572,7 @@ class CutterTipDlg (PassPickupTipDlg):
         PassPickupTipDlg.__init__( self, scenario, ground_control )
 
         self.description_field.text = _("Only the car with axe can cut gold.")
-        
+
         self.playfield.goldcars[0].add_pickup(pickups.Axe())
 
     def _fill_level( self ):
@@ -597,12 +596,12 @@ class CutterTipDlg (PassPickupTipDlg):
                TrailPosition(self.playfield.level.get_tile(x+0,y), 500)]
         self.playfield.goldcars = [GoldCar(pos[i], i) for i in range(0,2)]
         self.playfield.goldcars[0].pos.reverse_progress()
-        
+
     def do_tick( self, indev ):
         PassPickupTipDlg.do_tick( self, indev )
 
-        gold_cnt = self.playfield.get_pickup_count( pickups.GoldBlock )        
-        
+        gold_cnt = self.playfield.get_pickup_count( pickups.GoldBlock )
+
         if gold_cnt < 1:
             self.playfield.spawn_pickup( pickups.GoldBlock() )
 
@@ -616,7 +615,7 @@ class FlagTipDlg (TipDlg):
 
         x = 3
         y = 5
-        self.playfield.level = Level()        
+        self.playfield.level = Level()
         self.playfield.level.set_tile( Tile( Vec3D(x+2,y+0,0), Tile.Type.FLAT ) )
         self.playfield.level.set_tile( Tile( Vec3D(x+1,y+0,0), Tile.Type.FLAT ) )
         self.playfield.level.set_tile( Tile( Vec3D(x+0,y+0,0), Tile.Type.FLAT ) )
@@ -650,7 +649,7 @@ class FlagTipDlg (TipDlg):
             # Reset when flag is gone
             if self.tiles[i].pickup is None:
                 self.tiles[i] = None
-                
+
             i += 1
 
 
@@ -699,18 +698,18 @@ class OilTipDlg (TipDlg):
         self.timer += 1
 
         if self.timer == 25*3:
-            oil_cnt = self.playfield.get_pickup_count( pickups.Oiler )        
-            
+            oil_cnt = self.playfield.get_pickup_count( pickups.Oiler )
+
             if oil_cnt < 1:
                 x = 3
                 y = 4 + 3
                 tile = self.playfield.level.get_tile(x, y)
                 tile.pickup = pickups.Oiler()
                 tile.pickup.container = tile
-                
+
         elif self.timer == 25*11:
             self.playfield.goldcars[0].modifier = None
-            self.timer = 0        
+            self.timer = 0
 
     def draw( self, frame ):
         TipDlg.draw( self, frame )
@@ -729,7 +728,7 @@ class RockTipDlg (TipDlg):
 
         x = 3
         y = 5
-        self.playfield.level = Level()        
+        self.playfield.level = Level()
         self.playfield.level.set_tile( Enterance( Vec3D(x+3,y+0,0) ))
         self.playfield.level.set_tile( Tile( Vec3D(x+2,y+0,0), Tile.Type.FLAT ) )
         self.playfield.level.set_tile( Tile( Vec3D(x+1,y+0,0), Tile.Type.FLAT ) )
@@ -752,7 +751,7 @@ class RockTipDlg (TipDlg):
 
         rock_cnt = self.playfield.get_pickup_count( pickups.RockBlock )
         coin_cnt = self.playfield.get_pickup_count( pickups.CopperCoin )
-        
+
         if rock_cnt < 1:
             self.playfield.spawn_pickup( pickups.RockBlock() )
         if coin_cnt < 2:
@@ -784,7 +783,7 @@ class TorchTipDlg (TipDlg):
         self.description_field.text = _("A Torch moves every car to a different location")
 
         self.playfield = Playfield()
-        self.playfield.level = Level()        
+        self.playfield.level = Level()
         self._fill_level()
 
         self.playfield.goldcars = []
@@ -845,19 +844,19 @@ class GhostTipDlg (TipDlg):
         self.timer += 1
 
         if self.timer == 25*3:
-            ghost_cnt = self.playfield.get_pickup_count( pickups.Ghost )        
-            
+            ghost_cnt = self.playfield.get_pickup_count( pickups.Ghost )
+
             if ghost_cnt < 1:
                 x = 3
                 y = 4 + 3
                 tile = self.playfield.level.get_tile(x, y)
                 tile.pickup = pickups.Ghost()
                 tile.pickup.container = tile
-                
+
         elif self.timer == 25*11:
             self.playfield.goldcars[0].modifier = None
             self.playfield.goldcars[1].modifier = None
-            self.timer = 0        
+            self.timer = 0
 
     def draw( self, frame ):
         TipDlg.draw( self, frame )
@@ -865,7 +864,7 @@ class GhostTipDlg (TipDlg):
         frame.optimize_speed = False
         frame.draw( self.playfield )
         frame.optimize_speed = True
-        
+
 
 class IntroDlg( MultiDlg ):
     def __init__( self, scenario, ground_control ):
@@ -885,14 +884,14 @@ class IntroDlg( MultiDlg ):
 
         self.info.draw_title( frame.surface, frame.time_sec, (center.x, y) )
         self.info.draw_pickup( frame.surface, frame.time_sec, (center.x + 50, 240 ) )
-        
 
-        y += 50 
-    
+
+        y += 50
+
         self.font.draw( self.scenario.description, frame.surface,
                         (center.x, y), gfx.Font.CENTER )
 
-    
+
 class EndDlg( MultiDlg ):
     def __init__( self, scenario, ground_control ):
         MultiDlg.__init__( self, scenario, ground_control )
@@ -904,7 +903,7 @@ class EndDlg( MultiDlg ):
         #for goldcar in self.playfield.goldcars:
         #    if winner is None or winner.score < goldcar.score:
         #        winner = goldcar
-        
+
         center = Vec2D( frame.surface.get_width()/2, frame.surface.get_height()/2 )
 
         y = center.y - 180
@@ -919,7 +918,7 @@ class EndDlg( MultiDlg ):
 
         place = 1
         y -= 5
-        for goldcars in ranking:            
+        for goldcars in ranking:
             y += 32
 
             self.font.draw( "%d." % place, frame.surface,
@@ -960,7 +959,7 @@ class TotalDlg( MultiDlg ):
         place = 1
         y -= 5
         amount = 3
-        for goldcars in ranking:            
+        for goldcars in ranking:
             y += 32
 
             self.font.draw( "%d." % place, frame.surface,
@@ -990,7 +989,7 @@ class SingleDlg( MultiDlg ):
         self.font_tiny_white = gfx.Font("data/edmunds.ttf", 15, (255,255,255), use_antialias = True)
 
         self.skill_value = self.game_data.skill_level.old_value
-    
+
     def do_tick( self, indev ):
         MultiDlg.do_tick( self, indev )
 
@@ -1001,7 +1000,7 @@ class SingleDlg( MultiDlg ):
 
     def draw( self, frame ):
         MultiDlg.draw( self, frame )
-        
+
         center = Vec2D( frame.surface.get_width()/2, frame.surface.get_height()/2 )
 
         y = center.y - 180
@@ -1024,13 +1023,13 @@ class SingleDlg( MultiDlg ):
         pointer_y = geo.lin_ipol( self.skill_value,
                                   MAX_Y + 7, MIN_Y + 17, 0.3, 1.0 )
         pointer_y = max( min( pointer_y, MAX_Y ), MIN_Y )
-        
+
 #        pointer_y = MAX_Y
 
         resman.get("game.skill_pointer_surf").draw( frame.surface, Vec2D(x+10, pointer_y) )
         self.font_tiny_white.draw("%d" % int(self.skill_value * 100), frame.surface, (x+13, pointer_y+2),
                                   align=gfx.Font.CENTER, valign=gfx.Font.MIDDLE )
-        
+
         for skill_name in settings.SkillLevel.NAMES:
             if skill_name == self.game_data.skill_level.name:
                 self.font_tiny_red.draw( skill_name, frame.surface, (x+40, y) )
@@ -1045,12 +1044,12 @@ class WinDlg( SingleDlg ):
 
     def draw( self, frame ):
         SingleDlg.draw( self, frame )
-        
+
         center = Vec2D( frame.surface.get_width()/2, frame.surface.get_height()/2 )
 
         y = center.y - 180
 
-        self.large_font.draw( _("Nice job!"), frame.surface, (center.x, y), gfx.Font.CENTER )                
+        self.large_font.draw( _("Nice job!"), frame.surface, (center.x, y), gfx.Font.CENTER )
 
 class LoseDlg( SingleDlg ):
     def __init__( self, scenario, ground_control, game_data ):
@@ -1058,7 +1057,7 @@ class LoseDlg( SingleDlg ):
 
     def draw( self, frame ):
         SingleDlg.draw( self, frame )
-        
+
         center = Vec2D( frame.surface.get_width()/2, frame.surface.get_height()/2 )
 
         y = center.y - 180
@@ -1098,7 +1097,7 @@ class IngameMenu (gui.Dialog):
         self.add_subcomponent( self.quit_btn )
 
         self.update_neighbors()
-        
+
         self.options_dialog = None
 
         self.to_menu = False
@@ -1137,4 +1136,4 @@ class IngameMenu (gui.Dialog):
     def is_done( self ):
         return self._is_done
 
-    
+
