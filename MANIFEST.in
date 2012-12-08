@@ -1,4 +1,4 @@
-include README README.md setup.py build.py LICENSE.txt MysticMine
+include README README.md setup.py build.py LICENSE.txt MysticMine Makefile
 
 include locales/gettext.sh locales/messages.pot locales/de_DE.po locales/en_US.po locales/ru_RU.po
 
