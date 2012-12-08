@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 from monorail.koon.gfx import *;
 import pygame
@@ -43,10 +42,10 @@ class TestTimer:
            Then it is run 2 times"""
         # Given
         timer = Timer( 2 )
-        
+
         # When
         timer.start( 20 )
-        
+
         # Then
         assert timer.do_tick( 21 )
         assert timer.do_tick( 21 )
@@ -58,7 +57,7 @@ class TestTimer:
         assert not timer.do_tick( 22 )
         assert not timer.do_tick( 22 )
         assert not timer.do_tick( 22 )
-        
+
         assert timer.do_tick( 24 )
         assert timer.do_tick( 24 )
         assert timer.do_tick( 24 )
@@ -92,10 +91,10 @@ class TestLoopAnimationTimer:
            Then it is 2 frames later"""
         # Given
         anim = LoopAnimationTimer( 2, 0, 100 )
-        
+
         # When
         anim.set_frame( 10, 4 )
-        
+
         # Then
         assert anim.get_frame( 10 ) == 4
         assert anim.get_frame( 11 ) == 6

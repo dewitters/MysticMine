@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import pygame
 from monorail.koon.res import resman
@@ -26,7 +25,7 @@ class TestResourceManager:
             }
         """)
         f.close()
-        
+
         resman.read( "resources.tmp" )
 
         assert resman.get("loading") == "Loading..."

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import monorail.koon.cfg as cfg
 
@@ -15,7 +14,7 @@ class TestConfigNode:
         sub1.attribs["sub2a"] = sub2a
         sub1.attribs["sub2b"] = sub2b
         sub2b.attribs["sub3"] = sub3
-        
+
         assert root.get("sub1").value == "val1"
         assert root.get("sub1.sub2a").value == "val2a"
         assert root.get("sub1.sub2b").value == "val2b"
@@ -27,7 +26,7 @@ class TestConfigNode:
         except:
             assert True
 
-    def test_set( self ):        
+    def test_set( self ):
         root = cfg.ConfigNode("root", "root")
         sub1 = cfg.ConfigNode("sub1", "val1")
         sub2a = cfg.ConfigNode("sub2a", "val2a")
@@ -41,16 +40,16 @@ class TestConfigNode:
 
         root.set("sub1.sub2a", "val2Set")
         assert root.get("sub1.sub2a").value == "val2Set"
-        
+
         root.set("sub1.subNew", 18)
         assert int( root.get("sub1.subNew").value ) == 18
-        
+
 
     def test_parse_single( self ):
         cf = open( "cfg.tmp", "w" )
         cf.write("""
             timeout = 30
-            
+
             x = 25.5
             y = 7""")
         cf.close()
@@ -137,7 +136,7 @@ class TestConfigNode:
         cf.write("""
             # A line comment
             timeout = 30 # a trailing comment
-            
+
             x = 25.5
             y = 7""")
         cf.close()
@@ -168,7 +167,7 @@ class TestConfigFile:
 
         conf = cfg.ConfigFile("cfg.tmp")
         assert conf.root_node.get("hero.y").value == "60"
-        
+
     def test_save( self ):
         root = cfg.ConfigNode("root", "root")
         sub1 = cfg.ConfigNode("sub1", "val1")
@@ -186,7 +185,7 @@ class TestConfigFile:
         conf.save("cfg.tmp")
 
         conf.load("cfg.tmp")
-        
+
         assert conf.root_node.get("sub1").value == "val1"
         assert conf.root_node.get("sub1.sub2a").value == "val2a"
         assert conf.root_node.get("sub1.sub2b").value == "val2b"

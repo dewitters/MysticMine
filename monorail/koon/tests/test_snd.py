@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import time
 
@@ -15,7 +14,7 @@ def teardown_module( module ):
     pygame.quit()
 
     snd.deinit()
-    
+
 
 class TestMusic:
 

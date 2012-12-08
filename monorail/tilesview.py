@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import random
 
@@ -16,11 +15,11 @@ class TileView:
         self.sprite_nr = None
         if self.model.type == Tile.Type.FLAT:
             self.sprite_nr = random.randint(0,4)
-                
+
     def get_pos( self, frame ):
         x = self.model.pos.x * 32 + self.model.pos.y * 32 + frame.X_OFFSET
         y = -self.model.pos.x * 16 + self.model.pos.y * 16 + frame.Y_OFFSET
-        
+
         return Vec2D( x, y )
 
     def get_pickup_pos( self, frame ):
@@ -48,7 +47,7 @@ class TileView:
 class EnteranceView( TileView ):
     def __init__( self, model ):
         self.model = model
-                
+
     def draw( self, frame ):
         pos = self.get_pos( frame )
 
@@ -64,7 +63,7 @@ class EnteranceView( TileView ):
 class EnteranceTopView( TileView ):
     def __init__( self, model ):
         self.model = model
-                
+
     def draw( self, frame ):
         pos = self.get_pos( frame )
 
@@ -81,8 +80,8 @@ class EnteranceTopView( TileView ):
 class RailGateView( TileView ):
     def __init__( self, model ):
         TileView.__init__( self, model )
-        
-        self.sprite = copy.copy(resman.get("game.railgate_sprite"))        
+
+        self.sprite = copy.copy(resman.get("game.railgate_sprite"))
 
 ##    def game_tick( self ):
 ##        Tile.game_tick( self )
@@ -102,12 +101,12 @@ class RailGateView( TileView ):
 ##                self.sprite.nr -= 1
 ##            elif not self.is_down and self.sprite.nr <> 11:
 ##                self.sprite.nr += 1
-                
+
     def draw( self, frame ):
         TileView.draw( self, frame )
-        
+
         pos = self.get_pos( frame )
 
         self.sprite.draw( frame.surface, pos )
-                            
+
     z = property( lambda self: -self.model.pos.x * 16 + self.model.pos.y * 16 )

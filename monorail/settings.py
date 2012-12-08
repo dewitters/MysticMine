@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 from cPickle import *
 import os.path
@@ -29,7 +28,7 @@ class SkillLevel:
              _("Apprentice"),
              _("Beginner")
              ]
-             
+
     def __init__( self, value ):
         self.value = value
         self.old_value = self.value
@@ -37,7 +36,7 @@ class SkillLevel:
     def  update( self, value ):
         if value is not None:
             self.old_value = self.value
-            
+
             average = (self.value +  value) / 2
 
             # limit inc/dec
@@ -48,7 +47,7 @@ class SkillLevel:
                 self.value -= INC_DEC_LIMIT
             else:
                 self.value = average
-        
+
     def _get_name( self ):
         if self.value >= 1.0:
             return SkillLevel.NAMES[0]
@@ -88,10 +87,10 @@ class GameData:
 
     def set_type( self, gametype ):
         self.gametype = gametype
-            
+
         if self.gametype == GameType.SINGLE_SEQUENCE:
             self.goldcars = [["Player", ctrl.HumanController( None, input.Button(self.userinput.key, K_SPACE) )]]
-            
+
         elif self.gametype == GameType.SINGLE_RANDOM:
             self.goldcars = [["Player", ctrl.HumanController( None, input.Button(self.userinput.key, K_SPACE) )]]
 
@@ -102,7 +101,7 @@ class GameData:
 #                             ["Leen", ctrl.AiController( None )],
 #                             ["Computer", ctrl.AiController( None )]]
 #            self.goldcars = [["Koen", ctrl.HumanController( None, input.Button(self.userinput.key, K_SPACE) )]]
-            
+
         else:
             self.goldcars = [["Koen", ctrl.HumanController( None, input.Button(self.userinput.key, K_SPACE) )],
                              ["Koen", ctrl.HumanController( None, input.Button(self.userinput.key, K_SPACE) )],
@@ -137,12 +136,12 @@ class GameData:
 #            quest.add_level( ScenarioCollectAll( 120, 150, [] ), 5 )
             self.quest.add_level( ScenarioPacman( None, 0 ), 1 )
             self.quest.add_level( ScenarioCoinCollect( 120, None, 1, [Multiplier] ), 1 )
-            
+
         elif self.gametype == GameType.SINGLE_SEQUENCE:
             self.quest = quest_manager.get_quest( QuestManager.MAIN_QUEST )
 
             self.quest.progress = self.single_player_progress
-            
+
         elif self.gametype == GameType.SINGLE_RANDOM:
             self.quest = quest_manager.get_quest( QuestManager.SINGLE_RANDOM_QUEST )
             self._fill_random_quest_items()
@@ -157,7 +156,7 @@ class GameData:
         return self.gametype == GameType.SINGLE_SEQUENCE
 
     def is_single_random( self ):
-        return self.gametype == GameType.SINGLE_RANDOM               
+        return self.gametype == GameType.SINGLE_RANDOM
 
     def get_quest( self ):
         """Return the current scenario."""
@@ -205,7 +204,7 @@ class GameData:
         if self.unlocked_item_count >= 11: # Key
             available_pickups.append(Key)
 
-        self.quest.set_available_items( available_pickups, available_scenarios )        
+        self.quest.set_available_items( available_pickups, available_scenarios )
 
     def can_unlock_item( self ):
         return self._get_unlockable_item_count() > self.unlocked_item_count
@@ -219,10 +218,10 @@ class GameData:
     def unlock_item( self ):
         config = Configuration.get_instance()
         config.unlocked_item = self.unlocked_item_count + 1
-        config.save()        
+        config.save()
 
     def _get_unlockable_item_count( self ):
-        items = [ 3, # Diamond 
+        items = [ 3, # Diamond
                   8, # Dynamite
                   22, # Lamp
                   33, # Balloon
@@ -241,14 +240,14 @@ class GameData:
             if config.unlocked_level < items[i]:
                 return i
         return len(items)
-    
+
     def _get_unlocked_item_count( self ):
         return Configuration.get_instance().unlocked_item
     unlocked_item_count = property(_get_unlocked_item_count)
 
     def add_total_scores( self, playfield ):
         score = len( playfield.goldcars ) - 1
-        for goldcars in playfield.get_goldcar_ranking():            
+        for goldcars in playfield.get_goldcar_ranking():
             for goldcar in goldcars:
                 if self.total_scores.has_key( goldcar.nr ):
                     self.total_scores[goldcar.nr].score += score
@@ -261,7 +260,7 @@ class GameData:
         """Return a sorted list of goldcars with same score"""
         single_ranking = self.total_scores.values()[:]
         single_ranking.sort( lambda a, b: cmp( b.score, a.score ) )
-        
+
         ranking = []
         prev_score = None
         for goldcar in single_ranking:
@@ -270,9 +269,9 @@ class GameData:
             else:
                 ranking.append([goldcar])
                 prev_score = goldcar.score
-        
+
         return ranking
-        
+
 class GoldcarScore (object):
     def __init__( self, nr, score ):
         self.nr = nr
@@ -281,7 +280,7 @@ class GoldcarScore (object):
 class Configuration (object):
     instance = None
     config_name = os.path.expanduser("~/.mysticmine")
-    
+
     def __init__( self ):
         """Don't call! This is a singleton!"""
         Configuration.instance = self
@@ -323,10 +322,10 @@ class Configuration (object):
             else:
                 Configuration.instance = Configuration()
         return Configuration.instance
-        
+
     def save( self ):
         config_file = open(Configuration.config_name, "wb")
-        
+
         pickler = Pickler(config_file, 2)
         pickler.dump( self )
 
@@ -335,7 +334,7 @@ class Configuration (object):
     @staticmethod
     def load():
         config_file = open(Configuration.config_name, "rb")
-        
+
         unpickler = Unpickler(config_file)
         config = unpickler.load()
 
@@ -344,6 +343,6 @@ class Configuration (object):
         config._append_defaults()
 
         return config
-        
 
-    
+
+

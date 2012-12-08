@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 from world import *
 from player import *
@@ -31,14 +30,14 @@ class Frame:
     def get_views( self, model ):
         if hasattr( model, 'views' ) and model.views is not None:
             return model.views
-        else:            
+        else:
             if isinstance( model, Level):
                 views = [LevelView( model )]
             elif isinstance( model, Playfield ):
                 views = [PlayfieldView( model )]
-            elif isinstance( model, GoldCar ):                
+            elif isinstance( model, GoldCar ):
                 views = [GoldCarView( model )]
-                
+
             elif isinstance( model, Torch ):
                 views = [TorchView( model )]
             elif isinstance( model, Diamond ):
@@ -71,13 +70,13 @@ class Frame:
                 views = [FlagView( model )]
             elif isinstance( model, Leprechaun):
                 views = [LeprechaunView( model )]
-                
+
             elif isinstance( model, Enterance ):
-                views = [EnteranceView( model ), EnteranceTopView( model )]              
+                views = [EnteranceView( model ), EnteranceTopView( model )]
             elif isinstance( model, RailGate ):
                 views = [RailGateView( model )]
             elif isinstance( model, Tile ):
-                views = [TileView( model )]           
+                views = [TileView( model )]
             elif isinstance( model, GroundControl ):
                 views = [GroundControlView( model )]
             elif isinstance( model, Event ):
@@ -92,23 +91,23 @@ class Frame:
 
     def draw( self, model ):
         if model is None: return
-        
+
         for view in self.get_views( model ):
             view.draw( self )
 
-    def draw_z( self, models ):        
+    def draw_z( self, models ):
         views = []
         for model in models:
             for view in self.get_views( model ):
                 views.append( view )
-                
+
                 if hasattr(view, "submodels"):
                     for submodel in view.submodels:
                         for subview in self.get_views( submodel ):
                             views.append( subview )
 
         views.sort( key = lambda v: v.z )
-                    
+
         for view in views:
             view.draw( self )
-            
+

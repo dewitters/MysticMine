@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import copy
 
@@ -18,7 +17,7 @@ class GoldCar:
     - switch_dist: distance to switch
     - score
     - amount: amount of gold in car (0,1,2,3)
-    - collectible: current collectible on car    
+    - collectible: current collectible on car
     """
     COLLIDE_DISTANCE = 500
 
@@ -34,7 +33,7 @@ class GoldCar:
         self.amount = 0
 
         self._key_went_down = 0
-        
+
     def game_tick( self ):
         if self.pos is None: return
         old_tile = self.pos.tile
@@ -48,21 +47,21 @@ class GoldCar:
             MIN_SPEED = 150
             SLOPE_SLOWDOWN = 0.15
             SPEEDUP = 1.5
-        
+
         # slow down speed
         self.speed = int(self.speed * 0.99);
-        
+
         # DESIGN: don't stop the car
         if self.pos.tile.type == Tile.Type.FLAT and self.speed < MIN_SPEED:
             self.speed = int((self.speed+5) * SPEEDUP )
-        
+
         # when going down/up
         if (self.pos.is_reversed() and not isinstance(self.collectible, Balloon)) or \
                    (not self.pos.is_reversed() and isinstance(self.collectible, Balloon)):
             self.speed = min( [int(self.speed + SLOPE_ACCEL * self.pos.tile.get_angle()), MAX_SPEED] )
         else:
             self.speed = min( [int(self.speed - SLOPE_SLOWDOWN * self.pos.tile.get_angle()), MAX_SPEED] )
-        
+
         if self.speed < 0:
             self.speed *= -1
             self.pos.reverse_progress()
@@ -71,10 +70,10 @@ class GoldCar:
         # special case when ghost
         if isinstance( self.modifier, Ghost ):
             self.speed = (MIN_SPEED + MAX_SPEED) / 2
-        
+
         # update position
         self.pos += self.speed
-        
+
         # tile with goldcar on can't be switched
         if self.pos.tile <> old_tile:
             old_tile.trail.may_switch = True
@@ -88,7 +87,7 @@ class GoldCar:
             if isinstance( self.collectible, Lamp ):
                 self.score += self.collectible.score()
 
-            # Powerup worked out?            
+            # Powerup worked out?
             if isinstance(self.collectible, PowerUp) \
                and self.collectible.is_done():
                 self.collectible = None
@@ -103,13 +102,13 @@ class GoldCar:
             self.modifier.game_tick()
             # Powerup worked out?
             if self.modifier.is_done():
-                
+
                 if isinstance( self.modifier, Ghost ):
                     # playfield handles Ghost modifier
                     pass
                 else:
                     self.modifier = None
-        
+
         if self._key_went_down > 0:
             self._key_went_down -= 1
 
@@ -126,8 +125,8 @@ class GoldCar:
         if isinstance( self.pos.tile, RailGate ) and \
            self.pos.tile.is_down and \
            self.pos.get_distance( TrailPosition(self.pos.tile, self.pos.tile.get_length()/2 )) < GoldCar.COLLIDE_DISTANCE/2:
-            
-            self.speed *= -1                                       
+
+            self.speed *= -1
 
     def clear_switch_and_pos( self ):
         if self.switch is not None:
@@ -150,7 +149,7 @@ class GoldCar:
         while not it.tile.is_switch() and count < 100:
             #if it.get_tile().is_hill() and it.tile.get_out_direction() == it.in_dir:
             #	self.switch_pos = None
-            #	return            
+            #	return
             out_dir = it.get_out_direction()
             old_tile = it.tile
             it.to_next_tile()
@@ -159,7 +158,7 @@ class GoldCar:
                 # end of trail when same tile is returned as next
                 self.switch = None
                 return
-            
+
             self.switch_dist += it.tile.get_length()
 
             count += 1
@@ -192,7 +191,7 @@ class GoldCar:
         multiplier = 1
         if isinstance( self.collectible, Multiplier ):
             multiplier = 2
-        
+
         if isinstance( pickup, CopperCoin ):
             self.score += 1 * multiplier
             Event.coin_pickup( 1, self.pos )
@@ -240,9 +239,9 @@ class GoldCar:
                 if self.pos.get_distance( other.pos ) < GoldCar.COLLIDE_DISTANCE and \
                            self.collectible is None:
                     self.switch_collectibles( self, other )
-                    
+
         elif isinstance( other.modifier, Ghost ):
-            pass            
+            pass
         else:
             SPEEDUP  = 1.05
             SLOWDOWN = 0.95
@@ -250,11 +249,11 @@ class GoldCar:
             # Handle collision
             if self.pos.get_distance( other.pos ) < GoldCar.COLLIDE_DISTANCE:
                 Event.carhit()
-                
+
                 self.speed, other.speed = other.speed, self.speed
                 if not self.pos.same_direction( other.pos ):
                     self.pos.reverse_progress()
-                    other.pos.reverse_progress()                
+                    other.pos.reverse_progress()
                 diff = GoldCar.COLLIDE_DISTANCE - self.pos.get_distance( other.pos )
 
                 proportion1 = float(self.speed) / (self.speed + other.speed)

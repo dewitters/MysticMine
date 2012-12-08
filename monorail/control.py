@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import random
 
 from koon.input import Mouse
@@ -25,7 +23,7 @@ class GroundControl:
         # for debugging
         if hasattr(self, "views"):
             self.views[0].game_tick( indev )
-        
+
         # check each goldcar's keys
         for controller in self.controllers:
             controller.do_tick( indev )
@@ -38,7 +36,7 @@ class GroundControl:
 
             tile_x = (-mouse_y + (mouse_x+32)/2 - X_OFFSET/2 + Y_OFFSET) / 32
             tile_y = (mouse_y + (mouse_x-32)/2 - X_OFFSET/2 - Y_OFFSET) / 32
-            
+
             tile = self.playfield.level.get_tile( tile_x, tile_y )
 
             if tile is not None and tile.is_switch():
@@ -58,7 +56,7 @@ class GroundControl:
                 if not had_it:
                     tile.switch_it()
 
-        if self.contains_ai: 
+        if self.contains_ai:
             self._update_prediction_trees()
 
     def add_controllers( self, controllers ):
@@ -79,7 +77,7 @@ class GroundControl:
 
             if not isinstance( controller, HumanController ):
                 self.contains_ai = True
-            
+
             i += 1
 
     def _update_prediction_trees( self ):
@@ -103,7 +101,7 @@ class GroundControl:
 ##            if prediction_tree.root_node is not None:
 ##                print prediction_tree.root_node._best_score,
             i += 1
-            
+
     def _get_other_prediction_trees( self, car ):
         """Return all prediction trees that are not from car.
         """
@@ -115,7 +113,7 @@ class GroundControl:
             if car_it is not car:
                 trees.append( prediction_tree )
 
-            i += 1        
+            i += 1
 
         return trees
 
@@ -128,15 +126,15 @@ class GroundControl:
                 return prediction_tree
             i += 1
 
-        return None        
-        
-class Controller:    
+        return None
+
+class Controller:
     """Controller of a goldcar
 
     public members:
     - prediction_tree: the prediction tree of the goldcar
     """
-    
+
     def __init__( self, goldcar ):
         """goldcar can be None"""
         self.goldcar = goldcar
@@ -176,11 +174,11 @@ class AiController( Controller ):
         self.prev_switch = None
         self.best_dir = None
         self.iq = iq
-        
+
     def do_tick( self, indev ):
         if self.goldcar.switch is not None:
             switch_node = self.find_switch_node()
-                        
+
             # find best direction for switch
             if switch_node is not None:
                 best_childs = switch_node.get_best_childs()
@@ -190,7 +188,7 @@ class AiController( Controller ):
                     self.best_dir = None
             else:
                 self.best_dir = None
-            
+
             self.handle_switching()
 
     # TODO: improve algorithm here!
@@ -204,7 +202,7 @@ class AiController( Controller ):
                 if len(best_childs) > 0:
                     node_it = best_childs[0]
 ##                    if node_it._best_score < 0:
-##                        print node_it._best_score                    
+##                        print node_it._best_score
                 else:
                     node_it = None
             else:
@@ -224,4 +222,4 @@ class AiController( Controller ):
         else: # Stupid move
             if random.randint(0,32) == 0:
                 self.goldcar.keydown()
-            
+

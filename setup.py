@@ -1,4 +1,3 @@
-#!/usr/bin/python
 from distutils.core import Extension, setup
 from distutils.command.install import INSTALL_SCHEMES
 from Pyrex.Distutils import build_ext

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import math
 import random
@@ -48,14 +47,14 @@ class MonorailMenu:
                 else:
                     self._is_done = True
                     # self.screen = ScreenPlayerSelect( self.game_data )
-                    
+
         elif isinstance( self.screen, ScreenLevelSelect ):
             if self.screen.is_done():
                 if self.screen.get_state() == ScreenLevelSelect.PLAY:
                     self._is_done = True
                 elif self.screen.get_state() == ScreenLevelSelect.MENU:
                     self.screen = ScreenGameSelect( self.game_data )
-                    
+
         elif isinstance( self.screen, ScreenPlayerSelect ):
             if self.screen.is_done():
                 self._is_done = True
@@ -80,7 +79,7 @@ class MonorailMenu:
 
     def draw_mouse( self, surface, interpol, time_sec ):
         x, y = pygame.mouse.get_pos()
-        resman.get("gui_surf").draw( surface, Vec2D(x, y), (0,0,32,32) )            
+        resman.get("gui_surf").draw( surface, Vec2D(x, y), (0,0,32,32) )
 
 
     def mouse_down( self, button ):
@@ -99,8 +98,8 @@ class Credit:
         self.speed = -10
 
         if Credit.FONT is None:
-            Credit.FONT = Font( "data/edmunds.ttf", color=(255,255,255), size=25, use_antialias = True )        
-            Credit.FONT_BLACK = Font( "data/edmunds.ttf", color=(0,0,0), size=25, use_antialias = True )        
+            Credit.FONT = Font( "data/edmunds.ttf", color=(255,255,255), size=25, use_antialias = True )
+            Credit.FONT_BLACK = Font( "data/edmunds.ttf", color=(0,0,0), size=25, use_antialias = True )
 
     def tick( self ):
         self.speed += 0.3
@@ -115,7 +114,7 @@ class Credit:
         Credit.FONT.draw( self.text, surface, (170 + int(self.pos.x), int(self.pos.y) + offset_x + 600), Font.CENTER )
 
 class CarAnimation:
-    
+
     class RailObject:
         def __init__( self, weight ):
             self.weight = weight
@@ -131,7 +130,7 @@ class CarAnimation:
                 if self.offset <= parent_offset:
                     self.speed = 0.0
                     self.offset = parent_offset
-           elif self.offset < parent_offset: 
+           elif self.offset < parent_offset:
                 self.speed += self.weight
                 self.offset += self.speed
                 if self.offset >= parent_offset:
@@ -213,10 +212,10 @@ class CarAnimation:
                 if not credit.is_dead():
                     new_credits.append( credit )
             self.credits = new_credits
-        
+
     def tick_car( self, userinput ):
         self.carsprite.nr = (self.carsprite.nr + 1) % 5
-        
+
         if self.state == CarAnimation.STATE_DOWN:
             offset = 400
             if self.rails.offset >= 400:
@@ -306,7 +305,7 @@ class SingleSwitch:
 
                     if SingleSwitch.esc_timers[ btn ] == 25:
                         SingleSwitch.esc_went_down = True
-        
+
     @staticmethod
     def feed_keys( indev ):
         if SingleSwitch.is_enabled:
@@ -349,9 +348,9 @@ class ScreenGameSelect (Screen):
         self.game_data = game_data
         self._is_done = False
         self.should_quit = False
-        
-        btnFont = Font( "data/edmunds.ttf", color=(0,0,0), size=30, use_antialias = True )        
-        
+
+        btnFont = Font( "data/edmunds.ttf", color=(0,0,0), size=30, use_antialias = True )
+
         BUTTON_X = 550
         BUTTON_Y = 180
         H = 65
@@ -439,8 +438,8 @@ class ScreenGameSelect (Screen):
 
         Screen.draw( self, surface, interpol, time_sec )
 
-        
-            
+
+
     def is_done( self ):
         return self._is_done
 
@@ -461,7 +460,7 @@ class OptionsDialog (Dialog):
         self.sound_lbl = Label( Vec2D(200, 130), _("Sound"), btnFont )
         star = ImageButton( copy.copy(resman.get("gui.sheriffstar_sprite") ) )
         self.sound_slider = ImageSlider( Vec2D( 320, 140 ), copy.copy(resman.get("gui.slider_sprite")), star )
-        self.music_lbl = Label( Vec2D(200, 195), _("Music"), btnFont )        
+        self.music_lbl = Label( Vec2D(200, 195), _("Music"), btnFont )
         star = ImageButton( copy.copy(resman.get("gui.sheriffstar_sprite") ) )
         self.music_slider = ImageSlider( Vec2D( 320, 205 ), copy.copy(resman.get("gui.slider_sprite")), star )
         self.fullscreen_btn = ImageButton( copy.copy(resman.get("game.button02_sprite")), Vec2D(300,260) )
@@ -509,9 +508,9 @@ class OptionsDialog (Dialog):
             if self.sound_slider.went_up():
                 Event.sound_test()
             if self.music_slider.value_changed():
-                self.config.music_volume = self.music_slider.get_value()            
+                self.config.music_volume = self.music_slider.get_value()
                 SoundManager.set_music_volume(  self.config.music_volume )
-                    
+
             SingleSwitch.tick( userinput, self.guistate )
         else:
             self.dialog.tick( userinput, guistate )
@@ -553,8 +552,8 @@ class AccessDialog (Dialog):
         self.oneswitch_btn = ImageButton( copy.copy(resman.get("game.button02_sprite")), Vec2D(300,240) )
         self.update_oneswitch_label()
 
-        self.scan0_lbl = Label( Vec2D(200, 310), _("Scan"), btnFont )        
-        self.scan1_lbl = Label( Vec2D(200, 340), _("Speed"), btnFont )        
+        self.scan0_lbl = Label( Vec2D(200, 310), _("Scan"), btnFont )
+        self.scan1_lbl = Label( Vec2D(200, 340), _("Speed"), btnFont )
         star = ImageButton( copy.copy(resman.get("gui.sheriffstar_sprite") ) )
         self.scan_slider = ImageSlider( Vec2D( 320, 340 ), copy.copy(resman.get("gui.slider_sprite")), star )
 
@@ -592,7 +591,7 @@ class AccessDialog (Dialog):
         if self.scan_slider.value_changed():
             SingleSwitch.scan_timeout = int(20 + (1.0 - self.scan_slider.get_value()) * 40)
             self.config.scan_speed = SingleSwitch.scan_timeout
-                
+
         SingleSwitch.tick( userinput, self.guistate )
 
     def update_oneswitch_label( self ):
@@ -640,7 +639,7 @@ class ScreenPlayerSelect (Dialog):
         Dialog.draw( self, surface, interpol, time_sec )
 
         self.stage.draw( surface, interpol, time_sec )
-            
+
     def is_done( self ):
         return self._is_done
 
@@ -653,7 +652,7 @@ class StageHumanCount (Component):
         btnFont = Font( "data/edmunds.ttf", color=(0,0,0), size=32, use_antialias = True )
 
         self.add_subcomponent( Label( Vec2D(200, 200), _("Number of players?"), btnFont ) )
-        
+
         self.buttons = []
         for i in range( 2, 7 ):
             self.buttons.append( Button( Rectangle(365, 180 + i * 40, 35, 35) ) )
@@ -668,7 +667,7 @@ class StageHumanCount (Component):
     def tick( self, userinput, guistate ):
         self.guistate.update(userinput, self)
         Component.tick( self, userinput, self.guistate )
-        
+
         i = 1
         for btn in self.buttons:
             if btn.went_down():
@@ -700,9 +699,9 @@ class StagePlayerConfig (Component):
 
         self.car_sprite = resman.get("game.car1_sprite")
         self.carLabel =  Label( Vec2D(400, 240), image=self.car_sprite )
-        self.anim_timer = LoopAnimationTimer( 15, 40, 12 )                
+        self.anim_timer = LoopAnimationTimer( 15, 40, 12 )
 
-        
+
         self.add_subcomponent( self.textLabel )
         self.add_subcomponent( self.carLabel )
 
@@ -719,7 +718,7 @@ class StagePlayerConfig (Component):
                 if button not in self.forbidden_buttons:
                     resman.get("gui.key_good_sound").play()
                     self.forbidden_buttons.append( button )
-                    
+
                     if self.current_player <= self.player_cnt:
                         player_data = [_("Player %d") % self.current_player, ctrl.HumanController( None, button )]
                         self.game_data.goldcars.append( player_data )
@@ -743,7 +742,7 @@ class StagePlayerConfig (Component):
 
         Component.draw( self, surface, interpol, time_sec )
 
-        
+
 
 class ScreenLevelSelect (Screen):
 
@@ -754,7 +753,7 @@ class ScreenLevelSelect (Screen):
 
         self.game_data = game_data
         self._is_done = False
-        
+
         btnFont = Font( "data/edmunds.ttf", color=(64,64,64), size=22, use_antialias = True )
 
         self.menu_btn = ImageButton( copy.copy(resman.get("game.lvl_left_button")), Vec2D(35, 500) )
@@ -810,9 +809,9 @@ class ScreenLevelSelect (Screen):
 
                 diff = a - b
 
-                self.lines_length += diff.length()        
+                self.lines_length += diff.length()
 
-        
+
         self.levelpoints = Radiobuttons()
 
         total_points = game_data.quest.get_level_count()
@@ -845,14 +844,14 @@ class ScreenLevelSelect (Screen):
 
                 prev_pos_it = pos_it
 
-        assert False                            
+        assert False
 
     def tick( self, userinput, guistate ):
         if self.state == ScreenLevelSelect.LEVELS:
             if self.init_active:
                 guistate.set_active( self.play_btn )
                 self.init_active = False
-            
+
             super(type(self), self).tick( userinput, guistate )
 
             self.levelpoints.tick( userinput, guistate )
@@ -892,10 +891,10 @@ class ScreenLevelSelect (Screen):
                 self.game_data.unlock_item()
             elif self.unlock_timer == 20*5:
                 self.state = ScreenLevelSelect.LEVELS
-            
-            self.crate_hud.tick()            
+
+            self.crate_hud.tick()
             self.unlock_timer += 1
-            
+
         elif self.state == ScreenLevelSelect.CONGRATS:
             self.fireworks.tick()
             self.unlock_timer += 1
@@ -917,12 +916,12 @@ class ScreenLevelSelect (Screen):
 
     def draw( self, surface, interpol, time_sec ):
         self.background.draw( surface, (0,0) )
-        
+
         Screen.draw( self, surface, interpol, time_sec )
         self.levelpoints.draw( surface, interpol, time_sec )
 
         center = Vec2D( surface.get_width()/2, surface.get_height()/2 )
-        
+
         if self.state == ScreenLevelSelect.LEVELS:
             self.info.draw_title( surface, time_sec, (center.x, 410) )
             self.info.draw_pickup( surface, time_sec, (center.x + 30, 600-60 ) )
@@ -931,7 +930,7 @@ class ScreenLevelSelect (Screen):
             # draw skill level
             txt = self.font.render( _("skill: %(name)s (%(value).0f)") % {"name":self.game_data.skill_level.name, "value":self.game_data.skill_level.value*100}, True, (255,255,255) )
             surface.blit( txt, (240, 340) )
-                            
+
         elif self.state == ScreenLevelSelect.UNLOCK:
             y = 410
 
@@ -951,10 +950,10 @@ class ScreenLevelSelect (Screen):
 ##            for i in range( 0, len(seq) - 1 ):
 ##                a = ( seq[i][0], seq[i][1] )
 ##                b = ( seq[i+1][0], seq[i+1][1] )
-##            
+##
 ##                pygame.draw.line( surface, (255,0,0), a, b )
 
-            
+
     def is_done( self ):
         return self._is_done
 
@@ -1027,9 +1026,9 @@ class Fireworks:
             for i in range(0, random.randint(1, 6) ):
                 pos = Vec2D( random.randint( 200, 600 ), random.randint( 300, 500 ) )
                 speed = Vec2D( random.uniform(-2, 2 ), random.uniform( -20, -30 ) )
-                color = random.randint(-1, 5) 
+                color = random.randint(-1, 5)
                 self.spots.append( Fireworks.Spot( color, pos, speed, 1.0, random.randint(12, 25), color ) )
-        
+
         new_spots = []
         for spot in self.spots:
             spot.tick()
@@ -1056,7 +1055,7 @@ class ScenarioInfo:
         self.game_data = game_data
         self.font = gfx.Font("data/edmunds.ttf", 20, (0,0,0), True)
         self.title_font = gfx.Font("data/edmunds.ttf", 28, (0,0,0), True)
-        
+
         self.init_pickup_surf()
         self.init_title_sprites()
 
@@ -1079,7 +1078,7 @@ class ScenarioInfo:
                 self.pickup_surf = resman.get("game.balloon_sprite").clone()
                 self.pickup_y = 15
             elif pickup is Ghost:
-                self.pickup_surf = resman.get("game.ghost_sprite").clone()                
+                self.pickup_surf = resman.get("game.ghost_sprite").clone()
                 self.pickup_y = 0
 
     def init_title_sprites( self ):
@@ -1087,7 +1086,7 @@ class ScenarioInfo:
         self.title_sprite_right = None
         self.title_sprite_left_y = 0
         self.title_sprite_right_y = 0
-        
+
         if isinstance( self.scenario, scenarios.ScenarioCoinCollect ):
             self.title_sprite_left = resman.get("game.copper_sprite").clone()
             self.title_sprite_right = resman.get("game.copper_sprite").clone()
@@ -1168,7 +1167,7 @@ class ScenarioInfo:
             if self.left_anim_timer is not None:
                 self.title_sprite_left.nr = self.left_anim_timer.get_frame( time_sec )
             self.title_sprite_left.draw( surface, left_pos )
-            
+
         if self.title_sprite_right is not None:
             if self.right_anim_timer is not None:
                 self.title_sprite_right.nr = self.right_anim_timer.get_frame( time_sec )
@@ -1178,7 +1177,7 @@ class ScenarioInfo:
         opponent_count = len(self.game_data.get_quest().get_opponent_iqs())
 
         pos = Vec2D(pos[0], pos[1]) - Vec2D(35, 17) * ((opponent_count-1)/2)
-        
+
         for i in range(0, opponent_count):
             offset = Vec2D(i*35, i*17)
             sprite = copy.copy(resman.get("game.car%d_sprite" % (i+2)))
@@ -1187,10 +1186,10 @@ class ScenarioInfo:
 
 class CrateHud:
     """Crates at the bottom of the window"""
-    
+
     def __init__( self, game_data ):
         self.game_data = game_data
-        
+
         self.crate_sprite = resman.get("game.crate_sprite")
         self.crate_label = resman.get("game.crate_label_surf")
 
@@ -1242,7 +1241,7 @@ class CrateHud:
                 self.crate_sprite.nr = 2
             elif self.crate_sprite.nr == 2:
                 self.crate_sprite.nr = 1
-            
+
             self.crate_sprite.draw( surface, Vec2D(15 + i*73, 600-66) )
 
         self.crate_label.draw( surface, Vec2D(0, 600-100) )
