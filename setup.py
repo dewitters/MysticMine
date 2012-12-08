@@ -22,7 +22,7 @@ music = find_data_files('data/800x600/music/', '.ogg')
 snd = find_data_files('data/800x600/snd/', '.wav')
 
 setup( name='MysticMine',
-    version='1.0.0',
+    version='1.2.0',
     author='koonsolo',
     author_email='info@koonsolo.com',
     description='A one switch game',
