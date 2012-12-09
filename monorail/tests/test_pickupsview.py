@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import os
 
@@ -19,7 +18,7 @@ def setup_module( module ):
 
 def teardown_module( module ):
     pygame.quit()
-    
+
 
 class Container:
     class View:
@@ -57,6 +56,6 @@ class TestDrawingViews:
             frame = m_frame.Frame( surf, time_sec, 0.0 )
 
             model_view.draw( frame )
-        
+
 
 

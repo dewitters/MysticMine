@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import sys
 import gc
@@ -38,7 +37,7 @@ class Game:
         else:
             pygame.display.set_mode( self.config.resolution, pygame.FULLSCREEN )
         pygame.display.set_caption( self.name )
-        
+
         # Init the input
         pygame.mouse.set_visible( False )
         pygame.event.set_grab( False )
@@ -47,11 +46,11 @@ class Game:
 
     def deinit_pygame( self ):
         snd.deinit()
-        pygame.quit()        
+        pygame.quit()
 
     def before_gameloop( self ):
         pass
-    
+
     def after_gameloop( self ):
         pass
 
@@ -60,10 +59,10 @@ class Game:
             self.init_pygame()
 
             self.before_gameloop()
-            
+
             self.fps = 0
             frame_count = 0
-            
+
             next_game_tick = pygame.time.get_ticks()
             next_half_second = pygame.time.get_ticks()
 
@@ -71,8 +70,8 @@ class Game:
             self.game_is_done = False
             while not self.game_is_done:
                 # events
-                self.handle_events()    
-                
+                self.handle_events()
+
                 # game tick
                 loop_count = 0
                 while pygame.time.get_ticks() > next_game_tick and loop_count < 4:
@@ -85,10 +84,10 @@ class Game:
                     loop_count += 1
 
 ##                    gc.collect()
-                
+
                 if loop_count >= 4: # don't overdo the ticks
                     next_game_tick = pygame.time.get_ticks()
-                
+
                 # render
                 time_sec = pygame.time.get_ticks() * 0.001
                 interpol = 1 - ((next_game_tick - pygame.time.get_ticks()) / float(GAMETICKS))
@@ -102,9 +101,9 @@ class Game:
                     next_half_second += 500
 
             self.after_gameloop()
-            
+
             self.deinit_pygame()
-            
+
         except:
             self.deinit_pygame()
             print "Unexpected error:", sys.exc_info()[0]
@@ -128,7 +127,7 @@ class Game:
                 self.userinput.joys[event.joy].feed_down( event.button )
             elif event.type == JOYBUTTONUP:
                 self.userinput.joys[event.joy].feed_up( event.button )
-    
+
     def draw_fps( self, surface ):
         font = pygame.font.Font( None, 20 )
         render_text = font.render( str(self.fps), 0, (255,255,255) )

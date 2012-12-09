@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import random
 from cPickle import *
@@ -45,7 +44,7 @@ class Scenario:
         self.ontime = True # if time is static/const, not adapted by skill
 
         self.restart()
-    
+
     def restart( self ):
         pass
 
@@ -58,7 +57,7 @@ class Scenario:
 
     def game_tick( self ):
         self.handle_explosions()
-        
+
         if self.timeout is not None:
             self.timeout -= 1
         self.completed_time += 1
@@ -87,15 +86,15 @@ class Scenario:
                 inc = 3 / min([3, len(ranking)-1])
             else:
                 inc = 3
-            
+
             amount = min([3, ranking[0][0].score])
             prev_score = ranking[0][0].score
             for goldcars in ranking:
                 amount -= min(inc, prev_score - goldcars[0].score)
-                
+
                 for goldcar in goldcars:
                     goldcar.amount = max([0, amount])
-                    
+
                 prev_score = goldcars[0].score
 
     def is_finished( self ):
@@ -109,7 +108,7 @@ class Scenario:
                         return True
             elif self.timeout is None or not self.ontime:
                 return self.playfield.goldcars[0].score >= self.goal
-            
+
         return False
 
     def has_won( self ):
@@ -149,13 +148,13 @@ class ScenarioCoinCollect( Scenario ):
     def game_tick( self ):
         if self.playfield.get_pickup_count( pickups.CopperCoin ) < self.max_gold:
             self.playfield.spawn_pickup(pickups.CopperCoin())
-            
-        Scenario.game_tick( self )        
+
+        Scenario.game_tick( self )
 
     def _get_description( self ):
         if self.timeout is not None:
             seconds = self.timeout / TICKS_PER_SECOND
-        
+
         if self.timeout is not None and self.goal is not None:
             seconds_string = gettext.lang.ungettext("%d second", "%d seconds", seconds) % seconds
             goal_string = gettext.lang.ungettext("%d coin", "%d coins", self.goal) % self.goal
@@ -171,7 +170,7 @@ class ScenarioCoinCollect( Scenario ):
                 "Be the first to collect %d coin.",\
                 "Be the first to collect %d coins.",\
                 self.goal) % self.goal
-        elif self.goal is not None and not self.is_multiplayer:            
+        elif self.goal is not None and not self.is_multiplayer:
             return gettext.lang.ungettext(\
                 "Collect %d coin.",\
                 "Collect %d coins.",\
@@ -214,11 +213,11 @@ class ScenarioHoldLamp( Scenario ):
 
     def restart( self ):
         self.nolamp = True
-        
+
     def _get_description( self ):
         if self.timeout is not None:
             seconds = self.timeout / TICKS_PER_SECOND
-            
+
         if self.timeout is not None and self.goal is not None:
             seconds_string = gettext.lang.ungettext("%d second", "%d seconds", seconds) % seconds
             goal_string = gettext.lang.ungettext("%d point", "%d points", self.goal) % self.goal
@@ -243,7 +242,7 @@ class ScenarioHoldLamp( Scenario ):
         if self.nolamp:
             self.playfield.spawn_pickup(pickups.Lamp())
             self.nolamp = False
-            
+
         Scenario.game_tick( self )
 
     def _get_mission_txt( self ):
@@ -275,11 +274,11 @@ class ScenarioCutter( Scenario ):
 
     def restart( self ):
         self.noaxe = True
-            
+
     def _get_description( self ):
         if self.timeout is not None:
             seconds = self.timeout / TICKS_PER_SECOND
-            
+
         if self.timeout is not None and self.goal is not None:
             seconds_string = gettext.lang.ungettext("%d second", "%d seconds", seconds) % seconds
             goal_string = gettext.lang.ungettext("%d gold block", "%d gold blocks", self.goal) % \
@@ -309,7 +308,7 @@ class ScenarioCutter( Scenario ):
         if self.noaxe:
             self.playfield.spawn_pickup(pickups.Axe())
             self.noaxe = False
-            
+
         if self.playfield.get_pickup_count( pickups.GoldBlock ) < 1:
             self.playfield.spawn_pickup( pickups.GoldBlock() )
 
@@ -342,10 +341,10 @@ class ScenarioCutter( Scenario ):
 
 class ScenarioBlowup( Scenario ):
     START_SCORE = 0
-    
+
     def __init__( self, timeout, goal, pickups, is_multiplayer = True ):
         Scenario.__init__( self, timeout, goal, pickups, is_multiplayer )
-        
+
         self.title = _("Pass the Dynamite")
 
     def restart( self ):
@@ -355,7 +354,7 @@ class ScenarioBlowup( Scenario ):
     def _get_description( self ):
         if self.timeout is not None:
             seconds = self.timeout / TICKS_PER_SECOND
-            
+
         if self.timeout is not None and self.goal is not None:
             seconds_string = gettext.lang.ungettext("%d second", "%d seconds", seconds) % seconds
             goal_string = gettext.lang.ungettext("%d time", "%d times", self.goal) % self.goal
@@ -374,12 +373,12 @@ class ScenarioBlowup( Scenario ):
 
 
     def game_tick( self ):
-        if self.add_points:            
+        if self.add_points:
             for goldcar in self.playfield.goldcars:
                 goldcar.score = ScenarioBlowup.START_SCORE
             self.add_points = False
 
-        if self.explosion_timeout <= 0:            
+        if self.explosion_timeout <= 0:
             if self.playfield.get_pickup_count( pickups.Dynamite ) < 1:
                 cars = self.playfield.goldcars
                 self.playfield.spawn_dynamite_on_car(cars[random.randint(0, len(cars)-1)])
@@ -440,7 +439,7 @@ class ScenarioRace( Scenario ):
     def _get_description( self ):
         if self.timeout is not None:
             seconds = self.timeout / TICKS_PER_SECOND
-            
+
         if self.timeout is not None and self.goal is not None:
             seconds_string = gettext.lang.ungettext("%d second", "%d seconds", seconds) % seconds
             goal_string = gettext.lang.ungettext("%d flag", "%d flags", self.goal) % self.goal
@@ -456,7 +455,7 @@ class ScenarioRace( Scenario ):
                 "Be the first to collect %d flag.",\
                 "Be the first to collect %d flags.",\
                 self.goal) % self.goal
-        elif self.goal is not None and not self.is_multiplayer:            
+        elif self.goal is not None and not self.is_multiplayer:
             return gettext.lang.ungettext(\
                 "Collect %d flag.",\
                 "Collect %d flags.",\
@@ -474,7 +473,7 @@ class ScenarioRace( Scenario ):
             # Reset when flag is gone
             if self.tiles[i].pickup is None:
                 self.tiles[i] = None
-                
+
             i += 1
 
         Scenario.game_tick( self )
@@ -503,7 +502,7 @@ class ScenarioRace( Scenario ):
             else:
                 return _("Collect as many flags as possible")
     mission_txt = property( _get_mission_txt )
-            
+
 class ScenarioCollectRocks( Scenario ):
     def __init__( self, timeout, goal, pickups, is_multiplayer = True ):
         Scenario.__init__( self, timeout, goal, pickups, is_multiplayer )
@@ -513,7 +512,7 @@ class ScenarioCollectRocks( Scenario ):
     def _get_description( self ):
         if self.timeout is not None:
             seconds = self.timeout / TICKS_PER_SECOND
-            
+
         if self.timeout is not None and self.goal is not None:
             seconds_string = gettext.lang.ungettext("%d second", "%d seconds", seconds) % seconds
             goal_string = gettext.lang.ungettext("%d coin", "%d coins", self.goal) % self.goal
@@ -535,7 +534,7 @@ class ScenarioCollectRocks( Scenario ):
                 "Collect %d coins.",\
                 self.goal) % self.goal
         else:
-            assert False            
+            assert False
     description = property(_get_description)
 
     def game_tick( self ):
@@ -577,15 +576,15 @@ class ScenarioDiamondCollect( Scenario ):
         goalTen = goal
         if goalTen is not None:
             goalTen *= 10 # *10 because diamonds are worth 10
-        Scenario.__init__( self, timeout, goalTen, pickups, is_multiplayer ) 
+        Scenario.__init__( self, timeout, goalTen, pickups, is_multiplayer )
         self.max_diamonds = max_diamonds
-        
+
         self.title = _("Diamond Collect")
 
     def _get_description( self ):
         if self.timeout is not None:
             seconds = self.timeout / TICKS_PER_SECOND
-            
+
         if self.timeout is not None and self.goal is not None:
             seconds_string = gettext.lang.ungettext("%d second", "%d seconds", seconds) % seconds
             goal_string = gettext.lang.ungettext("%d diamond", "%d diamonds", self.goal/10) % (self.goal/10)
@@ -612,7 +611,7 @@ class ScenarioDiamondCollect( Scenario ):
 
     def game_tick( self ):
         diamond_cnt = self.playfield.get_pickup_count( pickups.Diamond )
-        
+
         if diamond_cnt < self.max_diamonds:
             self.playfield.spawn_pickup( pickups.Diamond() )
 
@@ -652,7 +651,7 @@ class ScenarioCollectAll( Scenario ):
     def _get_description( self ):
         if self.timeout is not None:
             seconds = self.timeout / TICKS_PER_SECOND
-            
+
         if self.timeout is not None and self.goal is not None:
             seconds_string = gettext.lang.ungettext("%d second", "%d seconds", seconds) % seconds
             goal_string = gettext.lang.ungettext("%d point", "%d points", self.goal) % self.goal
@@ -725,7 +724,7 @@ class ScenarioPacman( Scenario ):
     def _get_description( self ):
         if self.timeout is not None:
             seconds = self.timeout / TICKS_PER_SECOND
-            
+
         if self.timeout is not None and self.goal is not None:
             return gettext.lang.ungettext(\
                 "Collect all coins in %d second.",\
@@ -756,7 +755,7 @@ class ScenarioPacman( Scenario ):
         else:
             if self.playfield.get_pickup_count( pickups.CopperCoin ) <= 0:
                 self.all_taken = True
-                    
+
         Scenario.game_tick( self )
 
     def is_finished( self ):
@@ -805,7 +804,7 @@ class Quest:
                 scenario.goal = int(scenario.goal * skill / 10) * 10
         else:
             scenario.goal = int(scenario.goal * skill)
-        
+
         return scenario
 
     def save_score( self, scenario ):
@@ -862,7 +861,7 @@ class Quest:
             self.progress += 1
 
     def to_level( self, level_nr ):
-        self.progress = level_nr    
+        self.progress = level_nr
 
     def get_level_count( self ):
         return len( self.scenarios )
@@ -878,7 +877,7 @@ class RandomQuest( Quest ):
         # Fill available with everything
         self.available_pickups = []
         self.available_scenarios = [ScenarioCoinCollect]
-        
+
         self.pickups = []
         self.scenarios = []
         self.to_next_level()
@@ -911,13 +910,13 @@ class RandomQuest( Quest ):
     def _get_random_pickup( self ):
         if len( self.pickups ) < 1:
             self._fill_pickups()
-            
+
         return self._get_random_item( self.pickups )
 
     def _get_random_scenario( self ):
         if len( self.scenarios ) < 1:
             self._fill_scenarios()
-            
+
         return self._get_random_item( self.scenarios )
 
     def _fill_pickups( self ):
@@ -945,7 +944,7 @@ class RandomQuest( Quest ):
             self.scenarios.append(ScenarioRace( TIMEOUT, None, self._get_random_pickup() ))
         if ScenarioCutter in self.available_scenarios:
             self.scenarios.append(ScenarioCutter( TIMEOUT, None, self._get_random_pickup() ))
-                        
+
     def to_next_level( self ):
         self.level_nr = random.randint( RandomQuest.MIN_LEVEL, RandomQuest.MAX_LEVEL )
         self.scenario = self._get_random_scenario()
@@ -1010,7 +1009,7 @@ class QuestManager:
     """Singleton that manages all available quests"""
 
     MAIN_QUEST, SINGLE_RANDOM_QUEST, MULTI_RANDOM_QUEST = range( 3 )
-    
+
     _singleton = None
 
     def __init__( self ):
@@ -1028,7 +1027,7 @@ class QuestManager:
         timeout = 120
         stats = QuestStatistics()
         goal = stats.get( quest.get_level_count() )
-        
+
         ai = [0.5 for i in range(0,ai_count)]
         compete = False #ai_count > 0
 
@@ -1041,7 +1040,7 @@ class QuestManager:
         elif scenario_class is ScenarioCoinCollect:
             if xtra is None: xtra = 1
             if not ontime:
-                if goal is not None: 
+                if goal is not None:
                     goal = -goal / TICKS_PER_SECOND
                 count = 10 * xtra
                 if xtra == 3: count = 20
@@ -1070,11 +1069,11 @@ class QuestManager:
 
     def get_quest( self, quest_id ):
         if quest_id == QuestManager.MAIN_QUEST:
-            quest = Quest()            
+            quest = Quest()
             TIMEOUT = 120 # 120
 
             # -T-U-T-O-R-I-A-L-
-            #  
+            #
             #     add_level( SCENARIOXXXXXX(         TIMEOUT, GOAL, MAX, [PICKUPS],          COMPETE ), LEVEL, [A.I] ) #
 ##            quest.add_level( ScenarioCoinCollect(    None,    10,   1,   [],                 False   ), 0,     []    ) # Learn coins and switch
 ##            quest.add_level( ScenarioCoinCollect(    None,    20,   3,   [],                 False   ), 1,     []    ) # Learn larger playfield
@@ -1095,7 +1094,7 @@ class QuestManager:
             self.add( quest, ScenarioPacman, 5, 0, [] ) # Learn packman
             #-----------------------------------------------------------------------------------------left-bottom-hill-#
 
-            
+
             # -E-A-S-Y-
             #
             """
@@ -1105,7 +1104,7 @@ class QuestManager:
             pickups.Torch
             pickups.Ghost
             pickups.Key
-            """        
+            """
             #     add_level( SCENARIOXXXXXX(         TIMEOUT, GOAL, MAX, [PICKUPS],          COMPETE ), LEVEL, [A.I] ) #
             # Dynamite
             self.add( quest, ScenarioBlowup, 6, 1, [] )
@@ -1284,7 +1283,7 @@ class QuestManager:
             self.add( quest, ScenarioRace, 148, 2, [pickups.Torch] )
             self.add( quest, ScenarioPacman, 149, 0, [] )
 
-            # -B-O-N-U-S- 
+            # -B-O-N-U-S-
             #
             #
             self.add( quest, ScenarioDiamondCollect, 150, 2, [pickups.Balloon] )
@@ -1296,7 +1295,7 @@ class QuestManager:
             assert len(quest.scenarios) == 155, "total level count not 155 but " + str(len(quest.scenarios))
 
             self._set_ais( quest, 0.1, 1.0 )
-            
+
 
         elif quest_id == QuestManager.SINGLE_RANDOM_QUEST:
             quest = RandomQuest( 2 )
@@ -1308,13 +1307,13 @@ class QuestManager:
             assert False, "unknown quest id"
 
         return quest
-        
+
     def _set_ais( self, quest, stupid, smart ):
         for i in range(0, len(quest.opponent_iqs_list)):
             for j in range(0, len(quest.opponent_iqs_list[i])):
                 interpol = float(i) / len(quest.opponent_iqs_list)
                 quest.opponent_iqs_list[i][j] = stupid + ((smart - stupid) * interpol)
-            
+
 def clean_stats( stats ):
     new_stats = {}
 
@@ -1381,7 +1380,7 @@ def update_stats( stats ):
     pickler.dump( highscores )
     stats_file.close()
 
-        
+
 def filter_out( stats ):
     quest = QuestManager.get_instance().get_quest( QuestManager.MAIN_QUEST )
 
@@ -1402,7 +1401,7 @@ def filter_out( stats ):
     #stats.stats[9] = stats.stats[10]
     #stats.stats[10] = tmp
     del stats.stats[9]
-        
+
 if __name__ == '__main__':
     print "Quest Statistics"
 
@@ -1414,5 +1413,5 @@ if __name__ == '__main__':
 
     clean_stats( stats )
     print stats.stats
-    
+
     stats._save()

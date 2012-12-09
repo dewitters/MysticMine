@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import pygame
 from pygame.locals import *
@@ -14,7 +13,7 @@ class EventView:
 
     def __init__( self, model ):
         self.model = model
-    
+
     def draw( self, frame ):
         for point in self.model.points:
             point.draw( frame )

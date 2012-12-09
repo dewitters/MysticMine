@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import pygame
 import pygame.draw as draw
@@ -39,7 +38,7 @@ class GuiState (object):
 
     def activate_prev( self ):
         if self.active.prev_neighbor is not None:
-            self.set_active( self.active.prev_neighbor )                
+            self.set_active( self.active.prev_neighbor )
             while not self.active.is_enabled: self.set_active( self.active.prev_neighbor )
 
     def _update_active( self, userinput, component ):
@@ -56,7 +55,7 @@ class GuiState (object):
             for comp in interactives:
                 if comp.place.contains( userinput.mouse.pos ) and comp.is_enabled:
                     self.set_active( comp )
-                    
+
         if userinput.mouse.went_down( Mouse.LEFT ):
             if self.active is not None and self.active.has_input_lock():
                 self.active.lock_input( False )
@@ -67,7 +66,7 @@ class GuiState (object):
         if self.active is None or self.active not in interactives or not self.active.is_enabled:
             if len(interactives) > 0:
                 self.set_active( interactives[0] )
-                
+
 
     @staticmethod
     def _get_interactive_components( component ):
@@ -102,7 +101,7 @@ class Component (object):
         if self.is_visible:
             for sub in self.subs:
                 sub.draw( surface, interpol, time_sec )
-            
+
     def add_subcomponent( self, subcomponent ):
         self.subs.append( subcomponent )
 
@@ -111,13 +110,13 @@ class Component (object):
 
     def update_neighbors( self ):
         """Update the neighbors for key navigation"""
-        
+
         comps = GuiState._get_interactive_components( self )
 
         if len(comps) > 2:
             for i in range(0, len(comps)-1):
                 comps[i].next_neighbor = comps[i+1]
-                                           
+
             for i in range(1, len(comps)):
                 comps[i].prev_neighbor = comps[i-1]
 
@@ -146,7 +145,7 @@ class InteractiveComponent (Component):
         return self._has_input_lock;
 
     def lock_input( self, has_input_lock ):
-        self._has_input_lock = has_input_lock        
+        self._has_input_lock = has_input_lock
 
 
 class Screen (Component):
@@ -161,7 +160,7 @@ class Dialog (Component):
 
     def __init__( self, place ):
         super(Dialog, self).__init__()
-        
+
         self.place = place
         self.background_image = None
 
@@ -178,9 +177,9 @@ class Dialog (Component):
             self.background_image.draw( surface, self.place.pos )
         else:
             surface.fill( (50, 50, 50), self.place.get_tuple() )
-        
+
         super(Dialog, self).draw( surface, interpol, time_sec )
-        
+
 
 class ImageDialog (Dialog):
     def __init__( self ):
@@ -196,7 +195,7 @@ class ImageDialog (Dialog):
         yc = surface.get_height()
         ya = yc / 3
         yb = yc * 2 / 3
-        
+
         self.top_left  = Rect(  0,  0, xa, ya )
         self.top_cen   = Rect( xa,  0, xb-xa, ya )
         self.top_right = Rect( xb,  0, xc-xb, ya )
@@ -235,7 +234,7 @@ class ImageDialog (Dialog):
 
         y += self.top_left.height
 
-        for j in range( self.block_size.y ):        
+        for j in range( self.block_size.y ):
             x = self.pos.x
             self.surf.draw( backbuffer, Vec2D(x, y), self.mid_left )
             x += self.mid_left.width
@@ -243,9 +242,9 @@ class ImageDialog (Dialog):
                 self.surf.draw( backbuffer, Vec2D(x, y), self.mid_cen )
                 x += self.mid_cen.width
             self.surf.draw( backbuffer, Vec2D(x, y), self.mid_right )
-            
+
             y += self.mid_left.height
-        
+
         x = self.pos.x
         self.surf.draw( backbuffer, Vec2D(x, y), self.bot_left )
         x += self.bot_left.width
@@ -256,7 +255,7 @@ class ImageDialog (Dialog):
 
 class Button (InteractiveComponent):
     SELECT_KEYS = [K_SPACE, K_RETURN, K_KP_ENTER]
-    
+
     def __init__( self, place = Rectangle(0,0,0,0) ):
         InteractiveComponent.__init__( self, place )
         self.label = None
@@ -264,7 +263,7 @@ class Button (InteractiveComponent):
         self.is_down = False
         self.active = False
 
-    def tick( self, userinput, guistate ):        
+    def tick( self, userinput, guistate ):
         Component.tick( self, userinput, guistate )
 
 
@@ -292,7 +291,7 @@ class Button (InteractiveComponent):
                userinput.key.any_is_down( Button.SELECT_KEYS ):
                 self.is_down = True
 
-        self.active = (guistate is not None and guistate.get_active() == self)            
+        self.active = (guistate is not None and guistate.get_active() == self)
 
 
     def draw( self, surface, interpol, time_sec ):
@@ -320,7 +319,7 @@ class Checkbox (Button):
 
     def __init__( self, place = Rectangle(0,0,0,0), selected = False ):
         Button.__init__( self, place )
-        
+
         self.selected = selected
 
     def is_selected( self ):
@@ -455,17 +454,17 @@ class ImageCheckbox (Checkbox):
         Checkbox.__init__(self, Rectangle(pos.x, pos.y, sprite.width, sprite.height))
 
         self.sprite = sprite
-        self.sprite.nr = 1    
+        self.sprite.nr = 1
         self.animTimer = PingPongTimer( 20, 1, 3 )
 
     def tick( self, userinput, guistate ):
         Checkbox.tick( self, userinput, guistate )
-        
+
         if self.is_selected():
             self.sprite.nr = 3
         else:
             self.sprite.nr = 1
-            
+
         if self == guistate.get_active():
             self.sprite.nr = 4
 
@@ -505,7 +504,7 @@ class Slider (InteractiveComponent):
     def draw( self, surface, interpol, time_sec ):
         Component.draw( self, surface, interpol, time_sec )
 
-        draw.rect( surface, (255,255,255), self.place.get_tuple(), 2 )        
+        draw.rect( surface, (255,255,255), self.place.get_tuple(), 2 )
 
         val = (self.place.get_right() - self.place.pos.x) * self._value
 
@@ -527,7 +526,7 @@ class Slider (InteractiveComponent):
             value = 1.0
         if value < 0.0:
             value = 0.0
-        
+
         self._value = value
 
     def went_up( self ):
@@ -539,7 +538,7 @@ class ImageSlider (Slider):
         Slider.__init__( self, Rectangle.from_pos_size(pos, Vec2D(size[0], size[1]) ) )
 
         self.sprite = sprite
-        self.button = button        
+        self.button = button
 
         if button is not None:
             self.add_subcomponent( button )
@@ -569,7 +568,7 @@ class ImageSlider (Slider):
         # Handle keys
         STEP = 0.01
         LARGE_STEP = 0.2
-        
+
         if guistate.active == self.button:
             if userinput.key.is_down( K_LEFT ):
                 self.set_value( self.get_value() - STEP )
@@ -577,7 +576,7 @@ class ImageSlider (Slider):
                 self.set_value( self.get_value() + STEP )
             if userinput.key.any_went_down( Button.SELECT_KEYS ):
                 new_value = self.get_value() + LARGE_STEP
-                new_value = (int(new_value * 5) / 5.0) 
+                new_value = (int(new_value * 5) / 5.0)
                 if new_value > 1.0: new_value = 0.0
                 self.set_value( new_value )
 
@@ -611,7 +610,7 @@ class ImageSlider (Slider):
 
         Component.draw( self, surface, interpol, time_sec )
 
-            
+
 class Label (Component):
 
     def __init__( self, pos, text = None, font = None, image = None ):
@@ -642,7 +641,7 @@ class Label (Component):
 
         if self.text is not None and self.font is not None:
             self.font.draw( self.text, surface, self.pos.get_tuple() )
-        
+
 class TextField (InteractiveComponent):
 
     def __init__( self, place, font ):
@@ -667,37 +666,37 @@ class TextField (InteractiveComponent):
         else:
             lines.append( word.strip() )
             word = " "
-            
+
         return word
 
 
-    def _wrap_to_lines( self, text, length_pixels ):    
+    def _wrap_to_lines( self, text, length_pixels ):
         lines = [""]
         word = ""
         for ch in text:
             if ch == "\n" or ch == " ":
                 word = self._handle_last_word( lines, word, length_pixels )
-                    
+
                 if ch == "\n":
                     lines.append("")
-                                    
+
             else:
                 word += ch
-        
+
         word = self._handle_last_word( lines, word, length_pixels)
-        
+
         return lines
-        
-        
+
+
     def _set_text( self, text ):
         self._text = text
 
         self.lines = self._wrap_to_lines( text, self.place.size.x )
-            
-        
+
+
     def _get_text( self ):
         return self._text
-    
+
     text = property(_get_text, _set_text)
 
     def draw( self, surface, interpol, time_sec ):

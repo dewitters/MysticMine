@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import os
 
@@ -19,7 +18,7 @@ def setup_module( module ):
 
 def teardown_module( module ):
     pygame.quit()
-    
+
 
 class TestGoldCarView:
 
@@ -30,7 +29,7 @@ class TestGoldCarView:
         # Given
         goldcar = m_player.GoldCar( None, 1 )
         goldcarview = m_playerview.GoldCarView( goldcar )
-        
+
         surface = gfx.Surface((20,20))
         frame = m_frame.Frame( surface, 0.0, 0.0 )
         frame.interpol = 0.0

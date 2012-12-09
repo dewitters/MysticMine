@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import os
 from os import path
@@ -18,7 +17,7 @@ def should_update( filename, filenames_list ):
         if time < os.path.getmtime( f ):
             return True
     return False
-        
+
 
 def get_bounding_box( image ):
     x, y = 0, 0
@@ -33,7 +32,7 @@ def get_bounding_box( image ):
             else:              box[2] = max((box[2], x))
             if box[3] is None: box[3] = y
             else:              box[3] = max((box[3], y))
-        
+
         x += 1
         if x == image.size[0]:
             y += 1
@@ -44,7 +43,7 @@ def get_bounding_box( image ):
         return None
 
 def max_bounding_box( images ):
-    box = [ 999999999, 99999999999, -1, -1 ]    
+    box = [ 999999999, 99999999999, -1, -1 ]
     for im in images:
         b = get_bounding_box( im )
         if b is not None:
@@ -53,7 +52,7 @@ def max_bounding_box( images ):
             box[2] = max( b[2], box[2] )
             box[3] = max( b[3], box[3] )
     return box
-    
+
 def pack_images( images ):
     """Returns the packed images (all of same size)"""
     width = images[0].size[0]
@@ -80,10 +79,10 @@ def generate_sprite( configname, spritefilename, blenderfilename, scale, count,
                      scene = None, center = None ):
     node = cfg.ConfigNode( configname )
     node.value = "SpriteFilm"
-    
+
     tmpfilename = "assets/tmp/" + path.basename(spritefilename)
     tmpfilename = tmpfilename.replace(".", "_%04d.")
-    
+
     if should_update( tmpfilename % 1, [blenderfilename] ):
         for i in range(1, count+1):
             print "generating", tmpfilename % i
@@ -114,7 +113,7 @@ def generate_sprite( configname, spritefilename, blenderfilename, scale, count,
         images = [im.crop( box ) for im in images]
         for im in images:
             im.load() # for lazy crop
-        
+
         out_image = pack_images( images )
         out_image.save(spritefilename)
 
@@ -125,7 +124,7 @@ def generate_image( configname, imagefilename, blenderfilename, scale,
     node = cfg.ConfigNode( configname )
     node.value = "Surface"
 #    node.set( "file", imagefilename )
-    
+
     tmpfilename = "assets/tmp/" + path.basename(imagefilename)
     tmpfilename = tmpfilename.replace(".", "_0001.")
 
@@ -154,5 +153,5 @@ def generate_image( configname, imagefilename, blenderfilename, scale,
         im.load() # for lazy crop
 
         im.save(imagefilename)
-    
+
         return node

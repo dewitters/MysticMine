@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import pygame
 import pygame.mixer as mixer
@@ -17,7 +16,7 @@ def deinit():
 class Music (object):
     our_music_volume = 0.8
     our_current_music = None
-    
+
     def __init__( self, filename = None ):
         self.sound = None
         self.channel = None
@@ -31,7 +30,7 @@ class Music (object):
         self.sound.set_volume( Music.our_music_volume )
         self.channel = self.sound.play( loop )
         Music.our_current_music = self.sound
-        
+
     def stop( self ):
         self.sound.stop()
 
@@ -54,11 +53,11 @@ class Music (object):
     @staticmethod
     def get_global_volume():
         return Music.our_music_volume
-    
+
 
 class Sound (object):
     our_sound_volume = 0.8
-    
+
     def __init__( self, filename = None ):
         self.sound = None
         self.channel = None
@@ -72,7 +71,7 @@ class Sound (object):
         """for infiniteloop, set loop to -1"""
         self.sound.set_volume( Sound.our_sound_volume )
         self.channel = self.sound.play( loop )
-        
+
     def stop( self ):
         self.sound.stop()
 
@@ -92,4 +91,4 @@ class Sound (object):
     @staticmethod
     def get_global_volume():
         return Sound.our_sound_volume
-    
+

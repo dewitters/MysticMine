@@ -1,13 +1,12 @@
-#!/usr/bin/env python
 
 class ConfigFile:
     """Handles koonsolo config files
 
     Public Members:
     - root_node: the root ConfigNode of this file
-    
+
     example of such a file:
-    
+
     en = Language {
       new game = New Game!
       quit = Quit Game
@@ -27,7 +26,7 @@ class ConfigFile:
       }
     }
     """
-    
+
     def __init__( self, filename = None ):
         if filename is not None:
             self.load( filename )
@@ -75,7 +74,7 @@ class ConfigNode:
 
         for line in configfile.readlines():
             line = ConfigNode._strip_comments( line )
-            
+
             assign = line.find("=")
             if assign >= 0:
                 if line.strip()[-1] == '{':
@@ -93,7 +92,7 @@ class ConfigNode:
 
         if len( nodes ) <> 1:
             raise ParseException("too few {'s")
-        
+
         return root
 
     @staticmethod
@@ -113,14 +112,14 @@ class ConfigNode:
             values.sort(key=lambda a:a.name)
             for attrib in values:
                 attrib.to_file( configfile, indent+1 )
-                
+
             configfile.write( "\t" * indent)
             configfile.write("}")
         configfile.write("\n")
 
     def append_attribute( self, node ):
         if node is None: return
-        
+
         if self.attribs.has_key( node.name ):
             if node.value is not None and node.value != "":
                 self.attribs[ node.name ].value = node.value
@@ -137,7 +136,7 @@ class ConfigNode:
         node = self
         for name in names:
             node = node.attribs[ name ]
-            
+
         return node
 
     def set( self, name, value ):
@@ -154,4 +153,4 @@ class ConfigNode:
                 node = node.attribs[ name ]
 
         node.value = str( value )
-                    
+

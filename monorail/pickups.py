@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import random
 
@@ -18,7 +17,7 @@ class Pickup (object):
 
         self.container = None
         self.jump_cnt = None
-    
+
     def game_tick( self ):
         if self.jump_cnt is not None:
             self.jump_cnt += 0.25
@@ -48,12 +47,12 @@ class PowerUp( Pickup ):
         Pickup.game_tick( self )
         if self.goldcar is not None:
             self.time_to_live -= 1
-    
+
     def set_goldcar( self, goldcar ):
         self.goldcar = goldcar
 
     def is_done( self ):
-        return self.time_to_live <= 0    
+        return self.time_to_live <= 0
 
 class Modifier( Pickup ):
     """Doesn't get passed along"""
@@ -66,12 +65,12 @@ class Modifier( Pickup ):
         Pickup.game_tick( self )
         if self.goldcar is not None:
             self.time_to_live -= 1
-    
+
     def set_goldcar( self, goldcar ):
         self.goldcar = goldcar
 
     def is_done( self ):
-        return self.time_to_live <= 0    
+        return self.time_to_live <= 0
 
 class Key( PowerUp ):
     def __init__( self ):
@@ -106,7 +105,7 @@ class Ghost( Modifier ):
 
 class Dynamite( PowerUp ):
     DEC = 0.0015
-    
+
     def __init__( self ):
         PowerUp.__init__( self, 0 )
         self.life = 1.0
@@ -116,19 +115,19 @@ class Dynamite( PowerUp ):
     def game_tick( self ):
         PowerUp.game_tick( self )
         if self.life > 0.0:
-            self.life -= Dynamite.DEC        
+            self.life -= Dynamite.DEC
         else:
             self.is_exploding = True
 
         if self.life > Dynamite.DEC * 18:
             Event.dynamite_fuse()
-            
+
     def explode( self ):
         return self.life <= 0.0
 
     def is_done( self ):
         return False
-            
+
 
 class Collectible( Pickup ):
     """Goldcar can contain this pickup"""
@@ -173,7 +172,7 @@ class Axe( Collectible ):
         Collectible.__init__( self, True )
 
 class Flag( Collectible ):
-    def __init__( self, goldcar ):        
+    def __init__( self, goldcar ):
         Collectible.__init__( self, True )
         self.goldcar = goldcar
 

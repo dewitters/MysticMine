@@ -230,28 +230,28 @@ class Monkey (monorail.Monorail):
         if self.random( 0, 2**20 ) == 0:
             key = K_ESCAPE
             self.userinput.key.feed_down( key )
-            
+
 
     def run( self, timeout = None ):
         try:
             self.init_pygame()
 
             self.before_gameloop()
-            
+
             self.fps = 0
             frame_count = 0
-            
+
             next_game_tick = pygame.time.get_ticks()
             next_half_second = pygame.time.get_ticks()
             if timeout is not None:
-                end_game_tick = pygame.time.get_ticks() + timeout * 1000            
+                end_game_tick = pygame.time.get_ticks() + timeout * 1000
 
             # main loop
             self.game_is_done = False
             while not self.game_is_done:
                 # events
-                self.handle_events()    
-                
+                self.handle_events()
+
                 # game tick
                 loop_count = 0
                 while loop_count < 1:
@@ -259,7 +259,7 @@ class Monkey (monorail.Monorail):
                     self.userinput.update()
                     next_game_tick += GAMETICKS
                     loop_count += 1
-                
+
                 # render
                 time_sec = pygame.time.get_ticks() * 0.001
                 interpol = 1 - ((next_game_tick - pygame.time.get_ticks()) / GAMETICKS)
@@ -277,15 +277,15 @@ class Monkey (monorail.Monorail):
                     self.game_is_done = True
 
             self.after_gameloop()
-            
+
             self.deinit_pygame()
 
             self.replay_file.close()
-            
+
             if self.record or not self.user_exit:
                 os.remove(self.replay_filename)
-            
-            
+
+
         except Exception, ex:
             print "exceptje"
             self.deinit_pygame()
@@ -301,17 +301,17 @@ class Monkey (monorail.Monorail):
             f = "monkeyFailed%03d" % i
             if not f in os.listdir(os.getcwd()):
                 return f
-            
+
             i += 1
-                    
-        
+
+
 
 class MonkeyMaster:
 
     def run( self ):
         config = Configuration.get_instance()
         monkey = Monkey( config )
-        
+
         while not monkey.user_exit:
             print "starting monkey at", datetime.today()
             monkey = Monkey( config )
@@ -323,10 +323,10 @@ class MonkeyMaster:
                 info = sys.exc_info()
                 traceback.print_exception(info[0], info[1], info[2])
                 time.sleep(3)
-                
+
             print
 
-if __name__ == '__main__':    
+if __name__ == '__main__':
     try:
         if "run" in sys.argv[1:]:
             monkeyMaster = MonkeyMaster()
@@ -345,4 +345,4 @@ if __name__ == '__main__':
                 print "No failed files!"
     except Exception, ex:
         print "megaexcept!!!!!!"
-                
+

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import struct
 import random
@@ -15,7 +14,7 @@ from event import *
 def tilesort( tile1, tile2 ):
     pos1 = -tile1.pos.x + tile1.pos.y
     pos2 = -tile2.pos.x + tile2.pos.y
-    
+
     if pos1 < pos2:
         return -1
     elif pos1 > pos2:
@@ -31,9 +30,9 @@ class Level:
     def set_tile( self, tile ):
         self.remove_tile( tile.pos.x, tile.pos.y )
         self.tiles.append( tile )
-        
+
         self.tiles.sort( tilesort )
-        
+
         self.update_neighbors();
         self.align_trails();
 
@@ -41,9 +40,9 @@ class Level:
         for tile in self.tiles:
             if tile.pos.x == x and tile.pos.y == y:
                 return tile
-            
+
         return None
-        
+
     def remove_tile( self, x, y ):
         for tile in self.tiles:
             if tile.pos.x == x and tile.pos.y == y:
@@ -55,7 +54,7 @@ class Level:
     def update_neighbors( self ):
         for tile in self.tiles:
             self.update_tile_neighbors( tile )
-            
+
         self.update_portals()
 
     def update_tile_neighbors( self, tile ):
@@ -70,7 +69,7 @@ class Level:
                     # only a neighbor if both connect with each other
                     if (offset * -1) <> neighbor.get_neighbor_offset( direction.get_opposite() ):
                         neighbor = None
-                        
+
             tile.set_neighbor( neighbor, direction )
 
     def update_portals( self ):
@@ -110,7 +109,7 @@ class Level:
         self.tiles = []
         for i in range(0, data[0]):
             self.tiles.append( Tile.load( f ) )
-            
+
         f.close()
 
         self.update_neighbors()
@@ -152,7 +151,7 @@ class Playfield:
     - goldcars
     """
     instance = None
-    
+
     def __init__( self ):
         Playfield.instance = self
         self.level = Level()
@@ -181,7 +180,7 @@ class Playfield:
         """Return a sorted list of goldcars with same score"""
         single_ranking = self.goldcars[:]
         single_ranking.sort( lambda a, b: cmp( b.score, a.score ) )
-        
+
         ranking = []
         prev_score = None
         for goldcar in single_ranking:
@@ -190,7 +189,7 @@ class Playfield:
             else:
                 ranking.append([goldcar])
                 prev_score = goldcar.score
-        
+
         return ranking
 
     def spawn_next_goldcar( self, random_spawn = True ):
@@ -213,7 +212,7 @@ class Playfield:
             if goldcar.pos is not None: # for portal
                 was_reversed = goldcar.pos.is_reversed()
                 old_tile = goldcar.pos.tile
-            
+
             goldcar.game_tick()
 
             if goldcar.pos is not None:
@@ -239,10 +238,10 @@ class Playfield:
                             goldcar.pos.progress = 0.0
 
                 self.handle_new_pickups( goldcar )
-                self.handle_collisions( goldcar )                    
+                self.handle_collisions( goldcar )
                 goldcar.align_switch()
                 self.handle_special_car_pickups( goldcar )
-                
+
 
         for tile in self.level.tiles:
             tile.game_tick()
@@ -259,7 +258,7 @@ class Playfield:
             if tile.pickup is not None:
                 self.add_pickup_count( tile.pickup.__class__ )
 
-                
+
         if self.explosion is not None:
             self.explosion.game_tick()
 
@@ -276,7 +275,7 @@ class Playfield:
                         goldcar.clear_switch_and_pos()
                         goldcar.pos = new_pos
                         goldcar.select_next_switch()
-            
+
             if self.dark_counter >= 256*2:
                 self.dark_counter = None
 
@@ -292,24 +291,24 @@ class Playfield:
         """Handle new tile pickups for goldcar"""
         if goldcar.pos.tile.pickup is not None:
             pickup = goldcar.pos.tile.pickup
-            
+
             if isinstance( goldcar.collectible, RockBlock ):
                 pass #don't pickup anything else!
-            
+
             elif isinstance( goldcar.collectible, Diamond ) and \
                    isinstance( pickup, Diamond):
                 pass #don't pickup if I already got one
-            
+
             elif isinstance(pickup, GoldBlock):
                 if isinstance( goldcar.collectible, Axe ):
                     goldcar.add_pickup( goldcar.pos.tile.pickup )
                     goldcar.pos.tile.pickup = None
-                    
+
             elif isinstance(pickup, Flag):
                 if goldcar is pickup.goldcar:
                     goldcar.add_pickup( goldcar.pos.tile.pickup )
                     goldcar.pos.tile.pickup = None
-                    
+
             elif isinstance(pickup, Torch):
                 if self.dark_counter is None:
                     goldcar.pos.tile.pickup = None
@@ -322,7 +321,7 @@ class Playfield:
             elif isinstance( pickup, PowerUp ) \
                  and isinstance( goldcar.collectible, Collectible ):
                 pass # don't pickup PowerUp when we have collectible
-            
+
             else:
                 goldcar.add_pickup( goldcar.pos.tile.pickup )
                 goldcar.pos.tile.pickup = None
@@ -347,7 +346,7 @@ class Playfield:
                         car2.switch = None
                     else:
                         goldcar.switch = None
-                        
+
     def count_car_pickups( self, goldcar ):
         if goldcar.modifier is not None:
             self.add_pickup_count( goldcar.modifier.__class__ )
@@ -380,7 +379,7 @@ class Playfield:
         if self.pickup_count.has_key( pickup_class ):
             self.pickup_count[pickup_class] += increment
         else:
-            self.pickup_count[pickup_class] = increment        
+            self.pickup_count[pickup_class] = increment
 
     def spawn_dynamite_on_car( self, goldcar ):
         if goldcar.collectible is None:
@@ -415,5 +414,5 @@ class Playfield:
                     return False
 
         return True
-        
-        
+
+

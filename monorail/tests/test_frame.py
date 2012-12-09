@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 from monorail.koon.gfx import Surface
 
@@ -11,7 +10,7 @@ def setup_module( module ):
 
 def teardown_module( module ):
     pygame.quit()
-    
+
 
 class TestFrame:
     def test_get_view_for_playfield( self ):
@@ -25,7 +24,7 @@ class TestFrame:
         views = frame.get_views( Playfield() )
         # Then
         assert isinstance( views[0], PlayfieldView )
-        
+
 
     def test_draw_code( self ):
         # Given
@@ -50,7 +49,7 @@ class TestFrame:
 
         playfield.goldcars = [goldcarA, goldcarB]
 
-        # When            
+        # When
         frame.draw( Diamond() )
         frame.draw( Dynamite() )
         frame.draw( Torch() )
@@ -72,7 +71,7 @@ class TestFrame:
 
         frame.draw( Enterance( Vec3D(0,0,0) ) )
         #frame.draw( RailGate( Vec3D(0,0,0) ) )
-        
+
         frame.draw( goldcarA )
 
         frame.draw( level )

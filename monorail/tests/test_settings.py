@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 import os
 
@@ -16,13 +15,13 @@ class TestSettings:
 
         assert game_data.is_single_player() == True or \
                game_data.is_single_player() == False
-        
+
     def test_get_quest( self ):
         game_data = GameData()
 
         print type(game_data.get_quest())
         assert isinstance( game_data.get_quest(), Quest )
-            
+
 
 class TestConfig:
 

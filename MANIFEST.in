@@ -1,25 +1,17 @@
-include README README.md setup.py build.py LICENSE.txt MysticMine
+include README
+include README.md
+include setup.py
+include build.py
+include LICENSE.txt
+include MysticMine
+include Makefile
 
-include locales/gettext.sh locales/messages.pot locales/de_DE.po locales/en_US.po locales/ru_RU.po
+include data/800x600/edmunds.ttf
+data/800x600/font_default.fnt
+data/800x600/font_default.png
+data/800x600/resources.cfg
 
-include data/800x600/edmunds.ttf data/800x600/font_default.fnt data/800x600/font_default.png data/800x600/resources.cfg 
-
-include monorail/fonts/freesansbold.ttf
-
-include monorail/__init__.py monorail/ai.pyx monorail/control.py monorail/controlview.py monorail/event.py
-include monorail/eventview.py monorail/frame.py monorail/hud.py monorail/menu.py monorail/monkey.py
-include monorail/monorail.py monorail/pickups.py monorail/pickupsview.py monorail/player.py
-include monorail/playerview.py monorail/profile.py monorail/scenarios.py monorail/settings.py
-include monorail/setup.py monorail/setup_py2app.py monorail/setup_py2exe.py monorail/sndman.py
-include monorail/tiles.py monorail/tilesview.py monorail/world.py monorail/worldview.py
-
-include monorail/koon/__init__.py monorail/koon/app.py monorail/koon/build.py monorail/koon/cfg.py monorail/koon/geo.py
-include monorail/koon/gfx.py monorail/koon/gui.py monorail/koon/input.py monorail/koon/res.py monorail/koon/snd.py
-
-include monorail/tests/__init__.py monorail/tests/test_ai.py monorail/tests/test_control.py monorail/tests/test_frame.py
-include monorail/tests/test_geo.py monorail/tests/test_menu.py monorail/tests/test_pickups.py monorail/tests/test_pickupsview.py
-include monorail/tests/test_player.py monorail/tests/test_playerview.py monorail/tests/test_scenarios.py
-include monorail/tests/test_settings.py monorail/tests/test_tiles.py monorail/tests/test_world.py
+recursive-include monorail *.py *.pyx *.lvl *.ttf
 
 recursive-include data/800x600/gfx *
 recursive-include data/800x600/levels *
@@ -28,3 +20,4 @@ recursive-include data/800x600/music *
 recursive-include data/800x600/snd *
 
 recursive-include assets *
+recursive-include locales *
