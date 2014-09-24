@@ -3,7 +3,7 @@
 all:
 	rm -f monorail/ai.c monorail/ai.so
 	rm -rf monorail/data
-	@python setup.py build_ext --inplace
+	@python2 setup.py build_ext --inplace
 	ln -s $(CURDIR)/data/800x600/ monorail/data
 
 help:
@@ -18,7 +18,7 @@ help:
 	@echo " rebuild-all             rebuild everything including all assets"
 
 clean:
-	@python setup.py clean
+	@python2 setup.py clean
 	rm -f MANIFEST
 	rm -f monorail/ai.c monorail/ai.so
 	rm -rf monorail/data
@@ -29,11 +29,11 @@ git-clean:
 	git clean -f
 
 install:
-	@python setup.py install
+	@python2 setup.py install
 
 source: clean
-	@python setup.py sdist
+	@python2 setup.py sdist
 
 rebuild-all: clean
-	@python setup.py build_ext --inplace
-	@python build.py
+	@python2 setup.py build_ext --inplace
+	@python2 build.py
