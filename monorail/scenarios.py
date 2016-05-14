@@ -803,7 +803,8 @@ class Quest:
             if scenario.goal is not None:
                 scenario.goal = int(scenario.goal * skill / 10) * 10
         else:
-            scenario.goal = int(scenario.goal * skill)
+            if scenario.goal is not None:
+                scenario.goal = int(scenario.goal * skill)
 
         return scenario
 
