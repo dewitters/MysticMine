@@ -1,7 +1,5 @@
-## Automatically adapted for numpy.oldnumeric Nov 20, 2012 by
-
 import copy
-from numpy.oldnumeric import array
+from numpy import array
 
 import pygame
 
