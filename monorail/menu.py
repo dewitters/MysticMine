@@ -675,7 +675,8 @@ class StageHumanCount (Component):
                 self.player_count = i+1
             i += 1
 
-        if userinput.key.went_down( K_ESCAPE ):
+        if userinput.key.went_down( K_ESCAPE ) or \
+           userinput.joys.any_went_down( Joystick.BTN_BACK ):
             self.player_count = -1
 
         SingleSwitch.tick( userinput, self.guistate )
@@ -706,6 +707,9 @@ class StagePlayerConfig (Component):
         self.add_subcomponent( self.carLabel )
 
         self.forbidden_buttons = [input.Button(self.game_data.userinput.key, K_ESCAPE)]
+
+        for joy in self.game_data.userinput.joys:
+            self.forbidden_buttons.append(input.Button(joy, Joystick.BTN_BACK))
 
     def tick( self, userinput, guistate ):
         Component.tick( self, userinput, guistate )

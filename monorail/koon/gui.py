@@ -45,9 +45,11 @@ class GuiState (object):
         interactives = GuiState._get_interactive_components( component )
 
         if self.active is not None and not self.active.has_input_lock():
-            if userinput.key.went_down( K_UP ):
+            if userinput.key.went_down( K_UP ) or \
+               userinput.joys.any_went_down( Joystick.DPAD_UP ):
                 self.activate_prev()
-            if userinput.key.went_down( K_DOWN ):
+            if userinput.key.went_down( K_DOWN ) or \
+               userinput.joys.any_went_down( Joystick.DPAD_DOWN ):
                 self.activate_next()
 
         if userinput.mouse.has_moved() and \
@@ -279,6 +281,12 @@ class Button (InteractiveComponent):
             if guistate is not None and \
                guistate.get_active() == self and \
                userinput.key.any_went_down( Button.SELECT_KEYS ):
+                self._went_down = True
+            
+            # Check if joy button went down on this button
+            if guistate is not None and \
+               guistate.get_active() == self and \
+               userinput.joys.any_went_down( Joystick.BTN_A ):
                 self._went_down = True
 
             self.is_down = False
@@ -570,10 +578,14 @@ class ImageSlider (Slider):
         LARGE_STEP = 0.2
 
         if guistate.active == self.button:
-            if userinput.key.is_down( K_LEFT ):
+            if userinput.key.is_down( K_LEFT ) or \
+               userinput.joys.any_is_down( Joystick.DPAD_LEFT ):
                 self.set_value( self.get_value() - STEP )
-            if userinput.key.is_down( K_RIGHT ):
+
+            if userinput.key.is_down( K_RIGHT ) or \
+               userinput.joys.any_is_down( Joystick.DPAD_RIGHT ):
                 self.set_value( self.get_value() + STEP )
+
             if userinput.key.any_went_down( Button.SELECT_KEYS ):
                 new_value = self.get_value() + LARGE_STEP
                 new_value = (int(new_value * 5) / 5.0)
@@ -586,7 +598,9 @@ class ImageSlider (Slider):
             self._went_up = True
             self._is_sliding = False
 
-        if userinput.key.any_went_up( [K_LEFT, K_RIGHT] ):
+        if userinput.key.any_went_up( [K_LEFT, K_RIGHT] ) or \
+           userinput.joys.any_went_up( Joystick.DPAD_LEFT ) or \
+           userinput.joys.any_went_up( Joystick.DPAD_RIGHT ):
             self._went_up = True
 
     def draw( self, surface, interpol, time_sec ):

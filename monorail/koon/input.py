@@ -102,14 +102,41 @@ class Mouse (ButtonLogger):
                self._prev_pos <> self.pos
 
 class Joystick (ButtonLogger):
+    BTN_A, BTN_B, BTN_X, BTN_Y, BTN_LB, BTN_RB, BTN_BACK, BTN_START, \
+    BTN_GUIDE = range( 9 )
+
+    DPAD_LEFT, DPAD_RIGHT, DPAD_UP, DPAD_DOWN = range( 11, 15 )
+
     def get_name( self, key ):
         return "joy " + str(key)
+
+class Joysticks (list):
+    def any_went_up( self, button ):
+        for joy in self:
+            if joy.went_up(button):
+                return True
+        
+        return False
+    
+    def any_went_down( self, button ):
+        for joy in self:
+            if joy.went_down(button):
+                return True
+        
+        return False
+    
+    def any_is_down( self, button ):
+        for joy in self:
+            if joy.is_down(button):
+                return True
+        
+        return False
 
 class UserInput:
     def __init__( self ):
         self.key = Keyboard()
         self.mouse = Mouse()
-        self.joys = []
+        self.joys = Joysticks()
         for i in range( 0, pygame.joystick.get_count() ):
             joy = pygame.joystick.Joystick( i )
             joy.init()
