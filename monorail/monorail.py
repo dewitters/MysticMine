@@ -60,7 +60,7 @@ from pygame.locals import *
 
 import koon.app
 from koon.app import Game
-from koon.input import UserInput, Mouse
+from koon.input import UserInput, Mouse, Joystick
 from koon.geo import Vec3D, Vec2D, Rectangle
 from koon.res import resman
 from koon.gui import ImageButton, GuiState
@@ -320,7 +320,8 @@ class MonorailGame:
             SingleSwitch.tick( indev, None )
             if indev.key.went_down( K_ESCAPE ) or \
                         self.hud.menu_btn.went_down() or \
-                        SingleSwitch.esc_went_down:
+                        SingleSwitch.esc_went_down or \
+                        indev.joys.any_went_down( Joystick.BTN_BACK ):
                 resman.get("gui.paper_sound").play()
                 self.ingame_menu = IngameMenu(self.game_data.is_single_player(), self.game_data)
 
