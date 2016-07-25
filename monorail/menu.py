@@ -422,6 +422,12 @@ class ScreenGameSelect (Screen):
                 if isinstance(self.dialog, ScreenPlayerSelect) and \
                    not self.dialog.cancelled:
                     self._is_done = True
+
+                if isinstance(self.dialog, OptionsDialog):
+                    cfg = Configuration.get_instance()
+                    self.quick_play.is_enabled = cfg.unlocked_level != 0
+                    self.multiplayer_btn.is_enabled = cfg.unlocked_level != 0
+
                 self.remove_subcomponent( self.dialog )
                 self.dialog = None
                 self.is_enabled = True
@@ -540,6 +546,8 @@ class AccessDialog (Dialog):
         self.game_data = game_data
 
         self.config = Configuration.get_instance()
+        
+        self.unlocked = hasattr(self.config, 'unlocked') and self.config.unlocked
 
         btnFont = Font( "data/edmunds.ttf", color=(0,0,0), size=32, use_antialias = True )
 
@@ -549,8 +557,11 @@ class AccessDialog (Dialog):
         star = ImageButton( copy.copy(resman.get("gui.sheriffstar_sprite") ) )
         self.speed_slider = ImageSlider( Vec2D( 320, 170 ), copy.copy(resman.get("gui.slider_sprite")), star )
 
-        self.oneswitch_btn = ImageButton( copy.copy(resman.get("game.button02_sprite")), Vec2D(300,240) )
+        self.oneswitch_btn = ImageButton( copy.copy(resman.get("game.button02_sprite")), Vec2D(180,240) )
         self.update_oneswitch_label()
+        
+        self.unlock_btn = ImageButton( copy.copy(resman.get("game.button02_sprite")), Vec2D(420,240) )
+        self.update_unlock_label()
 
         self.scan0_lbl = Label( Vec2D(200, 310), _("Scan"), btnFont )
         self.scan1_lbl = Label( Vec2D(200, 340), _("Speed"), btnFont )
@@ -564,6 +575,7 @@ class AccessDialog (Dialog):
         self.add_subcomponent( self.speed1_lbl )
         self.add_subcomponent( self.speed_slider )
         self.add_subcomponent( self.oneswitch_btn )
+        self.add_subcomponent( self.unlock_btn )
         self.add_subcomponent( self.scan0_lbl )
         self.add_subcomponent( self.scan1_lbl )
         self.add_subcomponent( self.scan_slider )
@@ -585,6 +597,29 @@ class AccessDialog (Dialog):
             self.config.one_switch = SingleSwitch.is_enabled
             self.update_oneswitch_label()
 
+        if self.unlock_btn.went_down():
+            Event.button()
+            self.unlocked = not self.unlocked
+
+            if self.unlocked:
+                setattr(self.config, 'unlocked', True)
+                setattr(self.config, 'orig_unlocked_item', self.config.unlocked_item)
+                setattr(self.config, 'orig_unlocked_level', self.config.unlocked_level)
+
+                self.config.unlocked_item = 20
+                self.config.unlocked_level = 1000
+            else:
+                if hasattr(self.config, 'unlocked'):
+                    delattr(self.config, 'unlocked')
+                    self.config.unlocked_item = self.config.orig_unlocked_item
+                    self.config.unlocked_level = self.config.orig_unlocked_level
+
+                else:
+                    self.config.unlocked_item = 0
+                    self.config.unlocked_level = 0
+
+            self.update_unlock_label()
+
         if self.speed_slider.value_changed():
             self.config.game_speed = lin_ipol(self.speed_slider.get_value(), 0.4, 1.0)
             koon.app.set_game_speed(self.config.game_speed)
@@ -600,6 +635,14 @@ class AccessDialog (Dialog):
             self.oneswitch_btn.set_label( _("One Switch"), btnFont )
         else:
             self.oneswitch_btn.set_label( _("Normal Mode"), btnFont )
+
+    def update_unlock_label( self ):
+        btnFont = Font( "data/edmunds.ttf", color=(0,0,0), size=32, use_antialias = True )
+
+        if self.unlocked:
+            self.unlock_btn.set_label( _("Lock all"), btnFont )
+        else:
+            self.unlock_btn.set_label( _("Unlock all"), btnFont )
 
     def is_done( self ):
         self.config.save()
