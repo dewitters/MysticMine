@@ -58,7 +58,7 @@ Requirements
 - Python
 - pygame
 - numpy
-- pyrex
+- cython
 - Blender (only to regenerate sprites)
 
 

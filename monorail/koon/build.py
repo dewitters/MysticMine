@@ -60,7 +60,7 @@ def pack_images( images ):
 
 
     out_width = min([len(images), 10]) * width
-    out_height = ((len(images)-1) / 10 + 1) * height
+    out_height = ((len(images)-1) // 10 + 1) * height
 
     out_image = Image.new("RGBA", (out_width,out_height))
 
@@ -85,7 +85,7 @@ def generate_sprite( configname, spritefilename, blenderfilename, scale, count,
 
     if should_update( tmpfilename % 1, [blenderfilename] ):
         for i in range(1, count+1):
-            print "generating", tmpfilename % i
+            print("generating", tmpfilename % i)
             outname = tmpfilename[ 0: tmpfilename.rfind("_") ]
             if scene is None:
                 os.system( "blender -b "+blenderfilename+" -F PNG -o "+outname+"_ -f "+str(i) )
@@ -93,7 +93,7 @@ def generate_sprite( configname, spritefilename, blenderfilename, scale, count,
                 os.system( "blender -b "+blenderfilename+" -S "+scene+" -F PNG -o "+outname+"_ -f "+str(i) )
 
     if should_update( spritefilename, [tmpfilename % i for i in range(1,count+1)] ):
-        print "generating sprite", spritefilename
+        print("generating sprite", spritefilename)
 
         filenames = [tmpfilename % i for i in range(1,count+1)]
         images = [Image.open(filename) for filename in filenames]
@@ -129,7 +129,7 @@ def generate_image( configname, imagefilename, blenderfilename, scale,
     tmpfilename = tmpfilename.replace(".", "_0001.")
 
     if should_update( tmpfilename, [blenderfilename] ):
-        print "generating", tmpfilename
+        print("generating", tmpfilename)
         outfilename = tmpfilename[0: tmpfilename.rfind("_") ]
         if scene is None:
             os.system("blender -b "+blenderfilename+" -F PNG -o "+outfilename+"_ -f 1")
@@ -138,7 +138,7 @@ def generate_image( configname, imagefilename, blenderfilename, scale,
 
 
     if should_update(imagefilename, [tmpfilename] ):
-        print "generating image", imagefilename
+        print("generating image", imagefilename)
         im = Image.open(tmpfilename)
 
         im = im.resize( (int(im.size[0]*scale), int(im.size[1]*scale)), Image.ANTIALIAS )

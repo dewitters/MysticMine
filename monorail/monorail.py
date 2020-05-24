@@ -45,7 +45,7 @@ if lc:
 languages += DEFAULT_LANGUAGES
 mo_location = LOCALE_DIR
 
-gettext.install (True,localedir=None, unicode=1)
+gettext.install (True,localedir=None)
 gettext.find(APP_NAME, mo_location)
 gettext.textdomain (APP_NAME)
 gettext.bind_textdomain_codeset(APP_NAME, "UTF-8")
@@ -58,27 +58,27 @@ gettext.lang = lang
 import pygame
 from pygame.locals import *
 
-import koon.app
-from koon.app import Game
-from koon.input import UserInput, Mouse, Joystick
-from koon.geo import Vec3D, Vec2D, Rectangle
-from koon.res import resman
-from koon.gui import ImageButton, GuiState
-import koon.snd as snd
+from . import koon
+from .koon.app import Game
+from .koon.input import UserInput, Mouse, Joystick
+from .koon.geo import Vec3D, Vec2D, Rectangle
+from .koon.res import resman
+from .koon.gui import ImageButton, GuiState
+from .koon import snd
 
-from menu import MonorailMenu, SingleSwitch
-from tiles import *
-from world import Level, Playfield
-from player import *
-from hud import Hud, IngameMenu
-from settings import *
-from frame import Frame
-from sndman import MusicManager, SoundManager
-import control as ctrl
-import event
-import scenarios
+from .menu import MonorailMenu, SingleSwitch
+from .tiles import *
+from .world import Level, Playfield
+from .player import *
+from .hud import Hud, IngameMenu
+from .settings import *
+from .frame import Frame
+from .sndman import MusicManager, SoundManager
+from . import control as ctrl
+from . import event
+from . import scenarios
 
-from worldview import PlayfieldView
+from .worldview import PlayfieldView
 
 class Monorail (Game):
     """The Monorail main application
@@ -173,7 +173,7 @@ class Monorail (Game):
 
 class MonorailGame:
     STATE_INTRO, STATE_BEGIN, STATE_GAME, STATE_MENU, STATE_QUIT, STATE_STATS, STATE_TOTAL,\
-                 STATE_DONE = range( 8 )
+                 STATE_DONE = list(range( 8))
 
     MOUSE_TIMEOUT = 25 * 3
 
@@ -338,6 +338,7 @@ class MonorailGame:
                 elif self.ingame_menu.should_quit:
                     self.music_man.stop()
                     self.state = MonorailGame.STATE_QUIT
+                    pygame.quit()
                 elif self.ingame_menu.to_next_level:
                     self.music_man.stop()
                     self.state = MonorailGame.STATE_DONE
@@ -389,7 +390,7 @@ class MonorailGame:
 
 class MonorailEditor:
     FLAT, NORTH_SLOPE, EAST_SLOPE, SOUTH_SLOPE, WEST_SLOPE, ENTERANCE,\
-    ERASE, MAX = range( 8 )
+    ERASE, MAX = list(range( 8))
 
     X_OFFSET, Y_OFFSET = 20, 300
 
@@ -487,8 +488,8 @@ class MonorailEditor:
     def update_edit_tiles( self ):
         mouse_x, mouse_y = pygame.mouse.get_pos()
 
-        pos = Vec3D((-mouse_y + (mouse_x+32)/2 - MonorailEditor.X_OFFSET/2 + MonorailEditor.Y_OFFSET) / 32,
-    	            (mouse_y + (mouse_x-32)/2 - MonorailEditor.X_OFFSET/2 - MonorailEditor.Y_OFFSET) / 32,
+        pos = Vec3D((-mouse_y + (mouse_x+32)//2 - MonorailEditor.X_OFFSET//2 + MonorailEditor.Y_OFFSET) // 32,
+    	            (mouse_y + (mouse_x-32)//2 - MonorailEditor.X_OFFSET//2 - MonorailEditor.Y_OFFSET) // 32,
                      0)
 
         if self.current_tile == MonorailEditor.FLAT:
@@ -547,7 +548,7 @@ def main():
 if __name__ == '__main__':
     try:
         main()
-    except BaseException, e:
+    except BaseException as e:
         log = open("error_mm.log", "a")
         log.write("\n------- " + time.strftime("%a %b %d %Y %H:%M:%S") + "\n")
         log.write(traceback.format_exc())

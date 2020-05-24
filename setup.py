@@ -1,6 +1,6 @@
 from distutils.core import Extension, setup
 from distutils.command.install import INSTALL_SCHEMES
-from Pyrex.Distutils import build_ext
+from Cython.Distutils import build_ext
 import os
 
 # http://stackoverflow.com/questions/1612733/including-non-python-files-with-setup-py

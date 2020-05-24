@@ -3,11 +3,11 @@ import random
 
 import pygame
 
-from koon.geo import Vec2D
-from koon.gfx import SpriteFilm, Font
-from koon.res import resman
+from .koon.geo import Vec2D
+from .koon.gfx import SpriteFilm, Font
+from .koon.res import resman
 
-from tiles import *
+from .tiles import *
 
 class TileView:
     def __init__( self, model ):

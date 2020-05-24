@@ -5,11 +5,12 @@ import random
 import pygame
 from pygame.locals import *
 import copy
+import functools
 
-from tiles import Direction, Tile, TrailPosition, Enterance
-from player import *
-from pickups import *
-from event import *
+from .tiles import Direction, Tile, TrailPosition, Enterance
+from .player import *
+from .pickups import *
+from .event import *
 
 def tilesort( tile1, tile2 ):
     pos1 = -tile1.pos.x + tile1.pos.y
@@ -31,7 +32,8 @@ class Level:
         self.remove_tile( tile.pos.x, tile.pos.y )
         self.tiles.append( tile )
 
-        self.tiles.sort( tilesort )
+        # TODO: check for reverse
+        self.tiles.sort( key=functools.cmp_to_key(tilesort) )
 
         self.update_neighbors();
         self.align_trails();
@@ -63,11 +65,11 @@ class Level:
         for direction in Direction.ALL:
             offset = tile.get_neighbor_offset( direction )
             neighbor = None
-            if offset.x <> 0 or offset.y <> 0:
+            if offset.x != 0 or offset.y != 0:
                 neighbor = self.get_tile( tile.pos.x + offset.x, tile.pos.y + offset.y )
                 if neighbor is not None:
                     # only a neighbor if both connect with each other
-                    if (offset * -1) <> neighbor.get_neighbor_offset( direction.get_opposite() ):
+                    if (offset * -1) != neighbor.get_neighbor_offset( direction.get_opposite() ):
                         neighbor = None
 
             tile.set_neighbor( neighbor, direction )
@@ -179,7 +181,7 @@ class Playfield:
     def get_goldcar_ranking( self ):
         """Return a sorted list of goldcars with same score"""
         single_ranking = self.goldcars[:]
-        single_ranking.sort( lambda a, b: cmp( b.score, a.score ) )
+        single_ranking.sort(key=lambda x: x.score, reverse=True)
 
         ranking = []
         prev_score = None
@@ -360,7 +362,7 @@ class Playfield:
             if goldcar.key_went_down():
                 for tile in self.level.tiles:
                     if tile.is_switch() and \
-                               goldcar.switch <> tile:
+                               goldcar.switch != tile:
                         tile.switch_it()
         if isinstance( goldcar.modifier, Ghost ):
             if goldcar.modifier.is_done() \
@@ -369,14 +371,14 @@ class Playfield:
 
     def get_pickup_count( self, pickup_class ):
         """Return the number of pickups in the entire play."""
-        if self.pickup_count.has_key( pickup_class ):
+        if pickup_class in self.pickup_count:
             return self.pickup_count[pickup_class]
         else:
             return 0
 
     def add_pickup_count( self, pickup_class, increment = 1 ):
         """Increment the pickup count"""
-        if self.pickup_count.has_key( pickup_class ):
+        if pickup_class in self.pickup_count:
             self.pickup_count[pickup_class] += increment
         else:
             self.pickup_count[pickup_class] = increment
@@ -400,7 +402,7 @@ class Playfield:
         """Return a random free position, or None if not quickly found"""
         tile = self.level.get_random_flat_tile()
         if tile.pickup is None:
-            pos = TrailPosition(tile, tile.get_length() / 2)
+            pos = TrailPosition(tile, tile.get_length() // 2)
             if self.is_free_position( pos ):
                 return pos
         return None

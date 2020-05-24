@@ -2,10 +2,10 @@
 """
 import pygame
 
-import geo
-import cfg
-import gfx
-import snd
+from . import geo
+from . import cfg
+from . import gfx
+from . import snd
 
 class ResourceManager:
     def __init__( self ):
@@ -62,13 +62,13 @@ class ResourceManager:
                 return sprite
 
             elif node.value == "SubSurf":
-                if "surface" in node.attribs.keys():
+                if "surface" in list(node.attribs.keys()):
                     subsurf = gfx.SubSurf( self.get( node.get("surface").value ) )
                     subsurf.rect = self.get_from_node( node.get("rect") )
                 else:
                     subsurf = gfx.SubSurf( gfx.Surface( node.get("file").value ) )
 
-                if "offset_x" in node.attribs.keys():
+                if "offset_x" in list(node.attribs.keys()):
                     subsurf.offset = geo.Vec2D(
                             int( node.get("offset_x").value),
                             int( node.get("offset_y").value) )

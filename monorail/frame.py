@@ -1,17 +1,17 @@
 
-from world import *
-from player import *
-from pickups import *
-from tiles import *
-from control import *
-from event import *
+from .world import *
+from .player import *
+from .pickups import *
+from .tiles import *
+from .control import *
+from .event import *
 
-from worldview import *
-from playerview import *
-from pickupsview import *
-from tilesview import *
-from controlview import *
-from eventview import *
+from .worldview import *
+from .playerview import *
+from .pickupsview import *
+from .tilesview import *
+from .controlview import *
+from .eventview import *
 
 class Frame:
     """Contains one picture frame of the game.

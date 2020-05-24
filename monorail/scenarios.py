@@ -1,15 +1,16 @@
 
 import random
-from cPickle import *
+from pickle import *
 import os
 import gettext
+from gettext import gettext as _
 
-from koon.geo import *
+from .koon.geo import *
 
-import pickups
-from world import Playfield, Level
-from event import Explosion
-from tiles import *
+from . import pickups
+from .world import Playfield, Level
+from .event import Explosion
+from .tiles import *
 
 ## Handling localization, used for when running main
 ##current_lang = 'ru_RU'
@@ -22,7 +23,6 @@ from tiles import *
 #lang.install()
 #gettext.lang = lang
 ## End localisation
-
 
 TIMEOUT = 60
 
@@ -51,7 +51,7 @@ class Scenario:
     def get_timeout( self ):
         """returns the current timeout, or None if no timeout"""
         if self.timeout is not None:
-            return self.timeout / TICKS_PER_SECOND
+            return self.timeout // TICKS_PER_SECOND
         else:
             return None
 
@@ -77,13 +77,13 @@ class Scenario:
     def update_goldcar_amounts( self ):
         if len(self.playfield.goldcars) == 1 or not self.is_multiplayer:
             for goldcar in self.playfield.goldcars:
-                if self.goal is not None and self.goal <> 0:
-                    goldcar.amount = max([0, min([3, goldcar.score * 4 / self.goal])])
+                if self.goal is not None and self.goal != 0:
+                    goldcar.amount = max([0, min([3, goldcar.score * 4 // self.goal])])
         else:
             ranking = self.playfield.get_goldcar_ranking()
 
             if len(ranking) > 1:
-                inc = 3 / min([3, len(ranking)-1])
+                inc = 3 // min([3, len(ranking)-1])
             else:
                 inc = 3
 
@@ -125,7 +125,7 @@ class Scenario:
             if isinstance( goldcar.collectible, pickups.Dynamite ):
                 if goldcar.collectible.explode():
                     old_score = goldcar.score
-                    goldcar.score /= 2
+                    goldcar.score //= 2
                     x, y = goldcar.pos.get_screen_position()
                     end_tiles = [self.playfield.level.get_random_flat_tile() for i in range(0, old_score - goldcar.score) ]
                     self.playfield.explosion = Explosion( Vec2D( x, y ), end_tiles )
@@ -153,25 +153,25 @@ class ScenarioCoinCollect( Scenario ):
 
     def _get_description( self ):
         if self.timeout is not None:
-            seconds = self.timeout / TICKS_PER_SECOND
+            seconds = self.timeout // TICKS_PER_SECOND
 
         if self.timeout is not None and self.goal is not None:
-            seconds_string = gettext.lang.ungettext("%d second", "%d seconds", seconds) % seconds
-            goal_string = gettext.lang.ungettext("%d coin", "%d coins", self.goal) % self.goal
+            seconds_string = gettext.lang.ngettext("%d second", "%d seconds", seconds) % seconds
+            goal_string = gettext.lang.ngettext("%d coin", "%d coins", self.goal) % self.goal
             return _("Collect %(point)s in %(second)s.") % \
                    {"point":goal_string, "second":seconds_string}
         elif self.timeout is not None:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Collect the most coins in %d second.",\
                 "Collect the most coins in %d second.",\
                 seconds) % seconds
         elif self.goal is not None and self.is_multiplayer:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Be the first to collect %d coin.",\
                 "Be the first to collect %d coins.",\
                 self.goal) % self.goal
         elif self.goal is not None and not self.is_multiplayer:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Collect %d coin.",\
                 "Collect %d coins.",\
                 self.goal) % self.goal
@@ -186,17 +186,17 @@ class ScenarioCoinCollect( Scenario ):
             if self.goal is not None:
                 goldcar_score = self.playfield.goldcars[0].score
                 if goldcar_score < self.goal:
-                    return gettext.lang.ungettext(\
+                    return gettext.lang.ngettext(\
                         "Collect %d more coin",\
                         "Collect %d more coins",\
                         self.goal - goldcar_score) % (self.goal - goldcar_score)
                 else:
-                    return gettext.lang.ungettext(\
+                    return gettext.lang.ngettext(\
                         "All %d coin collected, ",\
                         "All %d coins collected, ",\
                         self.goal) % (self.goal)\
                         + \
-                        gettext.lang.ungettext(\
+                        gettext.lang.ngettext(\
                         "%d bonus point",\
                         "%d bonus points",\
                         goldcar_score - self.goal) % (goldcar_score - self.goal)
@@ -216,21 +216,21 @@ class ScenarioHoldLamp( Scenario ):
 
     def _get_description( self ):
         if self.timeout is not None:
-            seconds = self.timeout / TICKS_PER_SECOND
+            seconds = self.timeout // TICKS_PER_SECOND
 
         if self.timeout is not None and self.goal is not None:
-            seconds_string = gettext.lang.ungettext("%d second", "%d seconds", seconds) % seconds
-            goal_string = gettext.lang.ungettext("%d point", "%d points", self.goal) % self.goal
+            seconds_string = gettext.lang.ngettext("%d second", "%d seconds", seconds) % seconds
+            goal_string = gettext.lang.ngettext("%d point", "%d points", self.goal) % self.goal
             return _("Gain %(point)s in %(second)s") % {"point":goal_string, "second":seconds_string}
         elif self.timeout is not None:
             return _("Hold the lamp as long as possible.")
         elif self.goal is not None and self.is_multiplayer:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Be the first to hold the lamp for %d second.",\
                 "Be the first to hold the lamp for %d seconds.",\
                 self.goal) % self.goal
         elif self.goal is not None and not self.is_multiplayer:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Hold the lamp for %d second.",\
                 "Hold the lamp for %d seconds.",\
                 self.goal) % self.goal
@@ -252,12 +252,12 @@ class ScenarioHoldLamp( Scenario ):
             if self.goal is not None:
                 goldcar_score = self.playfield.goldcars[0].score
                 if goldcar_score < self.goal:
-                    return gettext.lang.ungettext(\
+                    return gettext.lang.ngettext(\
                         "Hold the lamp %d more second",\
                         "Hold the lamp %d more seconds",\
                         self.goal - goldcar_score) % (self.goal - goldcar_score)
                 else:
-                    return gettext.lang.ungettext(\
+                    return gettext.lang.ngettext(\
                         "Goal achieved, %d bonus point",\
                         "Goal achieved, %d bonus points",\
                         goldcar_score - self.goal) % (goldcar_score - self.goal)
@@ -277,26 +277,26 @@ class ScenarioCutter( Scenario ):
 
     def _get_description( self ):
         if self.timeout is not None:
-            seconds = self.timeout / TICKS_PER_SECOND
+            seconds = self.timeout // TICKS_PER_SECOND
 
         if self.timeout is not None and self.goal is not None:
-            seconds_string = gettext.lang.ungettext("%d second", "%d seconds", seconds) % seconds
-            goal_string = gettext.lang.ungettext("%d gold block", "%d gold blocks", self.goal) % \
+            seconds_string = gettext.lang.ngettext("%d second", "%d seconds", seconds) % seconds
+            goal_string = gettext.lang.ngettext("%d gold block", "%d gold blocks", self.goal) % \
                           self.goal
             return _("Cut %(goldblock)s in %(second)s") % \
                    {"goldblock":goal_string, "second":seconds_string}
         elif self.timeout is not None:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Collect the most gold in %d second.",\
                 "Collect the most gold in %d seconds.",\
                 seconds) % seconds
         elif self.goal is not None and self.is_multiplayer:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Be the first to collect %d gold block.",\
                 "Be the first to collect %d gold blocks.",\
                 self.goal) % self.goal
         elif self.goal is not None and not self.is_multiplayer:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Collect %d gold block.",\
                 "Collect %d gold blocks.",\
                 self.goal) % self.goal
@@ -321,17 +321,17 @@ class ScenarioCutter( Scenario ):
             if self.goal is not None:
                 goldcar_score = self.playfield.goldcars[0].score
                 if goldcar_score < self.goal:
-                    return gettext.lang.ungettext(\
+                    return gettext.lang.ngettext(\
                         "Cut %d more gold block",\
                         "Cut %d more gold blocsk",\
                         self.goal - goldcar_score) % (self.goal - goldcar_score)
                 else:
-                    return gettext.lang.ungettext(\
+                    return gettext.lang.ngettext(\
                         "All %d gold block collected,",\
                         "All %d gold blocks collected,",\
                         self.goal) % (self.goal)\
                         + \
-                        gettext.lang.ungettext(\
+                        gettext.lang.ngettext(\
                         "%d bonus point",\
                         "%d bonus points",\
                         goldcar_score - self.goal) % (goldcar_score - self.goal)
@@ -353,15 +353,15 @@ class ScenarioBlowup( Scenario ):
 
     def _get_description( self ):
         if self.timeout is not None:
-            seconds = self.timeout / TICKS_PER_SECOND
+            seconds = self.timeout // TICKS_PER_SECOND
 
         if self.timeout is not None and self.goal is not None:
-            seconds_string = gettext.lang.ungettext("%d second", "%d seconds", seconds) % seconds
-            goal_string = gettext.lang.ungettext("%d time", "%d times", self.goal) % self.goal
+            seconds_string = gettext.lang.ngettext("%d second", "%d seconds", seconds) % seconds
+            goal_string = gettext.lang.ngettext("%d time", "%d times", self.goal) % self.goal
             return _("Avoid the dynamite %(times)s in %(second)s") % \
                    {"times":goal_string, "second":seconds_string}
         elif self.timeout is not None:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Pass the Dynamite in %d second.",\
                 "Pass the Dynamite in %d seconds.",\
                 seconds) % seconds
@@ -408,17 +408,17 @@ class ScenarioBlowup( Scenario ):
             if self.goal is not None:
                 goldcar_score = self.playfield.goldcars[0].score
                 if goldcar_score < self.goal:
-                    return gettext.lang.ungettext(\
+                    return gettext.lang.ngettext(\
                         "Avoid the dynamite %d time.",\
                         "Avoid the dynamite %d times.",\
                         self.goal - goldcar_score) % (self.goal - goldcar_score)
                 else:
-                    return gettext.lang.ungettext(\
+                    return gettext.lang.ngettext(\
                         "All %d dynamite avoided,",\
                         "All %d dynamites avoided,",\
                         self.goal) % (self.goal)\
                         + \
-                        gettext.lang.ungettext(\
+                        gettext.lang.ngettext(\
                         "%d bonus point",\
                         "%d bonus points",\
                         goldcar_score - self.goal) % (goldcar_score - self.goal)
@@ -438,25 +438,25 @@ class ScenarioRace( Scenario ):
 
     def _get_description( self ):
         if self.timeout is not None:
-            seconds = self.timeout / TICKS_PER_SECOND
+            seconds = self.timeout // TICKS_PER_SECOND
 
         if self.timeout is not None and self.goal is not None:
-            seconds_string = gettext.lang.ungettext("%d second", "%d seconds", seconds) % seconds
-            goal_string = gettext.lang.ungettext("%d flag", "%d flags", self.goal) % self.goal
+            seconds_string = gettext.lang.ngettext("%d second", "%d seconds", seconds) % seconds
+            goal_string = gettext.lang.ngettext("%d flag", "%d flags", self.goal) % self.goal
             return _("Collect %(point)s in %(second)s.") % \
                     {"point":goal_string, "second":seconds_string}
         elif self.timeout is not None:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Collect the most flags in %d second.",\
                 "Collect the most flags in %d seconds.",\
                 seconds) % seconds
         elif self.goal is not None and self.is_multiplayer:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Be the first to collect %d flag.",\
                 "Be the first to collect %d flags.",\
                 self.goal) % self.goal
         elif self.goal is not None and not self.is_multiplayer:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Collect %d flag.",\
                 "Collect %d flags.",\
                 self.goal) % self.goal
@@ -485,17 +485,17 @@ class ScenarioRace( Scenario ):
             if self.goal is not None:
                 goldcar_score = self.playfield.goldcars[0].score
                 if goldcar_score < self.goal:
-                    return gettext.lang.ungettext(\
+                    return gettext.lang.ngettext(\
                         "Collect %d more flag",\
                         "Collect %d more flags",\
                         self.goal - goldcar_score) % (self.goal - goldcar_score)
                 else:
-                    return gettext.lang.ungettext(\
+                    return gettext.lang.ngettext(\
                         "All %d flag collected,",\
                         "All %d flags collected,",\
                         self.goal) % (self.goal)\
                         + \
-                        gettext.lang.ungettext(\
+                        gettext.lang.ngettext(\
                         "%d bonus point",\
                         "%d bonus points",\
                         goldcar_score - self.goal) % (goldcar_score - self.goal)
@@ -511,25 +511,25 @@ class ScenarioCollectRocks( Scenario ):
 
     def _get_description( self ):
         if self.timeout is not None:
-            seconds = self.timeout / TICKS_PER_SECOND
+            seconds = self.timeout // TICKS_PER_SECOND
 
         if self.timeout is not None and self.goal is not None:
-            seconds_string = gettext.lang.ungettext("%d second", "%d seconds", seconds) % seconds
-            goal_string = gettext.lang.ungettext("%d coin", "%d coins", self.goal) % self.goal
+            seconds_string = gettext.lang.ngettext("%d second", "%d seconds", seconds) % seconds
+            goal_string = gettext.lang.ngettext("%d coin", "%d coins", self.goal) % self.goal
             return _("Collect %(point)s in %(second)s.") % \
                     {"point":goal_string, "second":seconds_string}
         elif self.timeout is not None:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Collect the most coins in %d second.",\
                 "Collect the most coins in %d seconds.",\
                 seconds) % seconds
         elif self.goal is not None and self.is_multiplayer:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Be the first to collect %d coin.",\
                 "Be the first to collect %d coins.",\
                 self.goal) % self.goal
         elif self.goal is not None and not self.is_multiplayer:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Collect %d coin.",\
                 "Collect %d coins.",\
                 self.goal) % self.goal
@@ -553,17 +553,17 @@ class ScenarioCollectRocks( Scenario ):
             if self.goal is not None:
                 goldcar_score = self.playfield.goldcars[0].score
                 if goldcar_score < self.goal:
-                    return gettext.lang.ungettext(\
+                    return gettext.lang.ngettext(\
                         "Collect %d more point",\
                         "Collect %d more points",\
                         self.goal - goldcar_score) % (self.goal - goldcar_score)
                 else:
-                    return gettext.lang.ungettext(\
+                    return gettext.lang.ngettext(\
                         "All %d point collected,",\
                         "All %d points collected,",\
                         self.goal) % (self.goal)\
                         + \
-                        gettext.lang.ungettext(\
+                        gettext.lang.ngettext(\
                         "%d bonus point",\
                         "%d bonus points",\
                         goldcar_score - self.goal) % (goldcar_score - self.goal)
@@ -583,28 +583,28 @@ class ScenarioDiamondCollect( Scenario ):
 
     def _get_description( self ):
         if self.timeout is not None:
-            seconds = self.timeout / TICKS_PER_SECOND
+            seconds = self.timeout // TICKS_PER_SECOND
 
         if self.timeout is not None and self.goal is not None:
-            seconds_string = gettext.lang.ungettext("%d second", "%d seconds", seconds) % seconds
-            goal_string = gettext.lang.ungettext("%d diamond", "%d diamonds", self.goal/10) % (self.goal/10)
+            seconds_string = gettext.lang.ngettext("%d second", "%d seconds", seconds) % seconds
+            goal_string = gettext.lang.ngettext("%d diamond", "%d diamonds", self.goal//10) % (self.goal//10)
             return _("Collect %(point)s in %(second)s.") % \
                     {"point":goal_string, "second":seconds_string}
         elif self.timeout is not None:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Collect the most diamonds in %d second.",\
                 "Collect the most diamonds in %d seconds.",\
                 seconds) % seconds
         elif self.goal is not None and self.is_multiplayer:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Be the first to collect %d diamond.",\
                 "Be the first to collect %d diamonds.",\
-                self.goal/10) % (self.goal/10)
+                self.goal//10) % (self.goal//10)
         elif self.goal is not None and not self.is_multiplayer:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Collect %d diamond.",\
                 "Collect %d diamonds.",\
-                self.goal/10) % (self.goal/10)
+                self.goal//10) % (self.goal//10)
         else:
             assert False
     description = property(_get_description)
@@ -624,17 +624,17 @@ class ScenarioDiamondCollect( Scenario ):
             if self.goal is not None:
                 goldcar_score = self.playfield.goldcars[0].score
                 if goldcar_score < self.goal:
-                    return gettext.lang.ungettext(\
+                    return gettext.lang.ngettext(\
                         "Collect %d more diamond",\
                         "Collect %d more diamonds",\
-                        (self.goal - goldcar_score) / 10) % ((self.goal - goldcar_score) / 10)
+                        (self.goal - goldcar_score) // 10) % ((self.goal - goldcar_score) // 10)
                 else:
-                    return gettext.lang.ungettext(\
+                    return gettext.lang.ngettext(\
                         "All %d diamond collected,",\
                         "All %d diamonds collected,",\
-                        self.goal / 10) % (self.goal / 10)\
+                        self.goal // 10) % (self.goal // 10)\
                         + \
-                        gettext.lang.ungettext(\
+                        gettext.lang.ngettext(\
                         "%d bonus point",\
                         "%d bonus points",\
                         goldcar_score - self.goal) % (goldcar_score - self.goal)
@@ -650,25 +650,25 @@ class ScenarioCollectAll( Scenario ):
 
     def _get_description( self ):
         if self.timeout is not None:
-            seconds = self.timeout / TICKS_PER_SECOND
+            seconds = self.timeout // TICKS_PER_SECOND
 
         if self.timeout is not None and self.goal is not None:
-            seconds_string = gettext.lang.ungettext("%d second", "%d seconds", seconds) % seconds
-            goal_string = gettext.lang.ungettext("%d point", "%d points", self.goal) % self.goal
+            seconds_string = gettext.lang.ngettext("%d second", "%d seconds", seconds) % seconds
+            goal_string = gettext.lang.ngettext("%d point", "%d points", self.goal) % self.goal
             return _("Collect %(point)s in %(second)s.") % \
                     {"point":goal_string, "second":seconds_string}
         elif self.timeout is not None:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Collect the most points in %d second.",\
                 "Collect the most points in %d seconds.",\
                 seconds) % seconds
         elif self.goal is not None and self.is_multiplayer:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Be the first to collect %d point.",\
                 "Be the first to collect %d points.",\
                 self.goal) % self.goal
         elif self.goal is not None and not self.is_multiplayer:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Collect %d point.",\
                 "Collect %d points.",\
                 self.goal) % self.goal
@@ -691,17 +691,17 @@ class ScenarioCollectAll( Scenario ):
             if self.goal is not None:
                 goldcar_score = self.playfield.goldcars[0].score
                 if goldcar_score < self.goal:
-                    return gettext.lang.ungettext(\
+                    return gettext.lang.ngettext(\
                         "Collect %d more point",\
                         "Collect %d more points",\
                         self.goal - goldcar_score) % (self.goal - goldcar_score)
                 else:
-                    return gettext.lang.ungettext(\
+                    return gettext.lang.ngettext(\
                         "All %d point collected,",\
                         "All %d points collected,",\
                         self.goal) % (self.goal)\
                         + \
-                        gettext.lang.ungettext(\
+                        gettext.lang.ngettext(\
                         "%d bonus point",\
                         "%d bonus points",\
                         goldcar_score - self.goal) % (goldcar_score - self.goal)
@@ -723,15 +723,15 @@ class ScenarioPacman( Scenario ):
 
     def _get_description( self ):
         if self.timeout is not None:
-            seconds = self.timeout / TICKS_PER_SECOND
+            seconds = self.timeout // TICKS_PER_SECOND
 
         if self.timeout is not None and self.goal is not None:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Collect all coins in %d second.",\
                 "Collect all coins in %d seconds.",\
                 seconds) % seconds
         elif self.timeout is not None:
-            return gettext.lang.ungettext(\
+            return gettext.lang.ngettext(\
                 "Collect the most coins in %d second.",\
                 "Collect the most coins in %d seconds.",\
                 seconds) % seconds
@@ -814,7 +814,7 @@ class Quest:
         if not scenario.ontime:
             stats.add( self.progress, -scenario.completed_time )
         elif isinstance( scenario, ScenarioDiamondCollect ):
-            stats.add( self.progress, scenario.playfield.goldcars[0].score / 10 )
+            stats.add( self.progress, scenario.playfield.goldcars[0].score // 10 )
         else:
             stats.add( self.progress, scenario.playfield.goldcars[0].score )
 
@@ -963,7 +963,7 @@ class SkillSet:
     ENTERANCE_EXIT, TRACK_SWITCH, GATE_SWITCH, UPDOWN, PASS_PICKUPS, \
     COIN_COLLECT, DIAMOND_COLLECT, ROCK_COLLECT, COLLECT_ALL, \
     HOLD_LAMP, CUTTER, BLOWUP, RACE, \
-    OILER, DYNAMITE, BALLOON, KEY, GHOST, TORCH = range(19)
+    OILER, DYNAMITE, BALLOON, KEY, GHOST, TORCH = list(range(19))
 
 class QuestStatistics:
 
@@ -973,14 +973,14 @@ class QuestStatistics:
         self._load()
 
     def get( self, i ):
-        if self.stats.has_key(i):
+        if i in self.stats:
 #            print i, self.stats[i]
             return max(self.stats[i])
         else:
             return None
 
     def add( self, i, score ):
-        if self.stats.has_key(i):
+        if i in self.stats:
             self.stats[i].append(score)
         else:
             self.stats[i] = [score]
@@ -1009,7 +1009,7 @@ class QuestStatistics:
 class QuestManager:
     """Singleton that manages all available quests"""
 
-    MAIN_QUEST, SINGLE_RANDOM_QUEST, MULTI_RANDOM_QUEST = range( 3 )
+    MAIN_QUEST, SINGLE_RANDOM_QUEST, MULTI_RANDOM_QUEST = list(range( 3))
 
     _singleton = None
 
@@ -1318,7 +1318,7 @@ class QuestManager:
 def clean_stats( stats ):
     new_stats = {}
 
-    for key, values in stats.stats.items():
+    for key, values in list(stats.stats.items()):
         new_stats[key] = [max(values)]
 
     stats.stats = new_stats
@@ -1344,7 +1344,7 @@ def update_stats( stats ):
                 # no pacman scenarios
                 if not isinstance( scenario, ScenarioPacman ):
                     if stats.get(i) < other_stats.get(i):
-                        print "New Record: %10s: Level %03d with score %d (%s)" % (filename, i, other_stats.get(i), scenario.title)
+                        print("New Record: %10s: Level %03d with score %d (%s)" % (filename, i, other_stats.get(i), scenario.title))
                         stats.stats[i] = [other_stats.get(i)]
                         highscores[i] = filename
 
@@ -1354,13 +1354,13 @@ def update_stats( stats ):
     score_count = {"Koen" : 0}
 
     # Print highscores
-    print "Highscores:"
+    print("Highscores:")
     i = 0
     for scenario in quest.scenarios:
-        if highscores.has_key(i):
-            print "%10s: Level %03d with score %d (%s)" % (highscores[i], i, stats.get(i), scenario.title)
+        if i in highscores:
+            print("%10s: Level %03d with score %d (%s)" % (highscores[i], i, stats.get(i), scenario.title))
 
-            if score_count.has_key(highscores[i]):
+            if highscores[i] in score_count:
                 score_count[highscores[i]] += 1
             else:
                 score_count[highscores[i]] = 1
@@ -1370,9 +1370,9 @@ def update_stats( stats ):
         i += 1
 
 
-    print "Number of Highscores:"
-    for name, score in score_count.items():
-        print "%10s: %3d" % (name, score)
+    print("Number of Highscores:")
+    for name, score in list(score_count.items()):
+        print("%10s: %3d" % (name, score))
 
 
     # Save Highscores
@@ -1404,7 +1404,7 @@ def filter_out( stats ):
     del stats.stats[9]
 
 if __name__ == '__main__':
-    print "Quest Statistics"
+    print("Quest Statistics")
 
     stats = QuestStatistics()
 
@@ -1413,6 +1413,6 @@ if __name__ == '__main__':
     #filter_out( stats )
 
     clean_stats( stats )
-    print stats.stats
+    print(stats.stats)
 
     stats._save()

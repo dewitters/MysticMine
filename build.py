@@ -8,7 +8,7 @@ from PIL import Image, ImageSequence
 import monorail.koon.build as build
 import monorail.koon.cfg as cfg
 
-print "Updating data from assets..."
+print("Updating data from assets...")
 
 CONFIGFILE = "data/800x600/resources.cfg"
 
@@ -34,7 +34,7 @@ node = build.generate_sprite("", "data/800x600/gfx/tilehill.png",
                      "assets/3d/tiles.blend", TILESCALE, 4, scene="TileHill",
                      center=TILEOFFSET)
 
-if node is not None:    
+if node is not None:
     width = int(node.get("frame_width").value)
     height = int(node.get("frame_height").value)
     center_x = int(node.get("center_x").value)
@@ -44,7 +44,7 @@ if node is not None:
     r_y = 0
     r_width = width - (center_x + 16)
     r_height = height
-    
+
     cf.root_node.set("game.tile1_surf.offset_x", - 16)
     cf.root_node.set("game.tile1_surf.offset_y", center_y)
     cf.root_node.set("game.tile1_surf.rect.x", r_x)
@@ -86,7 +86,7 @@ if node is not None:
     cf.root_node.set("game.tile4_surf.rect.height", r_height)
     cf.root_node.set("game.tile4_surf.surface", "game.tilehill_surf")
 
-    r_x = 0 * width 
+    r_x = 0 * width
     r_width = center_x + 48
 
     cf.root_node.set("game.tile5_surf.offset_x", center_x)
@@ -112,7 +112,7 @@ if node is not None:
     r_y = 0
     r_width = width - (center_x + 16)
     r_height = height
-    
+
     cf.root_node.set("game.tile7_surf.offset_x", - 16)
     cf.root_node.set("game.tile7_surf.offset_y", center_y)
     cf.root_node.set("game.tile7_surf.rect.x", r_x)

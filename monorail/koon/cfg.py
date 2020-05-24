@@ -38,7 +38,7 @@ class ConfigFile:
 
     def save( self, filename ):
         f = open( filename, "w" )
-        values = self.root_node.attribs.values()
+        values = list(self.root_node.attribs.values())
         values.sort(key=lambda a:a.name)
         for attrib in values:
             attrib.to_file( f )
@@ -90,7 +90,7 @@ class ConfigNode:
                 else:
                     raise ParseException("too many }'s")
 
-        if len( nodes ) <> 1:
+        if len( nodes ) != 1:
             raise ParseException("too few {'s")
 
         return root
@@ -108,7 +108,7 @@ class ConfigNode:
         configfile.write( "%s = %s" % (str(self.name), str(self.value) ) )
         if len(self.attribs) > 0:
             configfile.write(" {\n");
-            values = self.attribs.values()
+            values = list(self.attribs.values())
             values.sort(key=lambda a:a.name)
             for attrib in values:
                 attrib.to_file( configfile, indent+1 )
@@ -120,10 +120,10 @@ class ConfigNode:
     def append_attribute( self, node ):
         if node is None: return
 
-        if self.attribs.has_key( node.name ):
+        if node.name in self.attribs:
             if node.value is not None and node.value != "":
                 self.attribs[ node.name ].value = node.value
-            for n in node.attribs.values():
+            for n in list(node.attribs.values()):
                 self.attribs[ node.name ].append_attribute( n )
         else:
             self.attribs[ node.name ] = node

@@ -46,18 +46,18 @@ class TestGoldCar:
         goldcar1.speed = 30
         goldcar2.speed = 10
 
-        print goldcar1.pos.progress
-        print goldcar2.pos.progress
+        print(goldcar1.pos.progress)
+        print(goldcar2.pos.progress)
 
         goldcar1.game_tick()
         goldcar2.game_tick()
 
-        print goldcar1.pos.progress
-        print goldcar2.pos.progress
-        print GoldCar.COLLIDE_DISTANCE
+        print(goldcar1.pos.progress)
+        print(goldcar2.pos.progress)
+        print(GoldCar.COLLIDE_DISTANCE)
 
-        print goldcar1.speed
-        print goldcar2.speed
+        print(goldcar1.speed)
+        print(goldcar2.speed)
 
         goldcar1.handle_collision( goldcar2 )
         assert goldcar1.pos.get_distance( goldcar2.pos ) < GoldCar.COLLIDE_DISTANCE + 20
@@ -84,7 +84,7 @@ class TestGoldCar:
         count = 0
         while goldcar.pos.tile != tileB and count < 100:
             goldcar.game_tick()
-            print goldcar.pos.tile, goldcar.pos.progress
+            print(goldcar.pos.tile, goldcar.pos.progress)
             count += 1
 
         assert count < 100

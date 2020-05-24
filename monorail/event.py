@@ -2,13 +2,13 @@
 import pygame
 import random
 
-import koon.snd as snd
-from koon.geo import Vec2D
-from koon.res import resman
-import koon.gfx as gfx
+from .koon import snd
+from .koon.geo import Vec2D
+from .koon.res import resman
+from .koon import gfx
 
-from pickups import *
-import pickups
+from .pickups import *
+from . import pickups
 
 class Point (object):
     def __init__( self, score, pos ):

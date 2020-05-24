@@ -2,7 +2,7 @@
 
 """
 
-from geo import Vec2D
+from .geo import Vec2D
 import pygame
 
 class ButtonLogger:
@@ -86,7 +86,7 @@ class Mouse (ButtonLogger):
     public members:
     - pos: the current Vec2D position of the mouse
     """
-    UNKNOWN, LEFT, RIGHT, MIDDLE, SCROLLUP, SCROLLDOWN = range( 6 )
+    UNKNOWN, LEFT, RIGHT, MIDDLE, SCROLLUP, SCROLLDOWN = list(range( 6))
 
     def __init__( self ):
         ButtonLogger.__init__( self )
@@ -99,13 +99,13 @@ class Mouse (ButtonLogger):
 
     def has_moved( self ):
         return self._prev_pos is not None and \
-               self._prev_pos <> self.pos
+               self._prev_pos != self.pos
 
 class Joystick (ButtonLogger):
     BTN_A, BTN_B, BTN_X, BTN_Y, BTN_LB, BTN_RB, BTN_BACK, BTN_START, \
-    BTN_GUIDE = range( 9 )
+    BTN_GUIDE = list(range( 9))
 
-    DPAD_LEFT, DPAD_RIGHT, DPAD_UP, DPAD_DOWN = range( 11, 15 )
+    DPAD_LEFT, DPAD_RIGHT, DPAD_UP, DPAD_DOWN = list(range( 11, 15))
 
     def get_name( self, key ):
         return "joy " + str(key)

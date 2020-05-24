@@ -8,8 +8,8 @@ from random import randint
 
 import pygame
 
-from koon.geo import Vec3D, Vec2D
-from koon.res import resman
+from .koon.geo import Vec3D, Vec2D
+from .koon.res import resman
 
 
 class Direction:
@@ -35,7 +35,7 @@ class Direction:
         return self.id == other.id
 
     def __ne__( self, other ):
-        return self.id <> other.id
+        return self.id != other.id
 
     def get_opposite( self ):
         return Direction( (self.id + 2) % 4 )
@@ -61,7 +61,7 @@ class Trail:
     """
 
     class Type:
-        NS, EW, SE, SW, NW, NE, HILL, MAX = range( 8 )
+        NS, EW, SE, SW, NW, NE, HILL, MAX = list(range( 8))
 
     def __init__( self, tile, trail_type = Type.NS  ):
         self.tile = tile
@@ -133,7 +133,7 @@ class Trail:
             self.type = available[i+1]
 
     def align( self, direction = None ):
-        if self.tile.type <> Tile.Type.FLAT : return
+        if self.tile.type != Tile.Type.FLAT : return
 
         if isinstance(self.tile, Enterance):
             if self.tile.is_north_exit():
@@ -146,7 +146,7 @@ class Trail:
                 if self.type not in available:
                     self.switch_it()
             else:
-                if direction <> self.get_in_direction() and direction <> self.get_out_direction():
+                if direction != self.get_in_direction() and direction != self.get_out_direction():
                     self.switch_it( direction )
 
 
@@ -164,7 +164,7 @@ class Tile:
     class Type:
         FLAT, NORTH_SLOPE_TOP, NORTH_SLOPE_BOT, EAST_SLOPE_TOP, EAST_SLOPE_BOT, \
         SOUTH_SLOPE_TOP, SOUTH_SLOPE_BOT, WEST_SLOPE_TOP, WEST_SLOPE_BOT, MAX, \
-        ENTERANCE, RAILGATE = range( 12 )
+        ENTERANCE, RAILGATE = list(range( 12))
         # NORTH_SLOPE_TOP is going down north to south
 
     def __init__( self, position, tile_type, trail_type = None ):
@@ -192,7 +192,7 @@ class Tile:
             else:
                 return int( (0.5 * math.pi / 2.0) * 1000 )
         else:
-            return 2300 / 2
+            return 2300 // 2
 
     def get_angle( self ):
         if self.type == Tile.Type.FLAT:
@@ -309,6 +309,7 @@ class Tile:
 
 
         if in_dir == out_dir.get_opposite():
+            # TODO: not sure what here
             pos = (in_pos * (self.get_length() - length) + out_pos * length) / self.get_length()
         else:
             interpol = float(length) / float( self.get_length() )
@@ -324,27 +325,27 @@ class Tile:
         """Returns the possible trail types"""
         available = []
 
-        if self.get_neighbor( Direction.NORTH ) <> None and self.get_neighbor( Direction.SOUTH ) <> None:
+        if self.get_neighbor( Direction.NORTH ) != None and self.get_neighbor( Direction.SOUTH ) != None:
             if from_dir is None or from_dir == Direction.NORTH or from_dir == Direction.SOUTH:
                 available.append( Trail.Type.NS )
 
-        if self.get_neighbor( Direction.EAST ) <> None and self.get_neighbor( Direction.WEST ) <> None:
+        if self.get_neighbor( Direction.EAST ) != None and self.get_neighbor( Direction.WEST ) != None:
             if from_dir is None or from_dir == Direction.EAST or from_dir == Direction.WEST:
                 available.append( Trail.Type.EW )
 
-        if self.get_neighbor( Direction.SOUTH ) <> None and self.get_neighbor( Direction.EAST ) <> None:
+        if self.get_neighbor( Direction.SOUTH ) != None and self.get_neighbor( Direction.EAST ) != None:
             if from_dir is None or from_dir == Direction.SOUTH or from_dir == Direction.EAST:
                 available.append( Trail.Type.SE )
 
-        if self.get_neighbor( Direction.SOUTH ) <> None and self.get_neighbor( Direction.WEST ) <> None:
+        if self.get_neighbor( Direction.SOUTH ) != None and self.get_neighbor( Direction.WEST ) != None:
             if from_dir is None or from_dir == Direction.SOUTH or from_dir == Direction.WEST:
                 available.append( Trail.Type.SW )
 
-        if self.get_neighbor( Direction.NORTH ) <> None and self.get_neighbor( Direction.WEST ) <> None:
+        if self.get_neighbor( Direction.NORTH ) != None and self.get_neighbor( Direction.WEST ) != None:
             if from_dir is None or from_dir == Direction.NORTH or from_dir == Direction.WEST:
                 available.append( Trail.Type.NW )
 
-        if self.get_neighbor( Direction.NORTH ) <> None and self.get_neighbor( Direction.EAST ) <> None:
+        if self.get_neighbor( Direction.NORTH ) != None and self.get_neighbor( Direction.EAST ) != None:
             if from_dir is None or from_dir == Direction.NORTH or from_dir == Direction.EAST:
                 available.append( Trail.Type.NE )
 
@@ -573,7 +574,7 @@ class TrailPosition:
 
         elif self.tile.get_in_tile() == trailpos.tile:
             if trailpos.tile.get_in_tile() == self.tile:
-                return self.reversed <> trailpos.reversed
+                return self.reversed != trailpos.reversed
             elif trailpos.tile.get_out_tile() == self.tile:
                 return self.reversed == trailpos.reversed
 
@@ -581,7 +582,7 @@ class TrailPosition:
             if trailpos.tile.get_in_tile() == self.tile:
                 return self.reversed == trailpos.reversed
             elif trailpos.tile.get_out_tile() == self.tile:
-                return self.reversed <> trailpos.reversed
+                return self.reversed != trailpos.reversed
 
 
 class TrailNode:
@@ -631,7 +632,7 @@ class TrailNode:
 
         if self.tile.type == Tile.Type.FLAT:
             for direction in Direction.ALL:
-                if self.in_dir is None or direction <> self.in_dir:
+                if self.in_dir is None or direction != self.in_dir:
                     neighbor = self.tile.get_neighbor( direction )
                     if neighbor is not None:
                         node = TrailNode( neighbor, direction.get_opposite() )

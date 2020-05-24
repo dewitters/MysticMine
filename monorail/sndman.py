@@ -1,8 +1,8 @@
 
 import random
 
-import koon.snd as snd
-from koon.res import resman
+from .koon import snd
+from .koon.res import resman
 
 class MusicManager (object):
 

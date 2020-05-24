@@ -10,7 +10,7 @@ class TestDirection:
         a = Direction.NORTH
         b = Direction.SOUTH
         assert not (a == b)
-        assert a <> b
+        assert a != b
         a = b
         assert a == b
 
@@ -50,19 +50,19 @@ class TestTileAndTrail:
 
         assert top.get_in_tile() in [left, right]
         assert top.get_out_tile() in [left, right]
-        assert top.get_in_tile() <> top.get_out_tile()
+        assert top.get_in_tile() != top.get_out_tile()
 
 
     def test_trail_in_out_direction( self ):
         t = Tile( Vec3D(0,0,0), Tile.Type.FLAT, Trail.Type.SE )
         assert t.trail.get_in_direction() in [Direction.EAST, Direction.SOUTH]
         assert t.trail.get_out_direction() in [Direction.EAST, Direction.SOUTH]
-        assert t.trail.get_in_direction() <> t.trail.get_out_direction()
+        assert t.trail.get_in_direction() != t.trail.get_out_direction()
 
         t = Tile( Vec3D(0,0,0), Tile.Type.NORTH_SLOPE_TOP )
         assert t.trail.get_in_direction() in [Direction.NORTH, Direction.SOUTH]
         assert t.trail.get_out_direction() in [Direction.NORTH, Direction.SOUTH]
-        assert t.trail.get_in_direction() <> t.trail.get_out_direction()
+        assert t.trail.get_in_direction() != t.trail.get_out_direction()
 
     def test_neighbor_offset( self ):
         flat = Tile( Vec3D(0,0,0), Tile.Type.FLAT )
@@ -241,7 +241,7 @@ class TestTrailPosition:
         right.set_neighbor( top, Direction.NORTH )
         right.set_neighbor( bottom, Direction.WEST )
 
-        pos = TrailPosition( top, top.get_length() / 2 )
+        pos = TrailPosition( top, top.get_length() // 2 )
         assert pos.tile == top
         pos -= top.get_length()
         assert pos.tile == right
@@ -269,7 +269,7 @@ class TestTrailPosition:
 
         # Test bounce agains wrong trail
         left.trail.type = Trail.Type.NS
-        pos.set_position( top, top.get_length() / 2 )
+        pos.set_position( top, top.get_length() // 2 )
         if pos.is_reversed():
             pos.reverse_progress()
 
@@ -277,7 +277,7 @@ class TestTrailPosition:
         assert pos.tile == top
 
         right.trail.type = Trail.Type.EW
-        pos.set_position( top, top.get_length() / 2 )
+        pos.set_position( top, top.get_length() // 2 )
         pos -= top.get_length()
         assert pos.tile == top
 
@@ -301,7 +301,7 @@ class TestTrailPosition:
         right.set_neighbor( top, Direction.NORTH )
         right.set_neighbor( bottom, Direction.WEST )
 
-        pos = TrailPosition( top, top.get_length() / 2 )
+        pos = TrailPosition( top, top.get_length() // 2 )
         assert pos.tile == top
         next = pos + top.get_length()
         assert next.tile == left
@@ -309,7 +309,7 @@ class TestTrailPosition:
         pos += top.get_length()
         assert pos == next
 
-        pos = TrailPosition( top, top.get_length() / 2 )
+        pos = TrailPosition( top, top.get_length() // 2 )
         assert pos.tile == top
         next = pos - top.get_length()
         assert next.tile == right
@@ -334,12 +334,12 @@ class TestTrailPosition:
         pos = TrailPosition( center, 50 )
         assert pos.tile == center
         pos.to_next_tile()
-        assert pos.tile is not None and pos.tile <> center
+        assert pos.tile is not None and pos.tile != center
         pos.reverse_progress()
         pos.to_next_tile()
         assert pos.tile == center
         pos.to_next_tile();
-        assert pos.tile is not None and pos.tile <> center
+        assert pos.tile is not None and pos.tile != center
 
     def test_get_distance( self ):
         center = Tile( Vec3D, Tile.Type.FLAT )
@@ -394,7 +394,7 @@ class TestTrailNode:
         assert len(outs) == 2
         assert outs[0].tile in [south, west]
         assert outs[1].tile in [south, west]
-        assert outs[0] <> outs[1]
+        assert outs[0] != outs[1]
 
     def test_get_out_nodes_enterance( self ):
         # Given
@@ -423,7 +423,7 @@ class TestTrailNode:
         assert len(outs) == 2
         assert outs[0].tile in [enter_b, enter_c]
         assert outs[1].tile in [enter_b, enter_c]
-        assert outs[0] <> outs[1]
+        assert outs[0] != outs[1]
 
         # And when
         node = node.get_out_nodes()[0]
@@ -439,6 +439,6 @@ class TestTrailNode:
         tile2 = Tile( Vec3D, Tile.Type.FLAT )
 
         assert TrailPosition( tile1, 200 ) == TrailPosition( tile1, 200 )
-        assert not (TrailPosition( tile1, 200 ) <> TrailPosition( tile1, 200 ))
-        assert TrailPosition( tile2, 200 ) <> TrailPosition( tile1, 200 )
-        assert TrailPosition( tile1, 300 ) <> TrailPosition( tile1, 200 )
+        assert not (TrailPosition( tile1, 200 ) != TrailPosition( tile1, 200 ))
+        assert TrailPosition( tile2, 200 ) != TrailPosition( tile1, 200 )
+        assert TrailPosition( tile1, 300 ) != TrailPosition( tile1, 200 )

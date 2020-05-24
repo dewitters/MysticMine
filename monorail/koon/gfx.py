@@ -3,7 +3,7 @@ from numpy import array
 
 import pygame
 
-from geo import Vec2D, Rectangle
+from .geo import Vec2D, Rectangle
 
 class Surface:
     def __init__( self, param ):
@@ -129,13 +129,13 @@ class SpriteFilm (Sprite):
     def set_dimension( self, width, height ):
         self.width = width
         self.height = height
-        self.max_x = self.surface.get_width() / width
+        self.max_x = self.surface.get_width() // width
 
     def set_div( self, x_sprites, y_sprites ):
-        self.width = self.surface.get_width() / x_sprites
-        self.height = self.surface.get_height() / y_sprites
+        self.width = self.surface.get_width() // x_sprites
+        self.height = self.surface.get_height() // y_sprites
         self.max_x = x_sprites
-        self.center = Vec2D(self.width, self.height) / 2
+        self.center = Vec2D(self.width, self.height) // 2
 
     def draw( self, surface, pos, rect = None ):
         """Draw the sprite on the surface at pos
@@ -143,7 +143,7 @@ class SpriteFilm (Sprite):
         pos is a Vec2D
         """
         sp_x = (self.nr % self.max_x) * self.width
-        sp_y = (self.nr / self.max_x) * self.height
+        sp_y = (self.nr // self.max_x) * self.height
 
         sprite_rect = [sp_x, sp_y, self.width, self.height]
 
@@ -162,8 +162,8 @@ class SpriteFilm (Sprite):
         return cl
 
 class Font:
-    LEFT, RIGHT, CENTER = range(3)
-    TOP, BOTTOM, MIDDLE = range(3)
+    LEFT, RIGHT, CENTER = list(range(3))
+    TOP, BOTTOM, MIDDLE = list(range(3))
 
     def __init__( self, filename = None, size = 16, color = (0,0,0), \
                   use_antialias = False ):
@@ -186,17 +186,18 @@ class Font:
     def use_antialias( self ):
         return self._use_antialias
 
-    def draw( self, text, surface, (x, y), align = LEFT, valign = TOP ):
+    def draw( self, text, surface, coords, align = LEFT, valign = TOP ):
+        (x, y) = coords
         textsurf = self.pygame_font.render( text, self._use_antialias,
                                             self.color )
         textsurf = Surface( textsurf )
 
         if   align == Font.TOP:     pass
-        elif align == Font.CENTER:  x -= textsurf.get_width() / 2
+        elif align == Font.CENTER:  x -= textsurf.get_width() // 2
         else:                       x -= textsurf.get_width()
 
         if valign == Font.TOP:      pass
-        elif valign == Font.MIDDLE: y -= textsurf.get_height() / 2
+        elif valign == Font.MIDDLE: y -= textsurf.get_height() // 2
         else:                       y -= textsurf.get_height()
 
         textsurf.draw( surface, (x, y) )

@@ -1,11 +1,11 @@
 import random
 
-from koon.input import Mouse
-from tiles import *
-from pickups import *
-import ai
-import world
-from event import Event
+from .koon.input import Mouse
+from .tiles import *
+from .pickups import *
+from . import ai
+from . import world
+from .event import Event
 
 
 class GroundControl:
@@ -34,8 +34,8 @@ class GroundControl:
 
             X_OFFSET, Y_OFFSET = 20, 300
 
-            tile_x = (-mouse_y + (mouse_x+32)/2 - X_OFFSET/2 + Y_OFFSET) / 32
-            tile_y = (mouse_y + (mouse_x-32)/2 - X_OFFSET/2 - Y_OFFSET) / 32
+            tile_x = (-mouse_y + (mouse_x+32)//2 - X_OFFSET//2 + Y_OFFSET) // 32
+            tile_y = (mouse_y + (mouse_x-32)//2 - X_OFFSET//2 - Y_OFFSET) // 32
 
             tile = self.playfield.level.get_tile( tile_x, tile_y )
 
@@ -70,7 +70,7 @@ class GroundControl:
             controller.set_ground_control( self )
             self.controllers.append( controller )
 
-            prediction_tree = ai.PredictionTree(256*2, 256/4)
+            prediction_tree = ai.PredictionTree(256*2, 256//4)
             self.prediction_trees.append( prediction_tree )
 
             controller.prediction_tree = prediction_tree

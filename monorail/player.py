@@ -1,11 +1,11 @@
 
 import copy
 
-from pickups import *
-from tiles import *
+from .pickups import *
+from .tiles import *
 #from mysticmine import App
-import world
-from event import Event
+from . import world
+from .event import Event
 
 class GoldCar:
     """A Car of Gold!
@@ -69,13 +69,13 @@ class GoldCar:
 
         # special case when ghost
         if isinstance( self.modifier, Ghost ):
-            self.speed = (MIN_SPEED + MAX_SPEED) / 2
+            self.speed = (MIN_SPEED + MAX_SPEED) // 2
 
         # update position
         self.pos += self.speed
 
         # tile with goldcar on can't be switched
-        if self.pos.tile <> old_tile:
+        if self.pos.tile != old_tile:
             old_tile.trail.may_switch = True
             self.pos.tile.trail.may_switch = False
             self.select_next_switch()
@@ -114,7 +114,7 @@ class GoldCar:
 
         # handle leprechaun
         if isinstance( self.collectible, Leprechaun ):
-            if old_tile <> self.pos.tile and \
+            if old_tile != self.pos.tile and \
                self.score > 0 and \
                old_tile.pickup is None and \
                random.randint(0, 5) == 0:
@@ -124,7 +124,7 @@ class GoldCar:
         # handle gate
         if isinstance( self.pos.tile, RailGate ) and \
            self.pos.tile.is_down and \
-           self.pos.get_distance( TrailPosition(self.pos.tile, self.pos.tile.get_length()/2 )) < GoldCar.COLLIDE_DISTANCE/2:
+           self.pos.get_distance( TrailPosition(self.pos.tile, self.pos.tile.get_length()//2 )) < GoldCar.COLLIDE_DISTANCE//2:
 
             self.speed *= -1
 
@@ -278,7 +278,7 @@ class GoldCar:
                 self.switch_collectibles( self, other )
 
             # Handle too close (in real extreme cases!)
-            elif self.pos.get_distance( other.pos ) < GoldCar.COLLIDE_DISTANCE * 3 / 2 \
+            elif self.pos.get_distance( other.pos ) < GoldCar.COLLIDE_DISTANCE * 3 // 2 \
                  and self.pos.same_direction( other.pos ) \
                  and abs( self.speed - other.speed ) < 10:
                 if self.pos + self.pos.get_distance( other.pos ) == other.pos:

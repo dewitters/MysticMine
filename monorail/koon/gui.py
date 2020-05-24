@@ -3,9 +3,9 @@ import pygame
 import pygame.draw as draw
 from pygame.locals import *
 
-from geo import Vec2D, Rectangle
-from gfx import *
-from input import *
+from .geo import Vec2D, Rectangle
+from .gfx import *
+from .input import *
 
 
 class GuiState (object):
@@ -192,11 +192,11 @@ class ImageDialog (Dialog):
         self.surf = surface
 
         xc = surface.get_width()
-        xa = xc / 3
-        xb = xc * 2 / 3
+        xa = xc // 3
+        xb = xc * 2 // 3
         yc = surface.get_height()
-        ya = yc / 3
-        yb = yc * 2 / 3
+        ya = yc // 3
+        yb = yc * 2 // 3
 
         self.top_left  = Rect(  0,  0, xa, ya )
         self.top_cen   = Rect( xa,  0, xb-xa, ya )
@@ -282,7 +282,7 @@ class Button (InteractiveComponent):
                guistate.get_active() == self and \
                userinput.key.any_went_down( Button.SELECT_KEYS ):
                 self._went_down = True
-            
+
             # Check if joy button went down on this button
             if guistate is not None and \
                guistate.get_active() == self and \
@@ -311,7 +311,7 @@ class Button (InteractiveComponent):
             draw.rect( surface, (0,0,0), self.place.get_tuple(), 3 )
 
         if self.label is not None:
-            pos = self.place.pos + self.place.size / 2
+            pos = self.place.pos + self.place.size // 2
             pos.y += 3
             self.font.draw( self.label, surface, pos.get_tuple(), Font.CENTER, Font.MIDDLE )
 
@@ -351,7 +351,7 @@ class Checkbox (Button):
             draw.rect( surface, (255,255,255), self.place.get_tuple(), 2 )
 
         if self.label is not None:
-            pos = self.place.pos + self.place.size / 2
+            pos = self.place.pos + self.place.size // 2
             if self.selected:
                 self.selected_font.draw( self.label, surface, pos.get_tuple(), Font.CENTER, Font.MIDDLE )
             else:
@@ -445,7 +445,7 @@ class ImageButton (Button):
         self.sprite.draw( surface, self.place.pos )# + self.sprite.center)
 
         if self.label is not None:
-            pos = self.place.pos + self.place.size / 2
+            pos = self.place.pos + self.place.size // 2
             self.font.draw( self.label, surface, pos.get_tuple(), Font.CENTER, Font.MIDDLE )
 
     def set_label( self, label, font ):
@@ -522,7 +522,7 @@ class Slider (InteractiveComponent):
         #print self._value
 
     def value_changed( self ):
-        changed = self._old_value <> self._value
+        changed = self._old_value != self._value
         self._old_value = self._value
         return changed
 
@@ -608,7 +608,7 @@ class ImageSlider (Slider):
 
         if self.button is not None:
             self.button.pos = Vec2D(self.place.left + val,
-                                    self.place.top + self.place.height / 2)
+                                    self.place.top + self.place.height // 2)
 
         rect = Rectangle( 0, 0,
                           val, self.place.height )

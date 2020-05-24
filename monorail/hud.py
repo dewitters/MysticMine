@@ -2,18 +2,18 @@
 import pygame.font
 import copy
 
-from koon.geo import Vec2D, Rectangle
-import koon.geo as geo
-from koon.res import resman
-import koon.gui as gui
-import koon.gfx as gfx
-from koon.input import Keyboard, Mouse
-import control as ctrl
-import settings
-import menu
-from world import *
-import pickups
-import event
+from .koon.geo import Vec2D, Rectangle
+from .koon import geo
+from .koon.res import resman
+from .koon import gui
+from .koon import gfx
+from .koon.input import Keyboard, Mouse
+from . import control as ctrl
+from . import settings
+from . import menu
+from .world import *
+from . import pickups
+from . import event
 
 class Hud:
     def __init__( self, scenario, ground_control, game_data ):
@@ -212,12 +212,12 @@ class MultiDlg (BaseDlg):
         if len(self.scenario.playfield.goldcars) == 1:
             return left_x + (right_x-left_x) * place
         else:
-            return left_x + (right_x-left_x) * place / (len(self.scenario.playfield.goldcars)-1)
+            return left_x + (right_x-left_x) * place // (len(self.scenario.playfield.goldcars)-1)
 
     def draw( self, frame ):
         BaseDlg.draw( self, frame )
 
-        center = Vec2D( frame.surface.get_width()/2, frame.surface.get_height()/2 )
+        center = Vec2D( frame.surface.get_width()//2, frame.surface.get_height()//2 )
 
         y = 365
 
@@ -282,7 +282,7 @@ class TipDlg (BaseDlg):
     def draw( self, frame ):
         BaseDlg.draw( self, frame )
 
-        center = Vec2D( frame.surface.get_width()/2, frame.surface.get_height()/2 )
+        center = Vec2D( frame.surface.get_width()//2, frame.surface.get_height()//2 )
 
         y = center.y - 200
 
@@ -875,7 +875,7 @@ class IntroDlg( MultiDlg ):
     def draw( self, frame ):
         MultiDlg.draw( self, frame )
 
-        center = Vec2D( frame.surface.get_width()/2, frame.surface.get_height()/2 )
+        center = Vec2D( frame.surface.get_width()//2, frame.surface.get_height()//2 )
 
         y = center.y - 180
 
@@ -904,7 +904,7 @@ class EndDlg( MultiDlg ):
         #    if winner is None or winner.score < goldcar.score:
         #        winner = goldcar
 
-        center = Vec2D( frame.surface.get_width()/2, frame.surface.get_height()/2 )
+        center = Vec2D( frame.surface.get_width()//2, frame.surface.get_height()//2 )
 
         y = center.y - 180
 
@@ -944,7 +944,7 @@ class TotalDlg( MultiDlg ):
     def draw( self, frame ):
         MultiDlg.draw( self, frame )
 
-        center = Vec2D( frame.surface.get_width()/2, frame.surface.get_height()/2 )
+        center = Vec2D( frame.surface.get_width()//2, frame.surface.get_height()//2 )
 
         y = center.y - 180
 
@@ -1001,7 +1001,7 @@ class SingleDlg( MultiDlg ):
     def draw( self, frame ):
         MultiDlg.draw( self, frame )
 
-        center = Vec2D( frame.surface.get_width()/2, frame.surface.get_height()/2 )
+        center = Vec2D( frame.surface.get_width()//2, frame.surface.get_height()//2 )
 
         y = center.y - 180
 
@@ -1045,7 +1045,7 @@ class WinDlg( SingleDlg ):
     def draw( self, frame ):
         SingleDlg.draw( self, frame )
 
-        center = Vec2D( frame.surface.get_width()/2, frame.surface.get_height()/2 )
+        center = Vec2D( frame.surface.get_width()//2, frame.surface.get_height()//2 )
 
         y = center.y - 180
 
@@ -1058,7 +1058,7 @@ class LoseDlg( SingleDlg ):
     def draw( self, frame ):
         SingleDlg.draw( self, frame )
 
-        center = Vec2D( frame.surface.get_width()/2, frame.surface.get_height()/2 )
+        center = Vec2D( frame.surface.get_width()//2, frame.surface.get_height()//2 )
 
         y = center.y - 180
 

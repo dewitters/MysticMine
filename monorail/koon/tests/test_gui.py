@@ -59,7 +59,7 @@ class TestGuiState:
 
         component = gui.InteractiveComponent( Rectangle( 100, 100, 100, 100 ) )
 
-        assert gui_state.get_active() <> component
+        assert gui_state.get_active() != component
 
         # When
         userinput.update()
@@ -83,7 +83,7 @@ class TestGuiState:
         base.add_subcomponent(component1)
         base.add_subcomponent(component)
 
-        assert gui_state.get_active() <> component
+        assert gui_state.get_active() != component
 
         # When
         userinput.update()
@@ -91,7 +91,7 @@ class TestGuiState:
         gui_state.update( userinput, base )
 
         # Then
-        assert gui_state.get_active() <> component
+        assert gui_state.get_active() != component
 
     def test_mouse_move_over_shouldnt_activate_nonhard_component( self ):
         # Given
@@ -110,7 +110,7 @@ class TestGuiState:
 
         gui_state.set_active( hardcomp )
 
-        assert gui_state.get_active() <> component
+        assert gui_state.get_active() != component
         assert gui_state.get_active() == hardcomp
 
         # When
@@ -119,7 +119,7 @@ class TestGuiState:
         gui_state.update( userinput, base )
 
         # Then
-        assert gui_state.get_active() <> component
+        assert gui_state.get_active() != component
         assert gui_state.get_active() == hardcomp
 
 

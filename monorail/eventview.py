@@ -2,10 +2,10 @@
 import pygame
 from pygame.locals import *
 
-import koon.gfx as gfx
-from koon.geo import Vec2D
+from .koon import gfx
+from .koon.geo import Vec2D
 
-import control as ctrl
+from . import control as ctrl
 
 
 

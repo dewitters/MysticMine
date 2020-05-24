@@ -113,6 +113,8 @@ class TestStatistics:
         stats1.add( 5, 20 )
 
         stats2 = QuestStatistics(STATNAME)
+        print(stats1)
+        print(stats2)
 
         assert stats2.get(5) == 20
 

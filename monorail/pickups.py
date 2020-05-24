@@ -1,10 +1,10 @@
 
 import random
 
-from koon.geo import Vec2D
-from koon.res import resman
+from .koon.geo import Vec2D
+from .koon.res import resman
 
-from event import Event
+from .event import Event
 
 
 class Pickup (object):

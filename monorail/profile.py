@@ -2,7 +2,7 @@
 
 import cProfile
 import pstats
-import monorail
+from . import monorail
 
 cProfile.run('monorail.main()', 'profile.txt')
 

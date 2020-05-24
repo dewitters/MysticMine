@@ -1,21 +1,22 @@
 
-from cPickle import *
+from pickle import *
 import os.path
+from gettext import gettext as _
 
 from pygame.locals import *
 
-import koon.input as input
+from .koon import input
 
-from scenarios import *
-from pickups import *
-from player import *
-import control as ctrl
+from .scenarios import *
+from .pickups import *
+from .player import *
+from . import control as ctrl
 
 
 class GameType (object):
     """Enum of game types"""
 
-    TEST, SINGLE_SEQUENCE, SINGLE_RANDOM, MULTI_RANDOM = range( 4 )
+    TEST, SINGLE_SEQUENCE, SINGLE_RANDOM, MULTI_RANDOM = list(range( 4))
 
 class SkillLevel:
 
@@ -249,7 +250,7 @@ class GameData:
         score = len( playfield.goldcars ) - 1
         for goldcars in playfield.get_goldcar_ranking():
             for goldcar in goldcars:
-                if self.total_scores.has_key( goldcar.nr ):
+                if goldcar.nr in self.total_scores:
                     self.total_scores[goldcar.nr].score += score
                 else:
                     self.total_scores[goldcar.nr] = GoldcarScore( goldcar.nr, score )
@@ -258,7 +259,7 @@ class GameData:
 
     def get_total_ranking( self ):
         """Return a sorted list of goldcars with same score"""
-        single_ranking = self.total_scores.values()[:]
+        single_ranking = list(self.total_scores.values())[:]
         single_ranking.sort( lambda a, b: cmp( b.score, a.score ) )
 
         ranking = []
@@ -288,7 +289,7 @@ class Configuration (object):
         self.sound_volume = 1.0
         self.music_volume = 1.0
         self.is_fullscreen = False
-        self.resolution = (800, 600)
+        self.resolution = (1600, 1200)
 
         self.level_progress = 0
         self.unlocked_level = 0

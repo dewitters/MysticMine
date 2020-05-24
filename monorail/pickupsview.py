@@ -3,13 +3,13 @@ import random
 
 import pygame
 
-from koon.geo import Vec2D
-import koon.geo as geo
-from koon.gfx import SpriteFilm, Font, LoopAnimationTimer, PingPongTimer, Timer
-from koon.res import resman
-import pickups
-import event
-import tiles
+from .koon.geo import Vec2D
+from .koon import geo
+from .koon.gfx import SpriteFilm, Font, LoopAnimationTimer, PingPongTimer, Timer
+from .koon.res import resman
+from . import pickups
+from . import event
+from . import tiles
 
 class PickupView:
     def __init__( self ):
@@ -189,7 +189,7 @@ class DynamiteView (PickupView):
             self.move = Vec2D( random.uniform( -2.5, 2.5 ), random.uniform( -2.5, 0.0 ) )
             self.surf = resman.get("game.sparkle_surf")
             width, height = self.surf.get_size()
-            self.center = Vec2D( width/2, height/2 )
+            self.center = Vec2D( width//2, height//2 )
 
         def game_tick( self ):
             self.life -= 1

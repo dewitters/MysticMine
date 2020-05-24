@@ -43,8 +43,8 @@ class TestFrame:
         playfield = Playfield()
         playfield.level = level
 
-        goldcarA = GoldCar( TrailPosition( tileA, tileA.get_length()/2 ), 0 )
-        goldcarB = GoldCar( TrailPosition( tileB, tileB.get_length()/2 ), 1 )
+        goldcarA = GoldCar( TrailPosition( tileA, tileA.get_length()//2 ), 0 )
+        goldcarB = GoldCar( TrailPosition( tileB, tileB.get_length()//2 ), 1 )
         goldcarB.pos.reverse_progress()
 
         playfield.goldcars = [goldcarA, goldcarB]

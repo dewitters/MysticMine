@@ -15,7 +15,7 @@ class TestVec3D:
         b = Vec3D( 3, 2, 1 )
         c = Vec3D( 1, 2, 3 )
         assert a == c
-        assert a <> b
+        assert a != b
 
     def test_add_sub_mul( self ):
         a = Vec3D( 1, 1, 0 )

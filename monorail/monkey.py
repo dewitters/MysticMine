@@ -12,9 +12,9 @@ import shutil
 import pygame
 from pygame.locals import *
 
-from koon.geo import Vec2D
-import monorail
-from settings import Configuration
+from .koon.geo import Vec2D
+from . import monorail
+from .settings import Configuration
 
 ALL_KEYS = [
     K_BACKSPACE, #   \b      backspace
@@ -172,8 +172,8 @@ class Monkey (monorail.Monorail):
             self.replay_file = open(replay_file, "rb")
             self.record = False
 
-        seed = self.random(0, sys.maxint )
-        print seed
+        seed = self.random(0, sys.maxsize )
+        print(seed)
         random.seed( seed )
 
     def random( self, lower, upper ):
@@ -187,7 +187,7 @@ class Monkey (monorail.Monorail):
                 data = struct.unpack("i", self.replay_file.read( struct.calcsize("i") ) )
                 return data[0]
             except:
-                print "Not failed this time!!!!!! Oh YEAH BABY !!!!!"
+                print("Not failed this time!!!!!! Oh YEAH BABY !!!!!")
                 self.game_is_done = True
                 return rand
 
@@ -222,7 +222,7 @@ class Monkey (monorail.Monorail):
                 down_buttons[ self.random(0, len(down_buttons)-1) ] )
 
         # feed random keys
-        while self.random( 0, 10 ) <> 0:
+        while self.random( 0, 10 ) != 0:
             key = ALL_KEYS[ self.random( 0, len(ALL_KEYS)-1 ) ]
             self.userinput.key.feed_down( key )
 
@@ -286,8 +286,8 @@ class Monkey (monorail.Monorail):
                 os.remove(self.replay_filename)
 
 
-        except Exception, ex:
-            print "exceptje"
+        except Exception as ex:
+            print("exceptje")
             self.deinit_pygame()
             self.replay_file.close()
             if self.record:
@@ -313,18 +313,18 @@ class MonkeyMaster:
         monkey = Monkey( config )
 
         while not monkey.user_exit:
-            print "starting monkey at", datetime.today()
+            print("starting monkey at", datetime.today())
             monkey = Monkey( config )
 
             try:
                 monkey.run( 60 * 5 )
-                print "stopped monkey at", datetime.today()
-            except Exception, ex:
+                print("stopped monkey at", datetime.today())
+            except Exception as ex:
                 info = sys.exc_info()
                 traceback.print_exception(info[0], info[1], info[2])
                 time.sleep(3)
 
-            print
+            print()
 
 if __name__ == '__main__':
     try:
@@ -342,7 +342,7 @@ if __name__ == '__main__':
                 monkey = Monkey( Configuration.get_instance(), replay_file )
                 monkey.run()
             else:
-                print "No failed files!"
-    except Exception, ex:
-        print "megaexcept!!!!!!"
+                print("No failed files!")
+    except Exception as ex:
+        print("megaexcept!!!!!!")
 

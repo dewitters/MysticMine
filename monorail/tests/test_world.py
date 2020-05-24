@@ -307,7 +307,7 @@ class TestPlayfield:
         while order_at < len(order)-1 and count < 1000:
             playfield.game_tick()
 
-            print goldcar.pos.tile, goldcar.pos.progress
+            print(goldcar.pos.tile, goldcar.pos.progress)
 
             if goldcar.pos.tile == order[ order_at ]:
                 pass
@@ -352,7 +352,7 @@ class TestPlayfield:
         while order_at < len(order)-1 and count < 1000:
             playfield.game_tick()
 
-            print goldcar.pos.tile, goldcar.pos.progress
+            print(goldcar.pos.tile, goldcar.pos.progress)
 
             if goldcar.pos.tile == order[ order_at ]:
                 pass
